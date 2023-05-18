@@ -1,24 +1,35 @@
-
-
+<app-header></app-header>
 <section class="form-container">
-  
+  <form action="" method="post">
+    <h3>Promena lozinke</h3>
+    <input
+      type="password"
+      name="oldPassword"
+      placeholder="važeća lozinka"
+      class="box"
+    />
+    <input
+      type="password"
+      name="newPassword"
+      placeholder="nova lozinka"
+      class="box"
+    />
+    <input
+      type="password"
+      name="c_pass"
+      placeholder="ponovite novu lozinku"
+      class="box"
+    />
 
-    <form action="" method="post">
-       <h3>Promena lozinke</h3>
-       <input type="password" name="oldPassword" placeholder="važeća lozinka" class="box">
-       <input type="password" name="newPassword" placeholder="nova lozinka" class="box">
-       <input type="password" name="c_pass" placeholder="ponovite novu lozinku" class="box">
- 
-         <p align="left">
-             <i class="fas fa-circle-exclamation"></i>
-             Lozinka mora da ima minimalno 8 karaktera, i to: <br> 
-             -mora počinjati slovom <br>
-             -mora imati bar jedno veliko slovo <br>
-             -mora imati jedan broj <br>
-             -mora imati jedan specijalni karakter(npr. !, ?, @, i sl. ) <br>
-         </p>
-       
-       <input type="submit" value="Potvrdi promenu" name="submit" class="btn">
-    </form>
- 
- </section>
+    <p align="left">
+      <i class="fas fa-circle-exclamation"></i>
+      Lozinka mora da ima minimalno 8 karaktera, i to: <br />
+      -mora počinjati slovom <br />
+      -mora imati bar jedno veliko slovo <br />
+      -mora imati jedan broj <br />
+      -mora imati jedan specijalni karakter(npr. !, ?, @, i sl. ) <br />
+    </p>
+
+    <input type="submit" value="Potvrdi promenu" name="submit" class="btn" />
+  </form>
+</section>

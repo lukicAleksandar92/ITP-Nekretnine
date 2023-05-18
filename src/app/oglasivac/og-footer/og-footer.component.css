@@ -1,9 +1,0 @@
-.box a fa-icon {
-  color: var(--main-color);
-}
-.box:first-child a fa-icon {
-  margin-right: 1.5rem;
-}
-.box:last-child a fa-icon {
-  margin-left: 1.5rem;
-}

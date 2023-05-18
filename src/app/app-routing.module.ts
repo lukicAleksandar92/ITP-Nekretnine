@@ -11,13 +11,13 @@ import { MojiOglasiComponent } from './oglasivac/moji-oglasi/moji-oglasi.compone
 import { OgMojProfilComponent } from './oglasivac/og-moj-profil/og-moj-profil.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'registracija', component: RegistracijaComponent},
-  {path: 'promena-lozinke', component: PromenaLozinkeComponent},
-  {path: 'naslovna', component: NaslovnaComponent},
-  {path: 'detaljna-pretraga', component: DetaljnaPretragaComponent},
-  {path: 'rezultat-pretrage', component: RezultatPretrageComponent}
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registracija', component: RegistracijaComponent },
+  { path: 'promena-lozinke', component: PromenaLozinkeComponent },
+  { path: 'naslovna', component: NaslovnaComponent },
+  { path: 'detaljna-pretraga', component: DetaljnaPretragaComponent },
+  { path: 'rezultat-pretrage', component: RezultatPretrageComponent },
 
   { path: 'moji-oglasi', component: MojiOglasiComponent },
   { path: 'postavi-oglas', component: PostaviOglasComponent },

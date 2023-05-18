@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontawesomeObject } from '@fortawesome/fontawesome-svg-core';
 import { OgHeaderComponent } from './oglasivac/og-header/og-header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { OgFooterComponent } from './oglasivac/og-footer/og-footer.component';
+
 import { PostaviOglasComponent } from './oglasivac/postavi-oglas/postavi-oglas.component';
 import { MojiOglasiComponent } from './oglasivac/moji-oglasi/moji-oglasi.component';
 import { OgMojProfilComponent } from './oglasivac/og-moj-profil/og-moj-profil.component';
@@ -33,9 +33,9 @@ import { OgMojProfilComponent } from './oglasivac/og-moj-profil/og-moj-profil.co
     FooterComponent,
     RezultatPretrageComponent,
     DetaljnaPretragaComponent,
-    ,
+
     OgHeaderComponent,
-    OgFooterComponent,
+
     PostaviOglasComponent,
     MojiOglasiComponent,
     OgMojProfilComponent,
@@ -45,7 +45,7 @@ import { OgMojProfilComponent } from './oglasivac/og-moj-profil/og-moj-profil.co
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ,
+
     FontAwesomeModule,
   ],
   providers: [],
