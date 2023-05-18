@@ -1,0 +1,41 @@
+
+<section class="form-container">
+
+    <form action="" method="post">
+       <h3>Napravi nov nalog</h3>
+       <input type="text" name="name"  placeholder="Ime i prezime" class="box">
+       <input placeholder="Datum rođenja" class="box" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+       <input type="text" name="name"  placeholder="Grad" class="box">
+       <input type="tel" name="telefon"  placeholder="Telefon" class="box">
+       <input type="email" name="email" placeholder="Email adresa" class="box">
+       <input type="text" name="korIme"  placeholder="Korisničko ime" class="box">
+       <input type="password" name="pass"  placeholder="Lozinka" class="box">
+       <select name="tipKorisnika" class="box">
+          <option value="">Izaberite tip korisnika</option>
+          <option value="kupac">kupac</option>
+          <option value="samostalni prodavac">samostalni prodavac</option>
+          <option value="agent">agent</option>
+       </select>
+       <select name="agencija" class="box">
+          <option value="">Izaberite agenciju</option>
+          <option value="euromont">Euromont</option>
+          <option value="zidart">Zidart</option>
+          <option value="cityexpert">City Expert</option>
+       </select>
+       <input type="number" name="licenca"  placeholder="Broj licence" class="box">
+       <label for="profile-picture" style="font-size: 1.8rem;">Dodaj profilnu sliku:</label>
+       <input type="file" class="box" id="profile-picture" name="profile-picture" accept="image/jpg, image/png">
+       <p align="left">
+         <i class="fas fa-circle-exclamation"></i>
+         Lozinka mora da ima minimalno 8 karaktera, i to: <br> 
+         -mora počinjati slovom <br>
+         -mora imati bar jedno veliko slovo <br>
+         -mora imati jedan broj <br>
+         -mora imati jedan specijalni karakter(npr. !, ?, @, i sl. ) <br>
+      </p>
+ 
+       <p>Već imaš nalog? <a routerLink="login">Prijavi se</a></p>
+       <input type="submit" value="Registruj se" name="submit" class="btn">
+    </form>
+ 
+ </section>

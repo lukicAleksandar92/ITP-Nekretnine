@@ -56,6 +56,12 @@ section {
   margin: 0 auto;
 }
 
+.sekcija {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .heading {
   text-align: center;
   padding-bottom: 2.5rem;
@@ -201,7 +207,7 @@ section {
 }
 
 .home {
-  background: url("./assets/naslovna.jpg") no-repeat;
+  background: url("assets/images/naslovna.jpg") no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -251,15 +257,6 @@ input {
   font-size: 1.8rem;
   margin: 1rem 0;
 }
-
-/* label {
-   width: 100%;
-   text-align: left;
-   padding: 1.4rem;
-   color: var(--black);
-   font-size: 1.8rem;
-   margin: 1rem 0;
-} */
 
 .home .left form .box p {
   color: var(--light-color);
@@ -593,6 +590,8 @@ input {
   color: var(--main-color);
 }
 
+/******************************************************************************/
+
 .filters form {
   background-color: var(--white);
   box-shadow: var(--box-shodow);
@@ -762,7 +761,6 @@ input {
   font-size: 2rem;
   color: var(--white);
   margin-top: 2rem;
-  /* padding-bottom: 10rem; */
 }
 
 .footer .credit span {
