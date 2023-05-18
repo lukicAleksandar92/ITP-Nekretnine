@@ -1,0 +1,386 @@
+<app-og-header></app-og-header>
+<section>
+  <form action="">
+    <h3>Postavi Oglas</h3>
+    <div class="flex">
+      <!-- lokacija -->
+      <div class="box">
+        <p>Lokacija</p>
+        <input
+          type="text"
+          name="lokacija"
+          placeholder="Upiši lokaciju"
+          class="input"
+        />
+      </div>
+      <!-- tip -->
+      <div class="box">
+        <p>Tip nekretnine<span>*</span></p>
+        <select name="type" class="input" required>
+          <option value="">Izaberite tip</option>
+          <option value="stan">stan</option>
+          <option value="kuća">kuća</option>
+          <option value="vikendica">vikendica</option>
+          <option value="lokal">lokal</option>
+          <option value="magacin">magacin</option>
+        </select>
+      </div>
+      <!-- cena -->
+      <div class="box">
+        <p>Cena</p>
+        <input type="number" name="cena" placeholder="€" class="input" />
+      </div>
+      <!-- kvadratura -->
+      <div class="box">
+        <p>Kvadratura</p>
+        <input type="number" name="cena" placeholder="m²" class="input" />
+      </div>
+      <!-- broj soba -->
+      <div class="box">
+        <p>Broj Soba</p>
+
+        <select name="brojSoba" class="input">
+          <option value="">Izaberite broj soba</option>
+          <option value="1">1</option>
+          <option value="1.5">1.5</option>
+          <option value="2">2</option>
+          <option value="2.5">2.5</option>
+          <option value="3">3</option>
+          <option value="3.5">3.5</option>
+          <option value="4">4</option>
+          <option value="4.5">4.5</option>
+          <option value="5">5</option>
+          <option value="5.5">5.5</option>
+          <option value="5+">5+</option>
+        </select>
+      </div>
+      <!-- godina izgradnje -->
+      <div class="box">
+        <p>Godina Izgradnje</p>
+
+        <select name="godinaIzgradnje" class="input">
+          <option value="">Izaberite godinu izgradnje</option>
+          <option value="1970">1970</option>
+          <option value="1971">1971</option>
+          <option value="1972">1972</option>
+          <option value="1973">1973</option>
+          <option value="1974">1974</option>
+          <option value="1975">1975</option>
+          <option value="1976">1976</option>
+          <option value="1977">1977</option>
+          <option value="1978">1978</option>
+          <option value="1979">1979</option>
+          <option value="1980">1980</option>
+          <option value="1981">1981</option>
+          <option value="1982">1982</option>
+          <option value="1983">1983</option>
+          <option value="1984">1984</option>
+          <option value="1985">1985</option>
+          <option value="1986">1986</option>
+          <option value="1987">1987</option>
+          <option value="1988">1988</option>
+          <option value="1989">1989</option>
+          <option value="1990">1990</option>
+          <option value="1991">1991</option>
+          <option value="1992">1992</option>
+          <option value="1993">1993</option>
+          <option value="1994">1994</option>
+          <option value="1995">1995</option>
+          <option value="1996">1996</option>
+          <option value="1997">1997</option>
+          <option value="1998">1998</option>
+          <option value="1999">1999</option>
+          <option value="2000">2000</option>
+          <option value="2001">2001</option>
+          <option value="2002">2002</option>
+          <option value="2003">2003</option>
+          <option value="2004">2004</option>
+          <option value="2005">2005</option>
+          <option value="2006">2006</option>
+          <option value="2007">2007</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
+          <option value="2010">2010</option>
+          <option value="2011">2011</option>
+          <option value="2012">2012</option>
+          <option value="2013">2013</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2023">2024</option>
+          <option value="2023">2025</option>
+        </select>
+      </div>
+      <!-- stanje nekretnine -->
+      <div class="box">
+        <p>Stanje nekretnine</p>
+        <select name="brojSoba" class="input">
+          <option value="">Izaberite stanje nekretnine</option>
+          <option value="izvorno">Izvorno</option>
+          <option value="renovirano">Renovirano</option>
+          <option value="lux">LUX</option>
+        </select>
+      </div>
+      <!-- tip grejanja -->
+      <div class="box">
+        <p>Tip Grejanja</p>
+        <select name="brojSoba" class="input">
+          <option value="">Izaberite tip grejanja</option>
+          <option value="cg">Centralno grejanje</option>
+          <option value="eg">Etazno grejanje</option>
+          <option value="ta">TA pec</option>
+          <option value="gas">Gas</option>
+          <option value="podno">Podno grejanje</option>
+          <option value="toplotne-pumpe">Toplotne pumpe</option>
+        </select>
+      </div>
+      <!-- sprat -->
+      <div class="box">
+        <p>Sprat</p>
+        <select name="sprat" class="input">
+          <option value="-3">Izaberite sprat</option>
+          <option value="-2">Podrum</option>
+          <option value="-1">Suteren</option>
+          <option value="0">Prizemlje</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="32">30+</option>
+          <option value="31">Potkrovlje</option>
+        </select>
+      </div>
+      <!-- rezije -->
+      <div class="box">
+        <p>Mesecne rezije</p>
+        <input type="number" class="input" placeholder="RSD" />
+      </div>
+      <!-- karakteristike -->
+      <div class="box">
+        <p>Karakteristike</p>
+        <div class="input karakteristike">
+          <p>
+            <label for="karakteristike-terasa">Terasa</label>
+            <input
+              type="checkbox"
+              id="karakteristike-terasa"
+              name="karakteristike[]"
+              value="terasa"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-podrum">Podrum</label>
+            <input
+              type="checkbox"
+              id="karakteristike-podrum"
+              name="karakteristike[]"
+              value="podrum"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-internet">Internet</label>
+            <input
+              type="checkbox"
+              id="karakteristike-internet"
+              name="karakteristike[]"
+              value="internet"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-lodja">Lodja</label>
+            <input
+              type="checkbox"
+              id="karakteristike-lodja"
+              name="karakteristike[]"
+              value="lodja"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-garaza">Garaza</label>
+            <input
+              type="checkbox"
+              id="karakteristike-garaza"
+              name="karakteristike[]"
+              value="garaza"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-interfon">Interfon</label>
+            <input
+              type="checkbox"
+              id="karakteristike-interfon"
+              name="karakteristike[]"
+              value="interfon"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-frBalkon">Fr. balkon</label>
+            <input
+              type="checkbox"
+              id="karakteristike-frBalkon"
+              name="karakteristike[]"
+              value="frBalkon"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-basta">Basta</label>
+            <input
+              type="checkbox"
+              id="karakteristike-basta"
+              name="karakteristike[]"
+              value="basta"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-telefon">Telefon</label>
+            <input
+              type="checkbox"
+              id="karakteristike-telefon"
+              name="karakteristike[]"
+              value="telefon"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-podrum">Lift</label>
+            <input
+              type="checkbox"
+              id="karakteristike-lift"
+              name="karakteristike[]"
+              value="lift"
+            />
+          </p>
+          <p>
+            <label for="karakteristike-podrum">Klima</label>
+            <input
+              type="checkbox"
+              id="karakteristike-klima"
+              name="karakteristike[]"
+              value="klima"
+            />
+          </p>
+        </div>
+      </div>
+      <!-- Linije prevoze -->
+      <div class="box">
+        <p>Linije prevoza</p>
+        <div class="input linije-prevoza">
+          <p>
+            <label for="prevoz-1">1</label>
+            <input type="checkbox" id="prevoz-1" name="prevoz[]" value="1" />
+          </p>
+          <p>
+            <label for="prevoz-2">2</label>
+            <input type="checkbox" id="prevoz-2" name="prevoz[]" value="2" />
+          </p>
+          <p>
+            <label for="prevoz-3">3</label>
+            <input type="checkbox" id="prevoz-3" name="prevoz[]" value="3" />
+          </p>
+          <p>
+            <label for="prevoz-4">4</label>
+            <input type="checkbox" id="prevoz-4" name="prevoz[]" value="4" />
+          </p>
+          <p>
+            <label for="prevoz-5">5</label>
+            <input type="checkbox" id="prevoz-5" name="prevoz[]" value="5" />
+          </p>
+          <p>
+            <label for="prevoz-6">6</label>
+            <input type="checkbox" id="prevoz-6" name="prevoz[]" value="6" />
+          </p>
+          <p>
+            <label for="prevoz-7">7</label>
+            <input type="checkbox" id="prevoz-7" name="prevoz[]" value="7" />
+          </p>
+          <p>
+            <label for="prevoz-8">8</label>
+            <input type="checkbox" id="prevoz-8" name="prevoz[]" value="8" />
+          </p>
+          <p>
+            <label for="prevoz-9">9</label>
+            <input type="checkbox" id="prevoz-9" name="prevoz[]" value="9" />
+          </p>
+          <p>
+            <label for="prevoz-10">10</label>
+            <input type="checkbox" id="prevoz-10" name="prevoz[]" value="10" />
+          </p>
+          <p>
+            <label for="prevoz-11">11</label>
+            <input type="checkbox" id="prevoz-11" name="prevoz[]" value="11" />
+          </p>
+          <p>
+            <label for="prevoz-12">12</label>
+            <input type="checkbox" id="prevoz-12" name="prevoz[]" value="12" />
+          </p>
+          <p>
+            <label for="prevoz-13">13</label>
+            <input type="checkbox" id="prevoz-13" name="prevoz[]" value="13" />
+          </p>
+          <p>
+            <label for="prevoz-14">14</label>
+            <input type="checkbox" id="prevoz-14" name="prevoz[]" value="14" />
+          </p>
+          <p>
+            <label for="prevoz-15">15</label>
+            <input type="checkbox" id="prevoz-15" name="prevoz[]" value="15" />
+          </p>
+          <p>
+            <label for="prevoz-16">16</label>
+            <input type="checkbox" id="prevoz-16" name="prevoz[]" value="16" />
+          </p>
+          <p>
+            <label for="prevoz-17">17</label>
+            <input type="checkbox" id="prevoz-17" name="prevoz[]" value="17" />
+          </p>
+          <p>
+            <label for="prevoz-18">18</label>
+            <input type="checkbox" id="prevoz-18" name="prevoz[]" value="18" />
+          </p>
+          <p>
+            <label for="prevoz-19">19</label>
+            <input type="checkbox" id="prevoz-19" name="prevoz[]" value="19" />
+          </p>
+          <p>
+            <label for="prevoz-20">20</label>
+            <input type="checkbox" id="prevoz-20" name="prevoz[]" value="20" />
+          </p>
+        </div>
+      </div>
+    </div>
+    <input type="submit" value="Postavi Oglas" name="Postavi" class="btn" />
+  </form>
+</section>
+<app-og-footer></app-og-footer>
