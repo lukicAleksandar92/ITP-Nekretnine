@@ -8,9 +8,11 @@ import { OgHeaderComponent } from './oglasivac/og-header/og-header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OgFooterComponent } from './oglasivac/og-footer/og-footer.component';
 import { PostaviOglasComponent } from './oglasivac/postavi-oglas/postavi-oglas.component';
+import { MojiOglasiComponent } from './oglasivac/moji-oglasi/moji-oglasi.component';
+import { OgMojProfilComponent } from './oglasivac/og-moj-profil/og-moj-profil.component';
 
 @NgModule({
-  declarations: [AppComponent, OgHeaderComponent, OgFooterComponent, PostaviOglasComponent],
+  declarations: [AppComponent, OgHeaderComponent, OgFooterComponent, PostaviOglasComponent, MojiOglasiComponent, OgMojProfilComponent],
   imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent],
