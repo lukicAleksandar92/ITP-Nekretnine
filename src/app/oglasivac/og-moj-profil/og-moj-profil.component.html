@@ -1,2 +1,135 @@
 <app-og-header></app-og-header>
-<section></section>
+<section>
+  <h1 class="heading">Moj Profil</h1>
+  <div class="content">
+    <!-- Informacije koji se ne menjaju-->
+    <div>
+      <div class="flex">
+        <span> <b>Korisničko ime:</b> Prodavac Pera </span>
+      </div>
+      <div class="flex">
+        <span> <b>Ime i prezime:</b> Pera Peric </span>
+      </div>
+      <div class="flex">
+        <span> <b>Grad:</b> Beograd </span>
+      </div>
+      <div class="flex">
+        <span> <b>Broj licence:</b> 226558 </span>
+      </div>
+    </div>
+    <!-- Email adresa i njena promena -->
+
+    <div class="flex">
+      <span> <b>Email adresa:</b> email@adresa.com </span>
+      <fa-icon
+        [icon]="arrowRight"
+        *ngIf="!mailSeMenja"
+        (click)="promeniMail()"
+      ></fa-icon>
+      <fa-icon [icon]="x" *ngIf="mailSeMenja" (click)="promeniMail()"></fa-icon>
+    </div>
+    <div *ngIf="mailSeMenja">
+      <input
+        type="mail"
+        name="newMail"
+        placeholder="nova e-mail adresa"
+        class="box"
+      />
+      <button class="btn">Potvrdi promenu</button>
+    </div>
+    <!-- Telefon i njegova promena -->
+
+    <div class="flex">
+      <span> <b>Broj Telefona:</b> 069/ 99 88 9898 </span>
+      <fa-icon
+        [icon]="arrowRight"
+        *ngIf="!telefonSeMenja"
+        (click)="promeniTelefon()"
+      ></fa-icon>
+      <fa-icon
+        [icon]="x"
+        *ngIf="telefonSeMenja"
+        (click)="promeniTelefon()"
+      ></fa-icon>
+    </div>
+    <div *ngIf="telefonSeMenja">
+      <input
+        type="phone"
+        name="newPhone"
+        placeholder="novi broj telefona"
+        class="box"
+      />
+      <button class="btn">Potvrdi promenu</button>
+    </div>
+    <!-- Promena agencije -->
+    <div class="flex">
+      <span> <b>Agencija:</b> Samostalni Prodavac </span>
+      <fa-icon
+        [icon]="arrowRight"
+        *ngIf="!agencijaSeMenja"
+        (click)="promeniAgenciju()"
+      ></fa-icon>
+      <fa-icon
+        [icon]="x"
+        *ngIf="agencijaSeMenja"
+        (click)="promeniAgenciju()"
+      ></fa-icon>
+    </div>
+    <div *ngIf="agencijaSeMenja">
+      <select name="agencija" class="box">
+        <option value="">Izaberite novu agenciju</option>
+        <option value="euromont">Samostalni prodavac</option>
+        <option value="euromont">Euromont</option>
+        <option value="zidart">Zidart</option>
+        <option value="cityexpert">City Expert</option>
+      </select>
+      <button class="btn">Potvrdi promenu</button>
+    </div>
+    <!-- Promena lozinke -->
+
+    <div class="flex">
+      <b>Promena Lozinke </b>
+      <fa-icon
+        [icon]="arrowRight"
+        *ngIf="!lozinkaSeMenja"
+        (click)="promeniLozinku()"
+      ></fa-icon>
+      <fa-icon
+        [icon]="x"
+        *ngIf="lozinkaSeMenja"
+        (click)="promeniLozinku()"
+      ></fa-icon>
+    </div>
+    <div *ngIf="lozinkaSeMenja">
+      <input
+        type="password"
+        name="oldPassword"
+        placeholder="važeća lozinka"
+        class="box"
+      />
+      <input
+        type="password"
+        name="newPassword"
+        placeholder="nova lozinka"
+        class="box"
+      />
+      <input
+        type="password"
+        name="c_pass"
+        placeholder="ponovite novu lozinku"
+        class="box"
+      />
+
+      <p align="left">
+        <i class="fas fa-circle-exclamation"></i>
+        Lozinka mora da ima minimalno 8 karaktera, i to: <br />
+        -mora počinjati slovom <br />
+        -mora imati bar jedno veliko slovo <br />
+        -mora imati jedan broj <br />
+        -mora imati jedan specijalni karakter(npr. !, ?, @, i sl. ) <br />
+      </p>
+
+      <input type="submit" value="Potvrdi promenu" name="submit" class="btn" />
+    </div>
+  </div>
+</section>
