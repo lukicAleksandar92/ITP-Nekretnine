@@ -1,3 +1,39 @@
 section {
   min-height: calc(100vh - 399px);
 }
+.content {
+  max-width: 50rem;
+  margin: 0 auto;
+  background-color: var(--white);
+  box-shadow: var(--box-shodow);
+  padding: 2rem;
+  text-align: center;
+}
+.flex {
+  padding: 1.4rem;
+  color: var(--black);
+  background-color: var(--white);
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  border: var(--border);
+  padding: 1.4rem;
+  color: var(--black);
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 1.8rem;
+}
+p {
+  font-size: 1.7rem;
+  padding: 1rem 0;
+  color: var(--light-color);
+}
+
+fa-icon {
+  cursor: pointer;
+}
