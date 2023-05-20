@@ -21,5 +21,9 @@ export class KupacMojProfilComponent {
   promeniLozinku() {
     this.lozinkaSeMenja = !this.lozinkaSeMenja;
   }
+  slikaSeMenja: boolean = false;
+  promeniSliku() {
+    this.slikaSeMenja = !this.slikaSeMenja;
+  }
 
 }
