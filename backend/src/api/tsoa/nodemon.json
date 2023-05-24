@@ -1,0 +1,5 @@
+{
+  "watch": ["src/api/routes"],
+  "ext": "ts",
+  "exec": "npx tsoa routes -c src/api/tsoa/tsoa.json"
+}

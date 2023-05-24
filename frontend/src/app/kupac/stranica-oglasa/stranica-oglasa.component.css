@@ -1,0 +1,86 @@
+section {
+  min-height: calc(100vh - 399px);
+}
+.content {
+  background-color: var(--white);
+  box-shadow: var(--box-shodow);
+  padding: 2rem;
+}
+h1 {
+  font-size: 2.5rem;
+  padding-bottom: 2rem;
+  color: var(--black);
+  text-align: center;
+}
+h2 {
+  font-size: 2rem;
+  padding-bottom: 2rem;
+  color: var(--black);
+  text-align: center;
+  font-weight: 500;
+}
+.flex {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.img-wrapper {
+  height: fit-content;
+}
+img {
+  width: 100%;
+  padding: 2rem;
+  overflow: hidden;
+}
+.info {
+  padding: 2rem;
+}
+
+.box {
+  font-size: 1.8rem;
+  color: var(--black);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05rem;
+}
+.input {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.8rem;
+  color: var(--black);
+}
+.karakteristike {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 1rem;
+  column-gap: 1rem;
+}
+.linije-prevoza {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  row-gap: 1rem;
+  column-gap: 1rem;
+}
+
+.ima {
+  font-weight: bold;
+}
+.btn {
+  margin-top: 3rem;
+}
+.oglasivac {
+  display: flex;
+  justify-content: space-between;
+}
+.vidi-vise {
+  color: var(--main-color);
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  width: auto;
+}

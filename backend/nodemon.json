@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ext": "ts",
+  "ignore": ["src/api/routes/**/*Controller.ts"],
+  "exec": "npx tsc && node build/index.js"
+}
