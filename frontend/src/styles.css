@@ -1,0 +1,878 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap");
+
+:root {
+  --main-color: #da2c32;
+  --light-color: #666;
+  --light-bg: #eee;
+  --white: #fff;
+  --black: #303030;
+  --border: 0.1rem solid var(--light-color);
+  --box-shodow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+*::selection {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+*::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 1rem;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 5rem;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 10rem;
+}
+
+body {
+  background-color: var(--light-bg);
+}
+
+section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sekcija {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading {
+  text-align: center;
+  padding-bottom: 2.5rem;
+  font-size: 3rem;
+  color: var(--black);
+}
+
+.btn,
+.inline-btn {
+  margin-top: 1rem;
+  padding: 1rem 3rem;
+  background-color: var(--main-color);
+  color: var(--white);
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.btn:hover,
+.inline-btn:hover {
+  background-color: var(--black);
+}
+
+.btn {
+  display: block;
+  width: 100%;
+}
+
+.btn2 {
+  background-color: var(--black);
+  color: var(--white);
+  margin-top: 1rem;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.8rem;
+
+  display: block;
+  width: 100%;
+}
+
+.btn2:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px black solid;
+}
+
+.inline-btn {
+  display: inline-block;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: var(--box-shodow);
+}
+
+.header .navbar.nav-1 .flex {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.header .navbar.nav-2 .flex {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.header .navbar.nav-1 {
+  background-color: var(--black);
+}
+
+.header .navbar.nav-2 {
+  background-color: var(--white);
+}
+
+.header .navbar .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .navbar .flex .logo {
+  font-size: 2.2rem;
+  color: var(--white);
+}
+
+.header .navbar .flex .logo i {
+  color: var(--main-color);
+  margin-right: 1rem;
+}
+
+.header .navbar .flex ul {
+  list-style: none;
+}
+
+.header .navbar .flex ul li {
+  float: left;
+  position: relative;
+}
+
+.header .navbar .flex ul li a {
+  display: inline-block;
+  padding: 1.2rem 2rem;
+  font-size: 1.8rem;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.header .navbar .flex ul li a:hover {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+.header .navbar .flex ul li a i {
+  margin-left: 1rem;
+}
+
+.header .navbar .flex ul li ul {
+  position: absolute;
+  width: 17rem;
+  left: 0;
+}
+
+.header .navbar .flex ul li ul li {
+  width: 100%;
+}
+
+.header .navbar .flex ul li ul li a {
+  display: none;
+}
+
+.header .navbar .flex ul li:hover ul li a {
+  display: block;
+}
+
+#menu-btn {
+  font-size: 2.5rem;
+  color: var(--black);
+  display: none;
+}
+
+.home {
+  background: url("assets/images/naslovna.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.home .left {
+  min-height: 85vh;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}
+
+.home .left form {
+  background-color: var(--white);
+  padding: 2rem;
+  box-shadow: var(--box-shodow);
+  width: 50rem;
+}
+
+.home .left form h3 {
+  padding-bottom: 1rem;
+  text-align: center;
+  color: var(--black);
+
+  font-size: 2.5rem;
+}
+
+.home .left form .flex {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.home .left form .box {
+  flex: 1 1 20rem;
+}
+
+input {
+  border: var(--border);
+  padding: 3px;
+}
+
+.home .left form .box .input {
+  width: 100%;
+  border: var(--border);
+  padding: 1.4rem;
+  color: var(--black);
+  font-size: 1.8rem;
+  margin: 1rem 0;
+}
+
+.home .left form .box p {
+  color: var(--light-color);
+  font-size: 1.7rem;
+  padding-top: 1rem;
+}
+
+.home .center form .box p span {
+  color: var(--main-color);
+}
+
+.listings .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 35rem);
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.listings2 .box-container {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  row-gap: 50px;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.listings .box-container .box {
+  background-color: var(--white);
+  box-shadow: var(--box-shodow);
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+.listings .box-container .box .admin {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.listings .box-container .box .admin h3 {
+  height: 4.5rem;
+  line-height: 4.4rem;
+  width: 4.5rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  color: var(--black);
+  background-color: var(--light-bg);
+  text-align: center;
+}
+
+.listings .box-container .box .admin p {
+  font-size: 1.7rem;
+  color: var(--black);
+  padding-bottom: 0.3rem;
+}
+
+.listings .box-container .box .admin span {
+  font-size: 1.5rem;
+  color: var(--light-color);
+}
+
+.listings .box-container .box .thumb {
+  position: relative;
+  height: 22rem;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.listings .box-container .box .thumb img {
+  height: 100%;
+  width: 100%;
+  transition: 0.2s linear;
+}
+
+.listings .box-container .box:hover .thumb img {
+  transform: scale(1.1);
+}
+
+.listings .box-container .box .thumb .total-images {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--white);
+  padding: 0.5rem 1.5rem;
+  font-size: 1.6rem;
+  z-index: 1;
+}
+
+.listings .box-container .box .thumb .total-images i {
+  margin-right: 0.7rem;
+}
+
+.listings .box-container .box .thumb .type {
+  position: absolute;
+  bottom: 1rem;
+  left: 0.7rem;
+  z-index: 1;
+}
+
+.listings .box-container .box .thumb .type span {
+  margin-right: 0.7rem;
+  padding: 0.5rem 1.5rem;
+  color: var(--white);
+  background-color: var(--main-color);
+  font-size: 1.6rem;
+}
+
+.listings .box-container .box .thumb .save {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1;
+}
+
+.listings .box-container .box .thumb .save button {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--white);
+  padding: 0.7rem 1rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.listings .box-container .box .thumb .save button:hover {
+  background-color: var(--main-color);
+}
+
+.listings .box-container .box .name {
+  font-size: 2rem;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+
+.listings .box-container .box .location {
+  padding-top: 1rem;
+  font-size: 1.6rem;
+  color: var(--light-color);
+}
+
+.listings .box-container .box .location i {
+  margin-right: 1rem;
+  color: var(--main-color);
+}
+
+.listings .box-container .box .flex {
+  display: flex;
+  background-color: var(--light-bg);
+  padding: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.listings .box-container .box .flex p {
+  font-size: 1.6rem;
+  flex: 1 1 4rem;
+}
+
+.listings .box-container .box .flex p span {
+  color: var(--light-color);
+}
+
+.listings .box-container .box .flex p i {
+  margin-right: 1rem;
+  color: var(--main-color);
+}
+
+/*-------------------------------------------------------------------------------------*/
+
+.listings2 .box-container .box {
+  background-color: var(--white);
+  box-shadow: var(--box-shodow);
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+.listings2 .box-container .box .admin {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.listings2 .box-container .box .admin h3 {
+  height: 4.5rem;
+  line-height: 4.4rem;
+  width: 4.5rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  color: var(--black);
+  background-color: var(--light-bg);
+  text-align: center;
+}
+
+.listings2 .box-container .box .admin p {
+  font-size: 1.7rem;
+  color: var(--black);
+  padding-bottom: 0.3rem;
+}
+
+.listings2 .box-container .box .admin span {
+  font-size: 1.5rem;
+  color: var(--light-color);
+}
+
+.listings2 .box-container .box .thumb {
+  position: relative;
+  height: 25rem;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  float: left;
+}
+
+.atributiRezultatPretrage {
+  position: relative;
+  float: left;
+  margin: 1.5rem 0;
+  padding: 1rem;
+}
+
+.opisRezultatPretrage {
+  inline-size: 630px;
+  overflow-wrap: break-word;
+}
+
+.listings2 .box-container .box .thumb img {
+  height: 100%;
+  width: 100%;
+  transition: 0.2s linear;
+}
+
+.listings2 .box-container .box:hover .thumb img {
+  transform: scale(1.05);
+}
+
+.listings2 .box-container .box .thumb .total-images {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--white);
+  padding: 0.5rem 1.5rem;
+  font-size: 1.6rem;
+  z-index: 1;
+}
+
+.listings2 .box-container .box .thumb .total-images i {
+  margin-right: 0.7rem;
+}
+
+.listings2 .box-container .box .thumb .type {
+  position: absolute;
+  bottom: 1rem;
+  left: 0.7rem;
+  z-index: 1;
+}
+
+.listings2 .box-container .box .thumb .type span {
+  margin-right: 0.7rem;
+  padding: 0.5rem 1.5rem;
+  color: var(--white);
+  background-color: var(--main-color);
+  font-size: 1.6rem;
+}
+
+.listings2 .box-container .box .thumb .save {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1;
+}
+
+.listings2 .box-container .box .thumb .save button {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--white);
+  padding: 0.7rem 1rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.listings2 .box-container .box .thumb .save button:hover {
+  background-color: var(--main-color);
+}
+
+.listings2 .box-container .box .name {
+  font-size: 2rem;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+
+.listings2 .box-container .box .location {
+  padding-top: 1rem;
+  font-size: 1.6rem;
+  color: var(--light-color);
+}
+
+.listings2 .box-container .box .location i {
+  margin-right: 1rem;
+  color: var(--main-color);
+}
+
+.listings2 .box-container .box .flex {
+  display: flex;
+  background-color: var(--light-bg);
+  padding: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.listings2 .box-container .box .flex p {
+  font-size: 1.6rem;
+  flex: 1 1 4rem;
+}
+
+.listings2 .box-container .box .flex p span {
+  color: var(--light-color);
+}
+
+.listings2 .box-container .box .flex p i {
+  margin-right: 1rem;
+  color: var(--main-color);
+}
+
+/******************************************************************************/
+
+.filters form {
+  background-color: var(--white);
+  box-shadow: var(--box-shodow);
+  padding: 2rem;
+}
+
+.filters form #close-filter {
+  text-align: right;
+  padding-bottom: 2rem;
+  display: none;
+}
+
+.filters form #close-filter i {
+  height: 4.5rem;
+  width: 4.5rem;
+  line-height: 4.4rem;
+  background-color: var(--main-color);
+  color: var(--white);
+  cursor: pointer;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.filters form #close-filter i:hover {
+  background-color: var(--black);
+}
+
+.filters form h3 {
+  font-size: 2.5rem;
+  padding-bottom: 2rem;
+  color: var(--black);
+
+  text-align: center;
+}
+
+.filters form .flex {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filters form .flex .box {
+  flex: 1 1 40rem;
+}
+
+.filters form .flex .box .input {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.8rem;
+  color: var(--black);
+  border: var(--border);
+  padding: 1.4rem;
+}
+
+.filters form .flex .box p {
+  font-size: 1.6rem;
+  color: var(--light-color);
+}
+
+#filter-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: var(--border);
+  color: var(--white);
+  text-align: center;
+  height: 4.5rem;
+  width: 4.5rem;
+  line-height: 4.4rem;
+  z-index: 1000;
+  font-size: 2rem;
+  background-color: var(--main-color);
+  display: none;
+}
+
+.form-container form {
+  max-width: 50rem;
+  margin: 0 auto;
+  background-color: var(--white);
+  box-shadow: var(--box-shodow);
+  padding: 2rem;
+  text-align: center;
+}
+
+.form-container form h3 {
+  padding-bottom: 1rem;
+  font-size: 2.5rem;
+  color: var(--black);
+}
+
+.form-container form .box {
+  border: var(--border);
+  padding: 1.4rem;
+  color: var(--black);
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 1.8rem;
+}
+
+.form-container form p {
+  font-size: 1.7rem;
+  padding: 1rem 0;
+  color: var(--light-color);
+}
+
+.form-container form p a {
+  color: var(--main-color);
+}
+
+.form-container form p a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: var(--black);
+}
+
+.footer .flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.footer .flex .box {
+  flex: 1 1 30rem;
+}
+
+.footer .flex .box a {
+  display: block;
+  padding: 1rem 0;
+  font-size: 1.8rem;
+}
+
+.footer .flex .box a span {
+  color: var(--white);
+}
+
+.footer .flex .box a:hover span {
+  text-decoration: underline;
+}
+
+.footer .flex .box a i {
+  color: var(--main-color);
+}
+
+.footer .flex .box:last-child {
+  text-align: right;
+}
+
+.footer .flex .box:last-child a i {
+  margin-left: 1.5rem;
+}
+
+.footer .flex .box:first-child a i {
+  margin-right: 1.5rem;
+}
+
+.footer .flex .box:nth-child(2) {
+  text-align: center;
+}
+
+.footer .credit {
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: var(--border);
+  font-size: 2rem;
+  color: var(--white);
+  margin-top: 2rem;
+}
+
+.footer .credit span {
+  color: var(--main-color);
+}
+
+/* media queries  */
+
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media (max-width: 768px) {
+  #menu-btn {
+    display: inline-block;
+  }
+
+  .header .navbar .menu {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border-top: var(--border);
+    transition: 0.2s linear;
+    z-index: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  .header .navbar .menu.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .header .navbar .menu ul li {
+    width: 100%;
+    position: relative;
+  }
+
+  .header .navbar .menu ul li a {
+    width: 100%;
+  }
+
+  .header .navbar .menu ul li ul {
+    position: relative;
+    width: 100%;
+  }
+
+  .header .navbar .menu ul li ul li a {
+    padding-left: 4rem;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .view-property .details .thumb .big-image img {
+    height: auto;
+  }
+
+  .view-property .details .thumb .small-images img {
+    height: 4rem;
+    width: 6rem;
+  }
+
+  #filter-btn {
+    display: inline-block;
+  }
+
+  .filters {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    background-color: var(--white);
+    z-index: 1100;
+    padding: 0;
+    display: none;
+  }
+
+  .filters.active {
+    display: block;
+  }
+
+  .filters form {
+    box-shadow: none;
+  }
+
+  .filters form #close-filter {
+    display: block;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+
+  .header .navbar .flex .logo {
+    font-size: 1.8rem;
+  }
+
+  .home .center form .flex {
+    gap: 0;
+  }
+
+  .listings .box-container {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews .box-container {
+    grid-template-columns: 1fr;
+  }
+}
