@@ -8,7 +8,53 @@ const runtime_1 = require("@tsoa/runtime");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const HelloWorldController_1 = require("./../../routes/helloWorld/HelloWorldController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-const models = {};
+const UserController_1 = require("./../../routes/users/UserController");
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+const models = {
+    "User": {
+        "dataType": "refObject",
+        "properties": {
+            "ime": { "dataType": "string", "required": true },
+            "prezime": { "dataType": "string", "required": true },
+            "datumRodjenja": { "dataType": "string", "required": true },
+            "grad": { "dataType": "string", "required": true },
+            "telefon": { "dataType": "double", "required": true },
+            "email": { "dataType": "string", "required": true },
+            "kor_ime": { "dataType": "string", "required": true },
+            "lozinka": { "dataType": "string", "required": true },
+            "tip": { "dataType": "string", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "FlattenMaps_T_": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": {}, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Document_any.any.any_": {
+        "dataType": "refAlias",
+        "type": { "ref": "FlattenMaps_T_", "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ObjectId": {
+        "dataType": "refAlias",
+        "type": { "dataType": "string", "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UpdateResult": {
+        "dataType": "refObject",
+        "properties": {
+            "acknowledged": { "dataType": "boolean", "required": true },
+            "matchedCount": { "dataType": "double", "required": true },
+            "modifiedCount": { "dataType": "double", "required": true },
+            "upsertedCount": { "dataType": "double", "required": true },
+            "upsertedId": { "ref": "ObjectId", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+};
 const validationService = new runtime_1.ValidationService(models);
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 function RegisterRoutes(app) {
@@ -24,6 +70,57 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new HelloWorldController_1.HelloWorldController();
             const promise = controller.getHelloWorldMessage.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/users/login', ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController)), ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController.prototype.login)), function UserController_login(request, response, next) {
+        const args = {
+            user: { "in": "body", "name": "user", "required": true, "ref": "User" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new UserController_1.UserController();
+            const promise = controller.login.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/users/insert', ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController)), ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController.prototype.insertUser)), function UserController_insertUser(request, response, next) {
+        const args = {
+            user: { "in": "body", "name": "user", "required": true, "ref": "User" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new UserController_1.UserController();
+            const promise = controller.insertUser.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/users/update', ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController)), ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController.prototype.updateUser)), function UserController_updateUser(request, response, next) {
+        const args = {
+            user: { "in": "body", "name": "user", "required": true, "ref": "User" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new UserController_1.UserController();
+            const promise = controller.updateUser.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

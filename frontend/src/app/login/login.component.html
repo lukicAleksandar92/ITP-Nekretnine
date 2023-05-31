@@ -2,9 +2,9 @@
 <section class="form-container">
   <form action="" method="post">
     <h3>Dobrodošli nazad!</h3>
-    <input type="email" name="email" placeholder="email adresa" class="box" />
-    <input type="password" name="pass" placeholder="lozinka" class="box" />
+      <input type="text" name="korisnicko_ime" placeholder="Korisnicko ime" [(ngModel)]="korisnicko_ime" class="box">
+      <input type="password" name="lozinka" placeholder="Lozinka" [(ngModel)]="lozinka" class="box">
     <p>nemaš nalog? <a routerLink="/registracija">registruj se</a></p>
-    <input type="submit" value="Prijavi se" name="submit" class="btn" />
+    <input type="submit" value="Prijavi se" name="submit" class="btn" (click)="login()"/>
   </form>
 </section>
