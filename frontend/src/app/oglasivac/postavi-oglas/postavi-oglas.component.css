@@ -49,3 +49,7 @@ p {
   row-gap: 1rem;
   column-gap: 1rem;
 }
+.greska {
+  color: red;
+  font-size: 1rem;
+}

@@ -1,0 +1,25 @@
+{
+  
+  "lokacija": "Vracar, Slavija",
+  "adresa": "Smiljaniceva",
+  "nazivOglasa": "Vracar, Slavija - Smiljaniceva",
+  "tipNekretnine": "stan",
+  "cena": 132000,
+  "kvadratura": 40,
+  "brojSoba": "2",
+  "godinaIzgradnje": "1985",
+  "stanjeNekretnine": "renovirano",
+  "tipGrejanja": "ta",
+  "sprat": "0",
+  "mesecneRezije": 10000,
+  "karakteristike": [
+    "Interfon",
+    "Basta"
+  ],
+  "linije": [
+    "2",
+    "5",
+    "12",
+    "19"
+  ]
+}

@@ -5,6 +5,8 @@ import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, H
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { HelloWorldController } from './../../routes/helloWorld/HelloWorldController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { ListingController } from './../../routes/listings/ListingController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../../routes/users/UserController';
 import type { RequestHandler } from 'express';
 import * as express from 'express';
@@ -12,6 +14,42 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "FlattenMaps_T_": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Document_any.any.any_": {
+        "dataType": "refAlias",
+        "type": {"ref":"FlattenMaps_T_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Listing": {
+        "dataType": "refObject",
+        "properties": {
+            "lokacija": {"dataType":"string","required":true},
+            "adresa": {"dataType":"string","required":true},
+            "nazivOglasa": {"dataType":"string","required":true},
+            "tipNekretnine": {"dataType":"string","required":true},
+            "cena": {"dataType":"string","required":true},
+            "kvadratura": {"dataType":"string","required":true},
+            "brojSoba": {"dataType":"string","required":true},
+            "godinaIzgradnje": {"dataType":"string","required":true},
+            "stanjeNekretnine": {"dataType":"string","required":true},
+            "tipGrejanja": {"dataType":"string","required":true},
+            "sprat": {"dataType":"string","required":true},
+            "mesecneRezije": {"dataType":"string","required":true},
+            "karakteristike": {"dataType":"array","array":{"dataType":"string"},"required":true},
+            "linije": {"dataType":"array","array":{"dataType":"string"},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ObjectId": {
+        "dataType": "refAlias",
+        "type": {"dataType":"string","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "User": {
         "dataType": "refObject",
         "properties": {
@@ -26,21 +64,6 @@ const models: TsoaRoute.Models = {
             "tip": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "FlattenMaps_T_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Document_any.any.any_": {
-        "dataType": "refAlias",
-        "type": {"ref":"FlattenMaps_T_","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ObjectId": {
-        "dataType": "refAlias",
-        "type": {"dataType":"string","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UpdateResult": {
@@ -83,6 +106,31 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.getHelloWorldMessage.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/listings/insert',
+            ...(fetchMiddlewares<RequestHandler>(ListingController)),
+            ...(fetchMiddlewares<RequestHandler>(ListingController.prototype.insertListing)),
+
+            function ListingController_insertListing(request: any, response: any, next: any) {
+            const args = {
+                    listing: {"in":"body","name":"listing","required":true,"dataType":"any"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ListingController();
+
+
+              const promise = controller.insertListing.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
