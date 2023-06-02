@@ -1,25 +1,113 @@
-{
-  
-  "lokacija": "Vracar, Slavija",
-  "adresa": "Smiljaniceva",
-  "nazivOglasa": "Vracar, Slavija - Smiljaniceva",
+[{
+  "_id": {
+    "$oid": "6479bc767667283ac511a07d"
+  },
+  "lokacija": "Opština Zemun  -  Batajnica",
+  "adresa": "Žarka Bokuna",
+  "nazivOglasa": "Batajnica trosoban dupleks 85m2 uknjižen",
   "tipNekretnine": "stan",
-  "cena": 132000,
-  "kvadratura": 40,
-  "brojSoba": "2",
-  "godinaIzgradnje": "1985",
-  "stanjeNekretnine": "renovirano",
-  "tipGrejanja": "ta",
-  "sprat": "0",
-  "mesecneRezije": 10000,
+  "cena": 125000,
+  "kvadratura": 85,
+  "brojSoba": "3",
+  "godinaIzgradnje": "2010",
+  "stanjeNekretnine": "izvorno",
+  "tipGrejanja": "Centralno grejanje",
+  "sprat": "1",
+  "mesecneRezije": 15000,
   "karakteristike": [
+    "Terasa",
+    "Internet"
+  ],
+  "linije": [
+    "13",
+    "16"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6479bcec7667283ac511a07f"
+  },
+  "lokacija": "Opština Stari grad  -  Trg Republike",
+  "adresa": "Kolarčeva",
+  "nazivOglasa": "Trg Republike - izuzetna ponuda",
+  "tipNekretnine": "stan",
+  "cena": 310000,
+  "kvadratura": 73,
+  "brojSoba": "2.5",
+  "godinaIzgradnje": "2001",
+  "stanjeNekretnine": "izvorno",
+  "tipGrejanja": "TA pec",
+  "sprat": "5",
+  "mesecneRezije": 8000,
+  "karakteristike": [
+    "Terasa",
+    "Podrum",
+    "Internet",
     "Interfon",
-    "Basta"
+    "Lift",
+    "Klima"
   ],
   "linije": [
     "2",
     "5",
+    "10",
     "12",
     "19"
-  ]
-}
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6479bd487667283ac511a081"
+  },
+  "lokacija": "Opština Savski venac  -  Dedinje",
+  "adresa": "Generala Save Grujića",
+  "nazivOglasa": "Dedinje - Pink - diplomatska kolonija ID#3805",
+  "tipNekretnine": "stan",
+  "cena": 389900,
+  "kvadratura": 120,
+  "brojSoba": "3.5",
+  "godinaIzgradnje": "2019",
+  "stanjeNekretnine": "izvorno",
+  "tipGrejanja": "Gas",
+  "sprat": "1",
+  "mesecneRezije": 20500,
+  "karakteristike": [
+    "Terasa",
+    "Internet",
+    "Garaza",
+    "Telefon",
+    "Klima"
+  ],
+  "linije": [
+    "7",
+    "14",
+    "15"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6479be347667283ac511a088"
+  },
+  "lokacija": "Palilula",
+  "adresa": "Cvijiceva",
+  "nazivOglasa": "LUX Jednosoban NOVO",
+  "tipNekretnine": "stan",
+  "cena": 156000,
+  "kvadratura": 28,
+  "brojSoba": "1",
+  "godinaIzgradnje": "1974",
+  "stanjeNekretnine": "lux",
+  "tipGrejanja": "TA pec",
+  "sprat": "Suteren",
+  "mesecneRezije": 7000,
+  "karakteristike": [
+    "Telefon",
+    "Lift"
+  ],
+  "linije": [
+    "6",
+    "7",
+    "13"
+  ],
+  "__v": 0
+}]
