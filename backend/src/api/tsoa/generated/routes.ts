@@ -31,14 +31,14 @@ const models: TsoaRoute.Models = {
             "adresa": {"dataType":"string","required":true},
             "nazivOglasa": {"dataType":"string","required":true},
             "tipNekretnine": {"dataType":"string","required":true},
-            "cena": {"dataType":"string","required":true},
-            "kvadratura": {"dataType":"string","required":true},
+            "cena": {"dataType":"double","required":true},
+            "kvadratura": {"dataType":"double","required":true},
             "brojSoba": {"dataType":"string","required":true},
             "godinaIzgradnje": {"dataType":"string","required":true},
             "stanjeNekretnine": {"dataType":"string","required":true},
             "tipGrejanja": {"dataType":"string","required":true},
             "sprat": {"dataType":"string","required":true},
-            "mesecneRezije": {"dataType":"string","required":true},
+            "mesecneRezije": {"dataType":"double","required":true},
             "karakteristike": {"dataType":"array","array":{"dataType":"string"},"required":true},
             "linije": {"dataType":"array","array":{"dataType":"string"},"required":true},
         },
@@ -131,6 +131,55 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.insertListing.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/listings/getAll',
+            ...(fetchMiddlewares<RequestHandler>(ListingController)),
+            ...(fetchMiddlewares<RequestHandler>(ListingController.prototype.getAllListings)),
+
+            function ListingController_getAllListings(request: any, response: any, next: any) {
+            const args = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ListingController();
+
+
+              const promise = controller.getAllListings.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/listings/getOne/:id',
+            ...(fetchMiddlewares<RequestHandler>(ListingController)),
+            ...(fetchMiddlewares<RequestHandler>(ListingController.prototype.getListingById)),
+
+            function ListingController_getListingById(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ListingController();
+
+
+              const promise = controller.getListingById.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

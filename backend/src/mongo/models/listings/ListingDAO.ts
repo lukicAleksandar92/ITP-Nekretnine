@@ -9,6 +9,12 @@ class ListingDAO {
     let newListingModel = new this.listingModel(listing);
     return newListingModel.save();
   }
+  async getAllListings(): Promise<Listing[]> {
+    return this.listingModel.find();
+  }
+  async getListingById(id: string): Promise<Listing | null> {
+    return this.listingModel.findById(id);
+  }
 }
 
 export const listingDAO = new ListingDAO();

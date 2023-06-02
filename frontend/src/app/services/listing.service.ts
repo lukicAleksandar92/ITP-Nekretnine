@@ -15,4 +15,10 @@ export class ListingService {
       this.http.post(`${this.back}/listings/insert`, listing)
     );
   }
+  getAllListings() {
+    return firstValueFrom(this.http.post(`${this.back}/listings/getAll`, {}));
+  }
+  getListingById(id: string) {
+    return firstValueFrom(this.http.get(`${this.back}/listings/getOne/${id}`));
+  }
 }

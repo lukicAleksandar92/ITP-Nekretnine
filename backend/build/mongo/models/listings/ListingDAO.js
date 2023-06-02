@@ -25,6 +25,16 @@ class ListingDAO {
             return newListingModel.save();
         });
     }
+    getAllListings() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.listingModel.find();
+        });
+    }
+    getListingById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.listingModel.findById(id);
+        });
+    }
 }
 exports.listingDAO = new ListingDAO();
 //# sourceMappingURL=ListingDAO.js.map

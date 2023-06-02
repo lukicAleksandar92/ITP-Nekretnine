@@ -28,7 +28,7 @@ const routes: Routes = [
 
   { path: 'kupac-moj-profil', component: KupacMojProfilComponent },
   { path: 'omiljene-nekretnine', component: OmiljeneNekretnineComponent },
-  { path: 'stranica-oglasa', component: StranicaOglasaComponent },
+  { path: 'stranica-oglasa/:id', component: StranicaOglasaComponent },
 ];
 
 @NgModule({

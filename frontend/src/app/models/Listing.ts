@@ -1,4 +1,5 @@
 export class Listing {
+  _id!: string;
   lokacija!: string;
   adresa!: string;
   nazivOglasa!: string;
