@@ -12,6 +12,7 @@ import { OgMojProfilComponent } from './oglasivac/og-moj-profil/og-moj-profil.co
 import { KupacMojProfilComponent } from './kupac/kupac-moj-profil/kupac-moj-profil.component';
 import { OmiljeneNekretnineComponent } from './kupac/omiljene-nekretnine/omiljene-nekretnine.component';
 import { StranicaOglasaComponent } from './kupac/stranica-oglasa/stranica-oglasa.component';
+import { IzmeniOglasComponent } from './oglasivac/izmeni-oglas/izmeni-oglas.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'kupac-moj-profil', component: KupacMojProfilComponent },
   { path: 'omiljene-nekretnine', component: OmiljeneNekretnineComponent },
   { path: 'stranica-oglasa/:id', component: StranicaOglasaComponent },
+  { path: 'izmeni-oglas/:id', component: IzmeniOglasComponent },
 ];
 
 @NgModule({

@@ -50,6 +50,18 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"string","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UpdateResult": {
+        "dataType": "refObject",
+        "properties": {
+            "acknowledged": {"dataType":"boolean","required":true},
+            "matchedCount": {"dataType":"double","required":true},
+            "modifiedCount": {"dataType":"double","required":true},
+            "upsertedCount": {"dataType":"double","required":true},
+            "upsertedId": {"ref":"ObjectId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "User": {
         "dataType": "refObject",
         "properties": {
@@ -62,18 +74,6 @@ const models: TsoaRoute.Models = {
             "kor_ime": {"dataType":"string","required":true},
             "lozinka": {"dataType":"string","required":true},
             "tip": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UpdateResult": {
-        "dataType": "refObject",
-        "properties": {
-            "acknowledged": {"dataType":"boolean","required":true},
-            "matchedCount": {"dataType":"double","required":true},
-            "modifiedCount": {"dataType":"double","required":true},
-            "upsertedCount": {"dataType":"double","required":true},
-            "upsertedId": {"ref":"ObjectId","required":true},
         },
         "additionalProperties": false,
     },
@@ -180,6 +180,32 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.getListingById.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/listings/update/:id',
+            ...(fetchMiddlewares<RequestHandler>(ListingController)),
+            ...(fetchMiddlewares<RequestHandler>(ListingController.prototype.updateListing)),
+
+            function ListingController_updateListing(request: any, response: any, next: any) {
+            const args = {
+                    listing: {"in":"body","name":"listing","required":true,"ref":"Listing"},
+                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ListingController();
+
+
+              const promise = controller.updateListing.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

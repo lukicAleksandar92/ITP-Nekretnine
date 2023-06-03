@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Path, Post, Route } from "tsoa";
+import { Body, Controller, Get, Path, Post, Put, Route } from "tsoa";
 import { Listing } from "../../../mongo/models/listings/Listing";
 import { listingDAO } from "../../../mongo/models/listings/ListingDAO";
 
@@ -16,5 +16,11 @@ export class ListingController extends Controller {
   @Get("getOne/:id")
   async getListingById(@Path() id: string): Promise<Listing | null> {
     return listingDAO.getListingById(id);
+  }
+  @Put("update/:id")
+  async updateListing(@Body() listing: Listing, @Path() id: string) {
+    let result = await listingDAO.updateListing(listing, id);
+    if (result == null) this.setStatus(404);
+    return result;
   }
 }

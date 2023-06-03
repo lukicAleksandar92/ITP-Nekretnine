@@ -25,6 +25,7 @@ import { OmiljeneNekretnineComponent } from './kupac/omiljene-nekretnine/omiljen
 import { KupacMojProfilComponent } from './kupac/kupac-moj-profil/kupac-moj-profil.component';
 import { KupacHeaderComponent } from './kupac/kupac-header/kupac-header.component';
 import { StranicaOglasaComponent } from './kupac/stranica-oglasa/stranica-oglasa.component';
+import { IzmeniOglasComponent } from './oglasivac/izmeni-oglas/izmeni-oglas.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { StranicaOglasaComponent } from './kupac/stranica-oglasa/stranica-oglasa
     KupacMojProfilComponent,
     KupacHeaderComponent,
     StranicaOglasaComponent,
+    IzmeniOglasComponent,
   ],
   imports: [
     BrowserModule,

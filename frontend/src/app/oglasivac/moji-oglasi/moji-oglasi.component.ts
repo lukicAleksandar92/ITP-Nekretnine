@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faMapMarkerAlt, faEuroSign } from '@fortawesome/free-solid-svg-icons';
+import { Listing } from 'src/app/models/Listing';
+import { ListingService } from 'src/app/services/listing.service';
 @Component({
   selector: 'app-moji-oglasi',
   templateUrl: './moji-oglasi.component.html',
   styleUrls: ['./moji-oglasi.component.css'],
 })
-export class MojiOglasiComponent {
+export class MojiOglasiComponent implements OnInit {
+  constructor(private listingService: ListingService) {}
+  ngOnInit(): void {
+    this.listingService.getAllListings().then((res) => {
+      this.allListings = JSON.parse(JSON.stringify(res));
+    });
+  }
+  allListings: Listing[] = [];
   mapMarker = faMapMarkerAlt;
   euroMarker = faEuroSign;
 }

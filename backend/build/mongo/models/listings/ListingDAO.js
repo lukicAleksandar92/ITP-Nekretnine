@@ -35,6 +35,32 @@ class ListingDAO {
             return this.listingModel.findById(id);
         });
     }
+    updateListing(listing, id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let activeListing = this.getListingById(id);
+            if (activeListing != null) {
+                return this.listingModel.updateOne({ _id: id }, {
+                    $set: {
+                        lokacija: listing.lokacija,
+                        adresa: listing.adresa,
+                        nazivOglasa: listing.nazivOglasa,
+                        tipNekretnine: listing.tipNekretnine,
+                        cena: listing.cena,
+                        kvadratura: listing.kvadratura,
+                        brojSoba: listing.brojSoba,
+                        godinaIzgradnje: listing.godinaIzgradnje,
+                        stanjeNekretnine: listing.stanjeNekretnine,
+                        tipGrejanja: listing.tipGrejanja,
+                        sprat: listing.sprat,
+                        mesecneRezije: listing.mesecneRezije,
+                        karakteristike: listing.karakteristike,
+                        linije: listing.linije,
+                    },
+                });
+            }
+            return null;
+        });
+    }
 }
 exports.listingDAO = new ListingDAO();
 //# sourceMappingURL=ListingDAO.js.map

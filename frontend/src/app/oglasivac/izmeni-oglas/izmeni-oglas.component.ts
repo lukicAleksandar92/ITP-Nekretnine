@@ -1,15 +1,55 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Listing } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
-  selector: 'app-postavi-oglas',
-  templateUrl: './postavi-oglas.component.html',
-  styleUrls: ['./postavi-oglas.component.css'],
+  selector: 'app-izmeni-oglas',
+  templateUrl: './izmeni-oglas.component.html',
+  styleUrls: ['./izmeni-oglas.component.css'],
 })
-export class PostaviOglasComponent {
-  constructor(private listingService: ListingService, private router: Router) {}
+export class IzmeniOglasComponent implements OnInit {
+  constructor(
+    private listingService: ListingService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id != null)
+      this.listingService.getListingById(id).then((res) => {
+        this.listing = JSON.parse(JSON.stringify(res));
+
+        this.id = this.listing._id;
+        this.lokacija = this.listing.lokacija;
+        this.adresa = this.listing.adresa;
+        this.nazivOglasa = this.listing.nazivOglasa;
+        this.tipNekretnine = this.listing.tipNekretnine;
+        this.cena = this.listing.cena;
+        this.kvadratura = this.listing.kvadratura;
+        this.kvadratura = this.listing.cena;
+        this.brojSoba = this.listing.brojSoba;
+        this.godinaIzgradnje = this.listing.godinaIzgradnje;
+        this.stanjeNekretnine = this.listing.stanjeNekretnine;
+        this.tipGrejanja = this.listing.tipGrejanja;
+        this.sprat = this.listing.sprat;
+        this.mesecneRezije = this.listing.mesecneRezije;
+
+        for (let k of this.sveKarakteristike) {
+          if (this.listing.karakteristike.includes(k.name)) {
+            k.checked = true;
+          }
+        }
+        for (let l of this.sveLinije) {
+          if (this.listing.linije.includes(l.name)) {
+            l.checked = true;
+          }
+        }
+      });
+  }
+  listing!: Listing;
+
+  id!: string;
   lokacija!: string;
   adresa!: string;
   nazivOglasa!: string;
@@ -49,11 +89,16 @@ export class PostaviOglasComponent {
     { name: 'Lift', checked: false },
     { name: 'Klima', checked: false },
   ];
-  odabraneKarakteristike: string[] = [];
-  osveziOdabraneKarakteristike() {
-    this.odabraneKarakteristike = this.sveKarakteristike
-      .filter((karakteristika) => karakteristika.checked)
-      .map((karakteristika) => karakteristika.name);
+  osveziOdabraneKarakteristike($event: any) {
+    const name = $event.target.value;
+    const isChecked = $event.target.checked;
+
+    this.sveKarakteristike = this.sveKarakteristike.map((k) => {
+      if (k.name == name) {
+        k.checked = isChecked;
+        return k;
+      } else return k;
+    });
   }
 
   sveLinije: any[] = [
@@ -78,14 +123,19 @@ export class PostaviOglasComponent {
     { name: '19', checked: false },
     { name: '20', checked: false },
   ];
-  odabraneLinije: string[] = [];
-  osveziOdabraneLinije() {
-    this.odabraneLinije = this.sveLinije
-      .filter((linija) => linija.checked)
-      .map((linija) => linija.name);
+  osveziOdabraneLinije($event: any) {
+    const name = $event.target.value;
+    const isChecked = $event.target.checked;
+
+    this.sveLinije = this.sveLinije.map((l) => {
+      if (l.name == name) {
+        l.checked = isChecked;
+        return l;
+      } else return l;
+    });
   }
 
-  postavi() {
+  izmeni() {
     let inputGreska = 0;
     let listing = new Listing();
     // lokacija
@@ -209,17 +259,16 @@ export class PostaviOglasComponent {
       listing.mesecneRezije = this.mesecneRezije;
     }
 
-    listing.karakteristike = this.odabraneKarakteristike;
-    listing.linije = this.odabraneLinije;
+    listing.karakteristike = this.sveKarakteristike
+      .filter((k) => k.checked)
+      .map((k) => k.name);
+
+    listing.linije = this.sveLinije.filter((l) => l.checked).map((l) => l.name);
 
     if (inputGreska == 0) {
-      this.listingService
-        .insertListing(listing)
-        .then((res) => {
-          alert('Uspeno unet oglas');
-          this.router.navigate(['/moji-oglasi']);
-        })
-        .catch((res) => {});
+      this.listingService.updateListing(listing, this.id);
+      alert('Oglas uspesno izmenjen');
+      this.router.navigate(['/moji-oglasi']);
     }
   }
 }
