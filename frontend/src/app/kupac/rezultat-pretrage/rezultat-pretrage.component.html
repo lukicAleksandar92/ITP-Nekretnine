@@ -4,136 +4,57 @@
   <h1 class="heading">Rezultat pretrage</h1>
 
   <div class="box-container">
-    <div class="box">
+    <div *ngFor="let listing of allListings" class="box">
       <div class="thumb">
-        <img src="assets/images/house-img-1.jpg" alt="" />
+        <img src="assets/images/house-img-2.jpg" alt="" />
       </div>
 
       <div class="atributiRezultatPretrage">
-        <h3 class="name">Prodajem stan</h3>
+        <h3 class="name">{{ listing.nazivOglasa }}</h3>
+        <!-- lokacija - ulica -->
         <p class="location">
           <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd-Vračar-Crveni krst</span>
+          ><span>Beograd - {{ listing.lokacija }} - {{ listing.ulica }}</span>
         </p>
+        <!-- kvadratura -->
         <p class="location">
-          <i class="fas fa-house"></i>Kvadratura: <span>54m²</span>
+          <i class="fas fa-house"></i>Kvadratura:
+          <span> {{ listing.kvadratura }} m²</span>
         </p>
+        <!-- broj soba -->
         <p class="location">
-          <i class="fas fa-door-open"></i>Broj soba: <span>3</span>
+          <i class="fas fa-door-open"></i>Broj soba:
+          <span> {{ listing.brojSoba }} </span>
         </p>
+        <!-- spratnost -->
         <p class="location">
-          <i class="fas fa-building"></i>Spratnost: <span>5</span>
+          <i class="fas fa-building"></i>Sprat:
+          <span> {{ listing.sprat }} </span>
         </p>
+        <!-- prosecna cena !!! treba da se poveze !!! -->
         <p class="location">
           <i class="fas fa-circle-question"></i>Prosečna cena po m²:<span
-            >104358</span
-          >
+          > </span>
         </p>
         <div class="flex">
           <p class="location">
-            <i class="fas fa-euro-sign"></i><b>Cena: <span>120000</span></b>
+            <i class="fas fa-euro-sign"></i
+            ><b
+              >Cena: <span> {{ listing.cena }} </span></b
+            >
           </p>
         </div>
       </div>
 
       <div class="opisRezultatPretrage">
         <p class="location">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+          {{ listing.opis }}
         </p>
       </div>
 
-      <a href="#" class="btn">Pogledaj oglas</a>
-    </div>
-
-    <div class="box">
-      <div class="thumb">
-        <img src="assets/images/house-img-1.jpg" alt="" />
-      </div>
-
-      <div class="atributiRezultatPretrage">
-        <h3 class="name">Prodajem stan</h3>
-        <p class="location">
-          <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd-Vračar-Crveni krst</span>
-        </p>
-        <p class="location">
-          <i class="fas fa-house"></i>Kvadratura: <span>54m²</span>
-        </p>
-        <p class="location">
-          <i class="fas fa-door-open"></i>Broj soba: <span>3</span>
-        </p>
-        <p class="location">
-          <i class="fas fa-building"></i>Spratnost: <span>5</span>
-        </p>
-        <p class="location">
-          <i class="fas fa-circle-question"></i>Prosečna cena po m²:<span
-            >104358</span
-          >
-        </p>
-        <div class="flex">
-          <p class="location">
-            <i class="fas fa-euro-sign"></i><b>Cena: <span>120000</span></b>
-          </p>
-        </div>
-      </div>
-
-      <div class="opisRezultatPretrage">
-        <p class="location">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-      </div>
-
-      <a href="#" class="btn">Pogledaj oglas</a>
-    </div>
-
-    <div class="box">
-      <div class="thumb">
-        <img src="assets/images/house-img-1.jpg" alt="" />
-      </div>
-
-      <div class="atributiRezultatPretrage">
-        <h3 class="name">Prodajem stan</h3>
-        <p class="location">
-          <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd-Vračar-Crveni krst</span>
-        </p>
-        <p class="location">
-          <i class="fas fa-house"></i>Kvadratura: <span>54m²</span>
-        </p>
-        <p class="location">
-          <i class="fas fa-door-open"></i>Broj soba: <span>3</span>
-        </p>
-        <p class="location">
-          <i class="fas fa-building"></i>Spratnost: <span>5</span>
-        </p>
-        <p class="location">
-          <i class="fas fa-circle-question"></i>Prosečna cena po m²:<span
-            >104358</span
-          >
-        </p>
-        <div class="flex">
-          <p class="location">
-            <i class="fas fa-euro-sign"></i><b>Cena: <span>120000</span></b>
-          </p>
-        </div>
-      </div>
-
-      <div class="opisRezultatPretrage">
-        <p class="location">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-      </div>
-
-      <a href="#" class="btn">Pogledaj oglas</a>
+      <a routerLink="/stranica-oglasa/{{ listing._id }}" class="btn"
+        >Pogledaj oglas</a
+      >
     </div>
   </div>
 </section>

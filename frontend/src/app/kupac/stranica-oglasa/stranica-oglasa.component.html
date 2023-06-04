@@ -2,7 +2,7 @@
 <section>
   <div class="content" *ngIf="listing">
     <h1>{{ listing.nazivOglasa }}</h1>
-    <h2>Beograd - {{ listing.lokacija }} - {{ listing.adresa }}</h2>
+    <h2>Beograd - {{ listing.lokacija }} - {{ listing.ulica }}</h2>
     <div class="flex">
       <div class="info">
         <div class="box"><b>Cena:</b> {{ listing.cena }} €</div>
@@ -10,6 +10,9 @@
         <div class="box"><b>Kvadratura:</b> {{ listing.kvadratura }}m²</div>
         <div class="box"><b>Broj soba:</b> {{ listing.brojSoba }}</div>
         <div class="box"><b>Sprat:</b> {{ listing.sprat }}</div>
+        <div class="box">
+          <b>Ukupna spratnost:</b> {{ listing.ukupnaSpratnost }}
+        </div>
         <div class="box"><b>Tip grejanja:</b> {{ listing.tipGrejanja }}</div>
         <div class="box">
           <b>Stanje nekretnine:</b> {{ listing.stanjeNekretnine }}
@@ -23,7 +26,7 @@
         <br />
         <div class="box">
           <b>Opis:</b> <br />
-          <!-- povezati nepohodne podatke -->
+          {{ listing.opis }}
         </div>
         <br />
         <!-- Karakteristike -->
@@ -70,10 +73,7 @@
         </div>
         <div class="box"><b> Prosečna cena na lokaciji:</b> 2398 €/m²</div>
         <div class="box oglasivac">
-          <p>
-            <b>Oglašivač:</b
-            ><!-- povezati oglasivaca -->
-          </p>
+          <p><b>Oglašivač:</b> {{ listing.oglasivac }}</p>
         </div>
         <div class="btn-wrapper">
           <button class="btn" (click)="vidiViseToggle()">Kontakt</button>

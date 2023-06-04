@@ -1,6 +1,7 @@
 export interface Listing {
+  oglasivac: string;
   lokacija: string;
-  adresa: string;
+  ulica: string;
   nazivOglasa: string;
   tipNekretnine: string;
   cena: number;
@@ -10,7 +11,11 @@ export interface Listing {
   stanjeNekretnine: string;
   tipGrejanja: string;
   sprat: string;
+  ukupnaSpratnost: string;
   mesecneRezije: number;
   karakteristike: string[];
   linije: string[];
+  opis: string;
+
+  status: string;
 }

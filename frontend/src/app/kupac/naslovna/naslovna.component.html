@@ -62,7 +62,13 @@
         class="btn2"
         routerLink="/detaljna-pretraga"
       />
-      <input type="submit" value="Traži" name="pretraga" class="btn" />
+      <input
+        routerLink="/rezultat-pretrage"
+        type="submit"
+        value="Traži"
+        name="pretraga"
+        class="btn"
+      />
     </form>
   </section>
 </div>
@@ -86,7 +92,7 @@
 
         <p class="location">
           <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd - {{ listing.lokacija }} - {{ listing.adresa }}</span>
+          ><span>Beograd - {{ listing.lokacija }} - {{ listing.ulica }}</span>
         </p>
 
         <div class="flex">

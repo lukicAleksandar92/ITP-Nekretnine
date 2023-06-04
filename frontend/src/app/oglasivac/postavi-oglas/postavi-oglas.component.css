@@ -53,3 +53,15 @@ p {
   color: red;
   font-size: 1rem;
 }
+.spratnost {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+  align-items: center;
+  justify-content: space-around;
+}
+.spratnost p {
+  margin: auto;
+}
+.tall {
+  min-height: 150px;
+}

@@ -46,6 +46,14 @@ let ListingController = class ListingController extends tsoa_1.Controller {
             return result;
         });
     }
+    sellListing(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield ListingDAO_1.listingDAO.sellListing(id);
+            if (result == null)
+                this.setStatus(404);
+            return result;
+        });
+    }
 };
 __decorate([
     (0, tsoa_1.Post)("insert"),
@@ -63,6 +71,10 @@ __decorate([
     __param(0, (0, tsoa_1.Body)()),
     __param(1, (0, tsoa_1.Path)())
 ], ListingController.prototype, "updateListing", null);
+__decorate([
+    (0, tsoa_1.Put)("sell/:id"),
+    __param(0, (0, tsoa_1.Path)())
+], ListingController.prototype, "sellListing", null);
 ListingController = __decorate([
     (0, tsoa_1.Route)("listings")
 ], ListingController);

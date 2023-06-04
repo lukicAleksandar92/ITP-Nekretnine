@@ -23,7 +23,7 @@ class ListingDAO {
         {
           $set: {
             lokacija: listing.lokacija,
-            adresa: listing.adresa,
+            ulica: listing.ulica,
             nazivOglasa: listing.nazivOglasa,
             tipNekretnine: listing.tipNekretnine,
             cena: listing.cena,
@@ -33,15 +33,30 @@ class ListingDAO {
             stanjeNekretnine: listing.stanjeNekretnine,
             tipGrejanja: listing.tipGrejanja,
             sprat: listing.sprat,
+            ukupnaSpratnost: listing.ukupnaSpratnost,
             mesecneRezije: listing.mesecneRezije,
             karakteristike: listing.karakteristike,
             linije: listing.linije,
+            opis: listing.opis,
           },
         }
       );
     }
 
     return null;
+  }
+  async sellListing(id: string) {
+    let activeLisitng = this.getListingById(id);
+    if (activeLisitng != null) {
+      return this.listingModel.updateOne(
+        { _id: id },
+        {
+          $set: {
+            status: "prodato",
+          },
+        }
+      );
+    }
   }
 }
 

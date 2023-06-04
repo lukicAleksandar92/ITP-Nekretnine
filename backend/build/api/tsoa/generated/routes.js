@@ -26,8 +26,9 @@ const models = {
     "Listing": {
         "dataType": "refObject",
         "properties": {
+            "oglasivac": { "dataType": "string", "required": true },
             "lokacija": { "dataType": "string", "required": true },
-            "adresa": { "dataType": "string", "required": true },
+            "ulica": { "dataType": "string", "required": true },
             "nazivOglasa": { "dataType": "string", "required": true },
             "tipNekretnine": { "dataType": "string", "required": true },
             "cena": { "dataType": "double", "required": true },
@@ -37,9 +38,12 @@ const models = {
             "stanjeNekretnine": { "dataType": "string", "required": true },
             "tipGrejanja": { "dataType": "string", "required": true },
             "sprat": { "dataType": "string", "required": true },
+            "ukupnaSpratnost": { "dataType": "string", "required": true },
             "mesecneRezije": { "dataType": "double", "required": true },
             "karakteristike": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
             "linije": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
+            "opis": { "dataType": "string", "required": true },
+            "status": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -160,6 +164,23 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new ListingController_1.ListingController();
             const promise = controller.updateListing.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/listings/sell/:id', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.sellListing)), function ListingController_sellListing(request, response, next) {
+        const args = {
+            id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new ListingController_1.ListingController();
+            const promise = controller.sellListing.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

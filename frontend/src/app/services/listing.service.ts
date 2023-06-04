@@ -26,4 +26,9 @@ export class ListingService {
       this.http.put(`${this.back}/listings/update/${id}`, listing)
     );
   }
+  sellListing(id: string) {
+    return firstValueFrom(
+      this.http.put(`${this.back}/listings/sell/${id}`, {})
+    );
+  }
 }

@@ -11,7 +11,7 @@ import { ListingService } from 'src/app/services/listing.service';
 export class PostaviOglasComponent {
   constructor(private listingService: ListingService, private router: Router) {}
   lokacija!: string;
-  adresa!: string;
+  ulica!: string;
   nazivOglasa!: string;
   tipNekretnine!: string;
   cena!: number;
@@ -21,10 +21,13 @@ export class PostaviOglasComponent {
   stanjeNekretnine!: string;
   tipGrejanja!: string;
   sprat!: string;
+
+  ukupnaSpratnost!: string;
   mesecneRezije!: number;
+  opis!: string;
 
   lokacijaGreska: boolean = false;
-  adresaGreska: boolean = false;
+  ulicaGreska: boolean = false;
   nazivOglasaGreska: boolean = false;
   tipNekretnineGreska: boolean = false;
   cenaGreska: boolean = false;
@@ -35,6 +38,183 @@ export class PostaviOglasComponent {
   tipGrejanjaGreska: boolean = false;
   spratGreska: boolean = false;
   mesecneRezijeGreska: boolean = false;
+
+  lokacijaIzbor: string[] = [
+    'Barajevo',
+    'Voždovac',
+    'Vračar',
+    'Grocka',
+    'Zvezdara',
+    'Zemun',
+    'Lazarevac',
+    'Mladenovac',
+    'Novi Beograd',
+    'Obrenovac',
+    'Palilula',
+    'Rakovica',
+    'Savski venac',
+    'Sopot',
+    'Stari Grad',
+    'Surčin',
+    'Čukarica',
+  ];
+  tipNekretnineIzbor: string[] = [
+    'Stan',
+    'Kuća',
+    'Vikendica',
+    'Lokal',
+    'Magacin',
+  ];
+  brojSobaIzbor: string[] = [
+    '1',
+    '1.5',
+    '2',
+    '2.5',
+    '3',
+    '3.5',
+    '4',
+    '4.5',
+    '5',
+    '5.5',
+    '5+',
+  ];
+  godinaIzgradnjeIzbor: string[] = [
+    '1970',
+    '1971',
+    '1972',
+    '1973',
+    '1974',
+    '1975',
+    '1976',
+    '1977',
+    '1978',
+    '1979',
+    '1980',
+    '1981',
+    '1982',
+    '1983',
+    '1984',
+    '1985',
+    '1986',
+    '1987',
+    '1988',
+    '1989',
+    '1990',
+    '1991',
+    '1992',
+    '1993',
+    '1994',
+    '1995',
+    '1996',
+    '1997',
+    '1998',
+    '1999',
+    '2000',
+    '2001',
+    '2002',
+    '2003',
+    '2004',
+    '2005',
+    '2006',
+    '2007',
+    '2008',
+    '2009',
+    '2010',
+    '2011',
+    '2012',
+    '2013',
+    '2014',
+    '2015',
+    '2016',
+    '2017',
+    '2018',
+    '2019',
+    '2020',
+    '2021',
+    '2022',
+    '2023',
+    '2024',
+    '2025',
+  ];
+  stanjeNekretnineIzbor: string[] = ['Izvorno', 'Renovirano', 'LUX'];
+  tipGrejanjaIzbor: string[] = [
+    'Centralno grejanje',
+    'Etažno grejanje',
+    'TA peć',
+    'Gas',
+    'Podno grejanje',
+    'Toplotne pumpe',
+  ];
+  spratIzbor: string[] = [
+    'Podrum',
+    'Suteren',
+    'Prizemlje',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '30+',
+    'Poktrovlje',
+  ];
+  ukupnaSpratnostIzbor: string[] = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '30+',
+  ];
 
   sveKarakteristike: any[] = [
     { name: 'Terasa', checked: false },
@@ -49,11 +229,17 @@ export class PostaviOglasComponent {
     { name: 'Lift', checked: false },
     { name: 'Klima', checked: false },
   ];
-  odabraneKarakteristike: string[] = [];
-  osveziOdabraneKarakteristike() {
-    this.odabraneKarakteristike = this.sveKarakteristike
-      .filter((karakteristika) => karakteristika.checked)
-      .map((karakteristika) => karakteristika.name);
+
+  osveziOdabraneKarakteristike($event: any) {
+    const name = $event.target.value;
+    const isChecked = $event.target.checked;
+
+    this.sveKarakteristike = this.sveKarakteristike.map((k) => {
+      if (k.name == name) {
+        k.checked = isChecked;
+        return k;
+      } else return k;
+    });
   }
 
   sveLinije: any[] = [
@@ -78,16 +264,24 @@ export class PostaviOglasComponent {
     { name: '19', checked: false },
     { name: '20', checked: false },
   ];
-  odabraneLinije: string[] = [];
-  osveziOdabraneLinije() {
-    this.odabraneLinije = this.sveLinije
-      .filter((linija) => linija.checked)
-      .map((linija) => linija.name);
+
+  osveziOdabraneLinije($event: any) {
+    const name = $event.target.value;
+    const isChecked = $event.target.checked;
+
+    this.sveLinije = this.sveLinije.map((l) => {
+      if (l.name == name) {
+        l.checked = isChecked;
+        return l;
+      } else return l;
+    });
   }
 
   postavi() {
     let inputGreska = 0;
     let listing = new Listing();
+    // ovde ubaciti aktivnog korisnika, local storage ili sta god
+    listing.oglasivac = 'anailic';
     // lokacija
     if (
       this.lokacija == undefined ||
@@ -100,13 +294,13 @@ export class PostaviOglasComponent {
       this.lokacijaGreska = false;
       listing.lokacija = this.lokacija;
     }
-    // adresa
-    if (this.adresa == undefined || this.adresa == null || this.adresa == '') {
+    // ulica
+    if (this.ulica == undefined || this.ulica == null || this.ulica == '') {
       inputGreska = 1;
-      this.adresaGreska = true;
+      this.ulicaGreska = true;
     } else {
-      this.adresaGreska = false;
-      listing.adresa = this.adresa;
+      this.ulicaGreska = false;
+      listing.ulica = this.ulica;
     }
     // naziv oglasa
     if (
@@ -193,12 +387,18 @@ export class PostaviOglasComponent {
       listing.tipGrejanja = this.tipGrejanja;
     }
     // sprat
-    if (this.sprat == undefined || this.sprat == null) {
+    if (
+      this.sprat == undefined ||
+      this.sprat == null ||
+      this.ukupnaSpratnost == undefined ||
+      this.ukupnaSpratnost == null
+    ) {
       inputGreska = 1;
       this.spratGreska = true;
     } else {
       this.spratGreska = false;
       listing.sprat = this.sprat;
+      listing.ukupnaSpratnost = this.ukupnaSpratnost;
     }
     // mesecne rezije
     if (this.mesecneRezije == undefined || this.mesecneRezije == null) {
@@ -208,9 +408,18 @@ export class PostaviOglasComponent {
       this.mesecneRezijeGreska = false;
       listing.mesecneRezije = this.mesecneRezije;
     }
+    // opis
+    if (this.opis == undefined || this.opis == null || this.opis == '') {
+      listing.opis = 'nema opisa';
+    } else {
+      listing.opis = this.opis;
+    }
 
-    listing.karakteristike = this.odabraneKarakteristike;
-    listing.linije = this.odabraneLinije;
+    listing.karakteristike = this.sveKarakteristike
+      .filter((k) => k.checked)
+      .map((k) => k.name);
+
+    listing.linije = this.sveLinije.filter((l) => l.checked).map((l) => l.name);
 
     if (inputGreska == 0) {
       this.listingService

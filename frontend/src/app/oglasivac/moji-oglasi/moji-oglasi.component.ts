@@ -17,4 +17,13 @@ export class MojiOglasiComponent implements OnInit {
   allListings: Listing[] = [];
   mapMarker = faMapMarkerAlt;
   euroMarker = faEuroSign;
+  prodaj(id: string) {
+    this.listingService.sellListing(id).then((res) => {
+      this.listingService.getAllListings().then((res) => {
+        this.allListings = JSON.parse(JSON.stringify(res));
+      });
+    });
+
+    alert('oglas prodat');
+  }
 }

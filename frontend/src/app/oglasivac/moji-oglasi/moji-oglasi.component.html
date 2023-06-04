@@ -4,24 +4,33 @@
   <!-- treba ubaciti oglasivaceve oglase umesto svih -->
   <div class="box" *ngFor="let listing of allListings">
     <div class="thumb">
-      <img src="./assets/house-img-1.webp" alt="" />
+      <img src="./assets/house-img-2.webp" alt="" />
     </div>
     <div class="info">
       <h3 class="name">{{ listing.nazivOglasa }}</h3>
       <p class="location">
         <fa-icon [icon]="euroMarker"></fa-icon>Cena:
-        <span> {{ listing.cena }} </span>
+        <span> {{ listing.cena }} €</span>
       </p>
       <p class="location">
         <fa-icon [icon]="mapMarker"></fa-icon
-        ><span>{{ listing.lokacija }} - {{ listing.adresa }} </span>
+        ><span>{{ listing.lokacija }} - {{ listing.ulica }} </span>
       </p>
     </div>
     <div class="buttons">
       <a class="btn" routerLink="/izmeni-oglas/{{ listing._id }}"
         >Izmeni Oglas</a
       >
-      <a class="btn">Prodato</a>
+
+      <a
+        *ngIf="listing.status == 'nije prodato'"
+        class="btn"
+        (click)="prodaj(listing._id)"
+        >Prodato</a
+      >
+      <a *ngIf="listing.status != 'nije prodato'" class="btn prodato"
+        >Prodato</a
+      >
     </div>
   </div>
 </section>

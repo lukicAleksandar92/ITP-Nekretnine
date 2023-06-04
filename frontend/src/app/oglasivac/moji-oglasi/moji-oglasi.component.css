@@ -54,3 +54,14 @@ img {
   align-items: center;
   justify-content: center;
 }
+.prodato {
+  margin-top: 1rem;
+  padding: 1rem 3rem;
+  background-color: transparent;
+  color: var(--main-color);
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 1000;
+  cursor: unset;
+}

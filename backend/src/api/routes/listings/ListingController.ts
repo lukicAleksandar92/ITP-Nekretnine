@@ -23,4 +23,10 @@ export class ListingController extends Controller {
     if (result == null) this.setStatus(404);
     return result;
   }
+  @Put("sell/:id")
+  async sellListing(@Path() id: string) {
+    let result = await listingDAO.sellListing(id);
+    if (result == null) this.setStatus(404);
+    return result;
+  }
 }
