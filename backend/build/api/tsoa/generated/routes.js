@@ -6,6 +6,8 @@ exports.RegisterRoutes = void 0;
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const runtime_1 = require("@tsoa/runtime");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+const AgencijeController_1 = require("./../../routes/agencije/AgencijeController");
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const HelloWorldController_1 = require("./../../routes/helloWorld/HelloWorldController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const ListingController_1 = require("./../../routes/listings/ListingController");
@@ -13,6 +15,18 @@ const ListingController_1 = require("./../../routes/listings/ListingController")
 const UserController_1 = require("./../../routes/users/UserController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const models = {
+    "Agencije": {
+        "dataType": "refObject",
+        "properties": {
+            "naziv": { "dataType": "string", "required": true },
+            "adresa": { "dataType": "string", "required": true },
+            "grad": { "dataType": "string", "required": true },
+            "telefon": { "dataType": "double", "required": true },
+            "PIB": { "dataType": "double", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "FlattenMaps_T_": {
         "dataType": "refAlias",
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": {}, "validators": {} },
@@ -89,6 +103,21 @@ function RegisterRoutes(app) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+    app.get('/agencije/getAll', ...((0, runtime_1.fetchMiddlewares)(AgencijeController_1.AgencijeController)), ...((0, runtime_1.fetchMiddlewares)(AgencijeController_1.AgencijeController.prototype.getAllListings)), function AgencijeController_getAllListings(request, response, next) {
+        const args = {};
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new AgencijeController_1.AgencijeController();
+            const promise = controller.getAllListings.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     app.get('/helloWorld/message', ...((0, runtime_1.fetchMiddlewares)(HelloWorldController_1.HelloWorldController)), ...((0, runtime_1.fetchMiddlewares)(HelloWorldController_1.HelloWorldController.prototype.getHelloWorldMessage)), function HelloWorldController_getHelloWorldMessage(request, response, next) {
         const args = {};
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

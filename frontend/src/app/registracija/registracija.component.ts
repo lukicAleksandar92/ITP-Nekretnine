@@ -20,7 +20,7 @@ export class RegistracijaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAgencije();
+    /* this.getAgencije();
     const tipSelect = document.getElementById('tip') as HTMLSelectElement;
     const agencijaLabel = document.getElementById(
       'agencijaLabel'
@@ -42,18 +42,21 @@ export class RegistracijaComponent implements OnInit {
         agencijaSelect.style.display = 'none';
         licencaInput.style.display = 'none';
       }
-    }
+    } */
+
+    // hvatamo iz baze agencije i smestamo ih u niz agencije[]
+    this.agencijeService.getAgencije().then((res) => {
+      this.agencije = JSON.parse(JSON.stringify(res));
+    });
   }
 
-  async getAgencije() {
+  /*  async getAgencije() {
     try {
       this.agencije = await this.agencijeService.getAgencije().toPromise();
     } catch (error) {
       console.error('Error retrieving agencije', error);
     }
-  }
-
-  
+  } */
 
   ime!: string;
   prezime!: string;
@@ -66,12 +69,11 @@ export class RegistracijaComponent implements OnInit {
   tip!: string;
   agencija: string | null = null;
   naziv!: string;
-  agencije: string[] = [];
+  agencije!: Agencije[];
   selectedAgency!: string;
 
   register() {
     let user = new User();
-    let agencije = new Agencije();
 
     user.ime = this.ime;
     user.prezime = this.prezime;
