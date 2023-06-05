@@ -1,0 +1,36 @@
+[
+  {
+    "ime": "Marko",
+    "prezime": "Marković",
+    "datumRodjenja": "1990-01-01",
+    "grad": "Beograd",
+    "telefon": "1234567890",
+    "email": "marko@example.com",
+    "kor_ime": "markomarko",
+    "lozinka": "lozinka123",
+    "tip": "kupac"
+  },
+  {
+    "ime": "Ana",
+    "prezime": "Ilić",
+    "datumRodjenja": "1985-05-15",
+    "grad": "Novi Sad",
+    "telefon": "9876543210",
+    "email": "ana@example.com",
+    "kor_ime": "anailic",
+    "lozinka": "lozinka456",
+    "tip": "samostalniProdavac"
+
+  },
+  {
+    "ime": "Milica",
+    "prezime": "Jovanović",
+    "datumRodjenja": "1995-09-20",
+    "grad": "Niš",
+    "telefon": "5555555555",
+    "email": "milica@example.com",
+    "kor_ime": "milicajovanovic",
+    "lozinka": "lozinka789",
+    "tip": "agent"
+  }
+]

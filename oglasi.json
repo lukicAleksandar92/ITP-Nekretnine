@@ -1,0 +1,94 @@
+[{
+  "_id": {
+    "$oid": "647c6f712183630f76a6107e"
+  },
+  "oglasivac": "anailic",
+  "lokacija": "Novi Beograd",
+  "ulica": "Hotel Jugoslavija",
+  "nazivOglasa": "Renoviran lux stan, Klare Cetkin 64m2 2.0",
+  "tipNekretnine": "Stan",
+  "cena": 220000,
+  "kvadratura": 220000,
+  "brojSoba": "2",
+  "godinaIzgradnje": "1988",
+  "stanjeNekretnine": "Renovirano",
+  "tipGrejanja": "Centralno grejanje",
+  "sprat": "Prizemlje",
+  "ukupnaSpratnost": "4",
+  "mesecneRezije": 9000,
+  "karakteristike": [
+    "Terasa",
+    "Podrum",
+    "Interfon",
+    "Telefon"
+  ],
+  "linije": [
+    "4",
+    "15",
+    "19"
+  ],
+  "opis": "Odlična pozicija objekta nadomak Zemunskog keja.\nMirna lokacija u neposrednoj blizini šetalište, marketi, restorani i kafići, škola i vrtić.\n\nStrukturno: predsoblje, spavaća soba, dnevna soba, kuhinja sa trpezarijom, kupatilo, terasa.\n\nRenoviran i sređen lux stan bez dodatnih ulaganja pruža komfor i prijatnu atmosferu.",
+  "status": "nije prodato",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "647c7442b0310f83ff8bf7a5"
+  },
+  "oglasivac": "anailic",
+  "lokacija": "Savski venac",
+  "ulica": "Beograd na vodi  -  Bulevar Vudroa Vilsona",
+  "nazivOglasa": "Dvostran sa direktnim pogledom na reku i kulu",
+  "tipNekretnine": "Stan",
+  "cena": 380000,
+  "kvadratura": 82.5,
+  "brojSoba": "3",
+  "godinaIzgradnje": "2020",
+  "stanjeNekretnine": "Izvorno",
+  "tipGrejanja": "Centralno grejanje",
+  "sprat": "18",
+  "ukupnaSpratnost": "23",
+  "mesecneRezije": 15000,
+  "karakteristike": [
+    "Terasa",
+    "Podrum",
+    "Garaza",
+    "Interfon",
+    "Lift"
+  ],
+  "linije": [
+    "3",
+    "11"
+  ],
+  "opis": "Lep komforan stan, dizajnerski opremljen, sa predivnim pogledom na reku i kulu. Sastoji se iz ulaznog dela, dnevnog boravka sa trpezarijom i kuhinjom, dve spavaće sobe, dva kupatila i vešernice. Stanu pripada i podrumska ostava u nivou garaže. Takođe uz stan se prodaju i dva garazna mesta u blizini lifta po ceni od 25.000 po jednom. \nStan je uvučen sa ulice i bez buke, svetao, orijentisan jugozapadno najvećim delom dok je jedna spavaća soba okrenuta severozapadno. \n\n\n\nMOLIM AGENCIJE DA.ME NE KONTAKTIRAJU. HVALA!! ",
+  "status": "nije prodato",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "647c75fab0310f83ff8bf7b9"
+  },
+  "oglasivac": "anailic",
+  "lokacija": "Rakovica",
+  "ulica": "Nikole Marakovića",
+  "nazivOglasa": "Prodajem dvoiposoban stan",
+  "tipNekretnine": "Stan",
+  "cena": 120000,
+  "kvadratura": 65,
+  "brojSoba": "2.5",
+  "godinaIzgradnje": "1975",
+  "stanjeNekretnine": "Izvorno",
+  "tipGrejanja": "Centralno grejanje",
+  "sprat": "2",
+  "ukupnaSpratnost": "4",
+  "mesecneRezije": 12000,
+  "karakteristike": [
+    "Terasa",
+    "Lift"
+  ],
+  "linije": [
+    "17",
+    "18"
+  ],
+  "opis": "Prodajem dvoiposoban stan na Miljakovcu 2. Stan se nalazi pored Miljakovačke šume koja je uredjena, osvetljena i opremljena klupama, korpama za otpatke i spravama za rekreaciju za decu i odrasle. U neposrednoj blizini je obdanište, škola, prodavnice i autobuska stanica. Kraj je odlično povezan gradskim prevozom sa svim delovima Beograda.\n\nStan se nalazi na drugom spratu (od ukupno 4 i potkrovlje), Zgrada poseduje lift i interfon. Po strukturi je dvoiposoban: ima dnevnu sobu, spavaću, dečju sobu, kuhinju sa trepezarijom, predoblje, kupatilo i terasu. Ima centralno grejanje.",
+  "status": "nije prodato",
+  "__v": 0
+}]

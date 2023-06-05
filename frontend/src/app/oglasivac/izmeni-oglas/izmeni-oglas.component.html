@@ -1,0 +1,275 @@
+<app-og-header></app-og-header>
+<section>
+  <form action="" method="post">
+    <h3>Izmeni Oglas</h3>
+    <div class="flex">
+      <!-- lokacija -->
+      <div class="box">
+        <p>
+          Lokacija
+
+          <span *ngIf="lokacijaGreska" class="greska">Morate uneti polje</span>
+        </p>
+        <select name="lokacija" class="input" required [(ngModel)]="lokacija">
+          <option value="undefined" disabled>Izaberite lokaciju</option>
+          <option *ngFor="let izbor of lokacijaIzbor" value="{{ izbor }}">
+            {{ izbor }}
+          </option>
+        </select>
+      </div>
+      <!-- ulica -->
+      <div class="box">
+        <p>
+          Ulica
+          <span *ngIf="ulicaGreska" class="greska">Morate uneti polje</span>
+        </p>
+        <input
+          type="text"
+          name="ulica"
+          placeholder="Upišite ulicu"
+          class="input"
+          [(ngModel)]="ulica"
+        />
+      </div>
+      <!-- naziv oglasa -->
+      <div class="box">
+        <p>
+          Naziv oglasa
+          <span *ngIf="nazivOglasaGreska" class="greska"
+            >Morate uneti polje</span
+          >
+        </p>
+        <input
+          type="text"
+          name="nazivOglasa"
+          placeholder="Upišite naziv oglasa"
+          class="input"
+          [(ngModel)]="nazivOglasa"
+        />
+      </div>
+      <!-- tip -->
+      <div class="box">
+        <p>
+          Tip nekretnine<span *ngIf="tipNekretnineGreska" class="greska"
+            >Morate uneti polje</span
+          >
+        </p>
+        <select
+          name="tipNekretnine"
+          class="input"
+          required
+          [(ngModel)]="tipNekretnine"
+        >
+          <option value="undefined" disabled>Izaberite tip</option>
+          <option *ngFor="let izbor of tipNekretnineIzbor" value="{{ izbor }}">
+            {{ izbor }}
+          </option>
+        </select>
+      </div>
+      <!-- cena -->
+      <div class="box">
+        <p>
+          Cena <span *ngIf="cenaGreska" class="greska">Morate uneti polje</span>
+        </p>
+        <input
+          type="number"
+          name="cena"
+          placeholder="€"
+          class="input"
+          [(ngModel)]="cena"
+        />
+      </div>
+      <!-- kvadratura -->
+      <div class="box">
+        <p>
+          Kvadratura
+          <span *ngIf="kvadraturaGreska" class="greska"
+            >Morate uneti polje</span
+          >
+        </p>
+        <input
+          type="number"
+          name="kvadratura"
+          placeholder="m²"
+          class="input"
+          [(ngModel)]="kvadratura"
+        />
+      </div>
+      <!-- broj soba -->
+      <div class="box">
+        <p>
+          Broj Soba
+          <span *ngIf="brojSobaGreska" class="greska">Morate uneti polje</span>
+        </p>
+
+        <select name="brojSoba" class="input" [(ngModel)]="brojSoba">
+          <option value="undefined" disabled>Izaberite broj soba</option>
+          <option *ngFor="let izbor of brojSobaIzbor" value="{{ izbor }}">
+            {{ izbor }}
+          </option>
+        </select>
+      </div>
+      <!-- godina izgradnje -->
+      <div class="box">
+        <p>
+          Godina Izgradnje
+          <span *ngIf="godinaIzgradnjeGreska" class="greska"
+            >Morate uneti polje</span
+          >
+        </p>
+
+        <select
+          name="godinaIzgradnje"
+          class="input"
+          [(ngModel)]="godinaIzgradnje"
+        >
+          <option value="undefined" disabled>Izaberite godinu izgradnje</option>
+          <option
+            *ngFor="let izbor of godinaIzgradnjeIzbor"
+            value="{{ izbor }}"
+          >
+            {{ izbor }}
+          </option>
+        </select>
+      </div>
+      <!-- stanje nekretnine -->
+      <div class="box">
+        <p>
+          Stanje nekretnine
+          <span *ngIf="stanjeNekretnineGreska" class="greska"
+            >Morate uneti polje</span
+          >
+        </p>
+        <select
+          name="stanjeNekrentine"
+          class="input"
+          [(ngModel)]="stanjeNekretnine"
+        >
+          <option value="undefined" disabled>
+            Izaberite stanje nekretnine
+          </option>
+          <option
+            *ngFor="let izbor of stanjeNekretnineIzbor"
+            value="{{ izbor }}"
+          >
+            {{ izbor }}
+          </option>
+        </select>
+      </div>
+      <!-- tip grejanja -->
+      <div class="box">
+        <p>
+          Tip Grejanja
+          <span *ngIf="tipGrejanjaGreska" class="greska"
+            >Morate uneti polje</span
+          >
+        </p>
+        <select name="tipGrejanja" class="input" [(ngModel)]="tipGrejanja">
+          <option value="undefined" disabled>Izaberite tip grejanja</option>
+          <option *ngFor="let izbor of tipGrejanjaIzbor" value="{{ izbor }}">
+            {{ izbor }}
+          </option>
+        </select>
+      </div>
+      <!-- sprat -->
+      <div class="box">
+        <p>
+          Sprat
+          <span *ngIf="spratGreska" class="greska">Morate uneti polje</span>
+        </p>
+        <div class="spratnost">
+          <select name="sprat" class="input" [(ngModel)]="sprat">
+            <option value="undefined">Izaberite sprat</option>
+            <option *ngFor="let izbor of spratIzbor" value="{{ izbor }}">
+              {{ izbor }}
+            </option>
+          </select>
+          <p>od ukupno:</p>
+          <select
+            name="ukupnaSpratnost"
+            class="input"
+            [(ngModel)]="ukupnaSpratnost"
+          >
+            <option value="undefined">Izaberite sprat</option>
+            <option
+              *ngFor="let izbor of ukupnaSpratnostIzbor"
+              value="{{ izbor }}"
+            >
+              {{ izbor }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <!-- rezije -->
+      <div class="box">
+        <p>
+          Mesecne rezije
+          <span *ngIf="mesecneRezijeGreska" class="greska"
+            >Morate uneti polje</span
+          >
+        </p>
+        <input
+          type="number"
+          class="input"
+          name="mesecneRezije"
+          placeholder="RSD"
+          [(ngModel)]="mesecneRezije"
+        />
+      </div>
+      <!-- karakteristike -->
+      <div class="box">
+        <p>Karakteristike</p>
+        <div class="input karakteristike">
+          <p *ngFor="let karakteristika of sveKarakteristike">
+            <label for="{{ karakteristika.name }}">{{
+              karakteristika.name
+            }}</label>
+            <input
+              type="checkbox"
+              [value]="karakteristika.name"
+              [checked]="karakteristika.checked"
+              (change)="osveziOdabraneKarakteristike($event)"
+            />
+          </p>
+        </div>
+      </div>
+      <!-- Linije prevoze -->
+      <div class="box">
+        <p>Linije prevoza</p>
+        <div class="input linije-prevoza">
+          <p *ngFor="let linija of sveLinije">
+            <label for="lp{{ linija.name }}">{{ linija.name }}</label>
+            <input
+              type="checkbox"
+              [value]="linija.name"
+              [checked]="linija.checked"
+              (change)="osveziOdabraneLinije($event)"
+            />
+          </p>
+        </div>
+      </div>
+      <!-- Opis -->
+      <div class="box">
+        <p>Opis</p>
+        <textarea
+          name="Opis"
+          class="input tall"
+          placeholder="Upišite opis"
+          [(ngModel)]="opis"
+        ></textarea>
+      </div>
+      <!-- Slike -->
+      <div class="box">
+        <p>Slike</p>
+        <input type="file" class="input tall" />
+      </div>
+    </div>
+    <input
+      type="submit"
+      value="Izmeni Oglas"
+      name="Izmeni"
+      class="btn"
+      (click)="izmeni()"
+    />
+  </form>
+</section>

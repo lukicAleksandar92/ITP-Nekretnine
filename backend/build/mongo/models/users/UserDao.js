@@ -8,36 +8,55 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userDao = void 0;
-const mongoose_1 = require("mongoose");
-const userSchema_1 = require("./userSchema");
-class UserDao {
+exports.userDAO = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
+const UserSchema_1 = require("./UserSchema");
+class UserDAO {
     constructor() {
-        this.schema = userSchema_1.userSchema;
-        this.model = (0, mongoose_1.model)("User", this.schema);
+        this.userModel = mongoose_1.default.model("user", UserSchema_1.userSchema, "korisnici");
     }
-    addOneUserDm(user) {
+    login(korisnicko_ime, lozinka) {
         return __awaiter(this, void 0, void 0, function* () {
-            const [result] = yield this.model.create([user]);
-            return result;
+            let user = yield this.userModel.findOne({ kor_ime: korisnicko_ime, lozinka: lozinka });
+            if (user != null) {
+                this.logUserLogin(user.kor_ime);
+            }
+            return user;
         });
     }
-    findAllUsers() {
+    logUserLogin(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.model.find({});
+            return yield this.userModel.updateOne({ "kor_ime": kor_ime }, { $push: { "logins": new Date() } });
         });
     }
-    findUserByUsername(username) {
+    getUserByKorIme(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.model.findOne({ username }).lean();
+            return this.userModel.findOne({ "kor_ime": kor_ime });
         });
     }
-    findUserByEmail(email) {
+    insertUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.model.findOne({ email }).lean();
+            let userInDB = yield this.getUserByKorIme(user.kor_ime);
+            if (userInDB == null) {
+                let newUserModel = new this.userModel(user);
+                return newUserModel.save();
+            }
+            return "Korisnik vec postoji";
+        });
+    }
+    updateUser(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let userInDB = yield this.getUserByKorIme(user.kor_ime);
+            if (userInDB != null) {
+                return this.userModel.updateOne({ "kor_ime": user.kor_ime }, { $set: { "ime": user.ime, "prezime": user.prezime } });
+            }
+            return 'Korisnik ne psotoji';
         });
     }
 }
-exports.userDao = new UserDao();
-//# sourceMappingURL=UserDao.js.map
+exports.userDAO = new UserDAO();
+//# sourceMappingURL=UserDAO.js.map

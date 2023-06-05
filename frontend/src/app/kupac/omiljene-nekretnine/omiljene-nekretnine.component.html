@@ -3,42 +3,28 @@
 <section>
   <h1 class="heading">Omiljene nekretnine</h1>
   <!-- u ng if ide prikaz svih oglasa oglasivaca -->
-  <div class="box">
-    <div class="thumb">
-      <img src="./assets/house-img-1.webp" alt="" />
-    </div>
-    <div class="info">
-      <h3 class="name">Ime Oglasa</h3>
-      <p class="location">
-        <fa-icon [icon]="euroMarker"></fa-icon>Cena: <span>120000</span>
-      </p>
-      <p class="location">
-        <fa-icon [icon]="mapMarker"></fa-icon
-        ><span>Beograd-Vračar-Crveni krst</span>
-      </p>
-    </div>
-    <div class="buttons">
-      <a class="btn">Ukloni iz omiljenih  <fa-icon [icon]="heartMinus"></fa-icon></a>
-
-    </div>
-  </div>
-  <div class="box">
+  <div *ngFor="let listing of allListings" class="box">
     <div class="thumb">
       <img src="./assets/house-img-2.webp" alt="" />
     </div>
     <div class="info">
-      <h3 class="name">Ime Drugog Oglasa</h3>
+      <h3 class="name">{{ listing.nazivOglasa }}</h3>
       <p class="location">
-        <fa-icon [icon]="euroMarker"></fa-icon>Cena: <span>250000</span>
+        <fa-icon [icon]="euroMarker"></fa-icon>Cena:
+        <span> {{ listing.cena }} </span>
       </p>
       <p class="location">
-        <fa-icon [icon]="mapMarker"></fa-icon><span>Beograd na vodi</span>
+        <fa-icon [icon]="mapMarker"></fa-icon
+        ><span>Beograd - {{ listing.lokacija }} - {{ listing.ulica }}</span>
       </p>
     </div>
     <div class="buttons">
-      <a class="btn">Ukloni iz omiljenih  <fa-icon [icon]="heartMinus"></fa-icon></a>
-      
-
+      <a routerLink="/stranica-oglasa/{{ listing._id }}" class="btn"
+        >Vidi oglas</a
+      >
+      <a class="btn"
+        >Ukloni iz omiljenih  <fa-icon [icon]="heartMinus"></fa-icon
+      ></a>
     </div>
   </div>
 </section>
