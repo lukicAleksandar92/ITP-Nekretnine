@@ -28,13 +28,22 @@
       <option value="agent">agent</option>
     </select>
     
+
     
+    <!-- <label for="agencija" id="agencijaLabel" style="font-size: 1.8rem; display: none;">Izaberite agenciju</label>
     <select name="agencija" id="agencija" class="box" style="display: none;">
-      <option value="">Izaberite agenciju</option>
-      <option value="euromont">Euromont</option>
-      <option value="zidart">Zidart</option>
-      <option value="cityexpert">City Expert</option>
+      <option agencije.naziv type="text" class="box"></option>
+    </select> -->
+
+    
+    <label for="agencija" id="agencijaLabel" style="font-size: 1.8rem;">Izaberite agenciju</label>
+    <select name="agencija" id="agencija" class="box" [(ngModel)]="selectedAgency">
+      <option value="" disabled selected>Select an agency</option>
+      <option *ngFor="let agencija of agencije">{{ naziv }}</option>
     </select>
+    
+    <p>Selected agency: {{ selectedAgency }}</p>
+    
   
     <input
       type="number"
