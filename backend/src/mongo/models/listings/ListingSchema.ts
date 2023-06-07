@@ -9,12 +9,14 @@ export const listingSchema = new mongoose.Schema<Listing>({
   tipNekretnine: { type: String },
   cena: { type: Number },
   kvadratura: { type: Number },
-  brojSoba: { type: String },
-  godinaIzgradnje: { type: String },
+  brojSoba: { type: Number },
+  godinaIzgradnje: { type: Number },
   stanjeNekretnine: { type: String },
   tipGrejanja: { type: String },
-  sprat: { type: String },
-  ukupnaSpratnost: { type: String },
+
+  sprat: { type: Number },
+  ukupnaSpratnost: { type: Number },
+
   mesecneRezije: { type: Number },
   karakteristike: [{ type: String }],
   linije: [{ type: String }],

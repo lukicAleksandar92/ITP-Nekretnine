@@ -17,7 +17,7 @@ export class PostaviOglasComponent {
   cena!: number;
   kvadratura!: number;
   brojSoba!: string;
-  godinaIzgradnje!: string;
+  godinaIzgradnje!: number;
   stanjeNekretnine!: string;
   tipGrejanja!: string;
   sprat!: string;
@@ -78,63 +78,12 @@ export class PostaviOglasComponent {
     '5.5',
     '5+',
   ];
-  godinaIzgradnjeIzbor: string[] = [
-    '1970',
-    '1971',
-    '1972',
-    '1973',
-    '1974',
-    '1975',
-    '1976',
-    '1977',
-    '1978',
-    '1979',
-    '1980',
-    '1981',
-    '1982',
-    '1983',
-    '1984',
-    '1985',
-    '1986',
-    '1987',
-    '1988',
-    '1989',
-    '1990',
-    '1991',
-    '1992',
-    '1993',
-    '1994',
-    '1995',
-    '1996',
-    '1997',
-    '1998',
-    '1999',
-    '2000',
-    '2001',
-    '2002',
-    '2003',
-    '2004',
-    '2005',
-    '2006',
-    '2007',
-    '2008',
-    '2009',
-    '2010',
-    '2011',
-    '2012',
-    '2013',
-    '2014',
-    '2015',
-    '2016',
-    '2017',
-    '2018',
-    '2019',
-    '2020',
-    '2021',
-    '2022',
-    '2023',
-    '2024',
-    '2025',
+  godinaIzgradnjeIzbor: number[] = [
+    1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981,
+    1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993,
+    1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+    2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+    2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
   ];
   stanjeNekretnineIzbor: string[] = ['Izvorno', 'Renovirano', 'LUX'];
   tipGrejanjaIzbor: string[] = [
@@ -276,7 +225,18 @@ export class PostaviOglasComponent {
       } else return l;
     });
   }
-
+  brojSobaToNum(brojSoba: string) {
+    if (brojSoba == '5+') return 6;
+    else return parseFloat(brojSoba);
+  }
+  spratToNum(sprat: string) {
+    if (sprat == 'Podrum') return -2;
+    if (sprat == 'Suteren') return -1;
+    if (sprat == 'Prizemlje') return 0;
+    if (sprat == '30+') return 31;
+    if (sprat == 'Potkrovlje') return 32;
+    else return parseInt(sprat);
+  }
   postavi() {
     let inputGreska = 0;
     let listing = new Listing();
@@ -352,7 +312,7 @@ export class PostaviOglasComponent {
       this.brojSobaGreska = true;
     } else {
       this.brojSobaGreska = false;
-      listing.brojSoba = this.brojSoba;
+      listing.brojSoba = this.brojSobaToNum(this.brojSoba);
     }
     //  godina izgradnje
     if (this.godinaIzgradnje == undefined || this.godinaIzgradnje == null) {
@@ -397,8 +357,8 @@ export class PostaviOglasComponent {
       this.spratGreska = true;
     } else {
       this.spratGreska = false;
-      listing.sprat = this.sprat;
-      listing.ukupnaSpratnost = this.ukupnaSpratnost;
+      listing.sprat = this.spratToNum(this.sprat);
+      listing.ukupnaSpratnost = this.spratToNum(this.ukupnaSpratnost);
     }
     // mesecne rezije
     if (this.mesecneRezije == undefined || this.mesecneRezije == null) {

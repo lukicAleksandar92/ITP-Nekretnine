@@ -6,12 +6,14 @@ export interface Listing {
   tipNekretnine: string;
   cena: number;
   kvadratura: number;
-  brojSoba: string;
-  godinaIzgradnje: string;
+  brojSoba: number;
+  godinaIzgradnje: number;
   stanjeNekretnine: string;
   tipGrejanja: string;
-  sprat: string;
-  ukupnaSpratnost: string;
+
+  sprat: number;
+  ukupnaSpratnost: number;
+
   mesecneRezije: number;
   karakteristike: string[];
   linije: string[];

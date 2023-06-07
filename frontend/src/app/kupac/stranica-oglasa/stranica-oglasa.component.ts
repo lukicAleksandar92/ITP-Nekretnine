@@ -21,6 +21,9 @@ export class StranicaOglasaComponent implements OnInit {
     if (id != null)
       this.listingService.getListingById(id).then((res) => {
         this.listing = JSON.parse(JSON.stringify(res));
+        this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
+        this.sprat = this.spratToString(this.listing.sprat);
+        this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
       });
   }
   listing!: Listing;
@@ -65,4 +68,19 @@ export class StranicaOglasaComponent implements OnInit {
     '19',
     '20',
   ];
+  brojSoba!: string;
+  sprat!: string;
+  ukupnaSpratnost!: string;
+  brojSobaToString(brojSoba: number) {
+    if (brojSoba == 6) return '5+';
+    else return brojSoba.toString();
+  }
+  spratToString(sprat: number) {
+    if (sprat == -2) return 'Podrum';
+    if (sprat == -1) return 'Suteren';
+    if (sprat == 0) return 'Prizemlje';
+    if (sprat == 31) return '30+';
+    if (sprat == 32) return 'Potkrovlje';
+    else return sprat.toString();
+  }
 }
