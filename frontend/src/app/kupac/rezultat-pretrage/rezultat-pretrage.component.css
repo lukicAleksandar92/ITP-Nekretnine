@@ -1,0 +1,7 @@
+.err {
+  font-size: 2rem;
+}
+
+section {
+  min-height: calc(100vh - 399px);
+}

@@ -29,7 +29,7 @@
         <!-- spratnost -->
         <p class="location">
           <i class="fas fa-building"></i>Sprat:
-          <span> {{ listing.sprat }} </span>
+          <span> {{ spratToString(listing.sprat) }} </span>
         </p>
         <!-- prosecna cena !!! treba da se poveze !!! -->
         <p class="location">
@@ -56,5 +56,8 @@
         >Pogledaj oglas</a
       >
     </div>
+    <p class="err" *ngIf="allListings.length == 0">
+      Nema oglasa koji zadovoljavaju vaše kriterijume
+    </p>
   </div>
 </section>

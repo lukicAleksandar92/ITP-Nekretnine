@@ -21,3 +21,10 @@ export interface Listing {
 
   status: string;
 }
+export class SearchCriteria {
+  lokacija: string | undefined = undefined;
+  tip: string | undefined = undefined;
+  kvadratura: number | undefined = undefined;
+  cena: number | undefined = undefined;
+  brojSoba: number | undefined = undefined;
+}
