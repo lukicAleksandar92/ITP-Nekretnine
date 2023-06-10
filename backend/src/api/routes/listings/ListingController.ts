@@ -1,5 +1,8 @@
 import { Body, Controller, Get, Path, Post, Put, Route } from "tsoa";
-import { Listing } from "../../../mongo/models/listings/Listing";
+import {
+  Listing,
+  SearchCriteria,
+} from "../../../mongo/models/listings/Listing";
 import { listingDAO } from "../../../mongo/models/listings/ListingDAO";
 
 @Route("listings")
@@ -26,6 +29,12 @@ export class ListingController extends Controller {
   @Put("sell/:id")
   async sellListing(@Path() id: string) {
     let result = await listingDAO.sellListing(id);
+    if (result == null) this.setStatus(404);
+    return result;
+  }
+  @Post("search")
+  async searchListings(@Body() filter: SearchCriteria) {
+    let result = await listingDAO.searchListings(filter);
     if (result == null) this.setStatus(404);
     return result;
   }

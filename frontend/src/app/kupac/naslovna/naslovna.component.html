@@ -1,74 +1,77 @@
 <app-kupac-header></app-kupac-header>
 <div class="home">
   <section class="left">
-    <form>
+    <form (ngSubmit)="pretrazi()">
       <h3>Pronađite savršeni dom</h3>
       <div class="box">
         <p>Lokacija</p>
-        <input
-          type="text"
+        <select
           name="lokacija"
-          placeholder="Upiši lokaciju"
           class="input"
-        />
+          required
+          [(ngModel)]="filter.lokacija"
+        >
+          <option value="undefined" disabled>Izaberite lokaciju</option>
+          <option *ngFor="let izbor of lokacijaIzbor" value="{{ izbor }}">
+            {{ izbor }}
+          </option>
+        </select>
       </div>
       <div class="flex">
+        <!-- tip nekretnien -->
         <div class="box">
-          <p>Tip nekretnine<span>*</span></p>
-          <select name="type" class="input" required>
-            <option value="">Izaberite tip</option>
-            <option value="stan">stan</option>
-            <option value="kuća">kuća</option>
-            <option value="vikendica">vikendica</option>
-            <option value="lokal">lokal</option>
-            <option value="magacin">magacin</option>
+          <p>Tip nekretnine</p>
+          <select
+            name="tipNekretnine"
+            class="input"
+            required
+            [(ngModel)]="filter.tip"
+          >
+            <option value="undefined" disabled>Izaberite tip</option>
+            <option
+              *ngFor="let izbor of tipNekretnineIzbor"
+              value="{{ izbor }}"
+            >
+              {{ izbor }}
+            </option>
           </select>
         </div>
+        <!-- cena -->
         <div class="box">
           <p>Cena do</p>
-          <input type="number" name="cenaDo" placeholder="€" class="input" />
+          <input
+            type="number"
+            name="cenaDo"
+            placeholder="€"
+            class="input"
+            [(ngModel)]="filter.cena"
+          />
         </div>
+        <!-- kvadratura -->
         <div class="box">
-          <p>Kvadratura do</p>
+          <p>Kvadratura od</p>
           <input
             type="number"
             name="kvadraturaDo"
             placeholder="m²"
             class="input"
+            [(ngModel)]="filter.kvadratura"
           />
         </div>
         <div class="box">
           <p>Broj soba</p>
-          <select name="brojSoba" class="input">
-            <option value="">Izaberite broj soba</option>
-            <option value="1">1</option>
-            <option value="1.5">1.5</option>
-            <option value="2">2</option>
-            <option value="2.5">2.5</option>
-            <option value="3">3</option>
-            <option value="3.5">3.5</option>
-            <option value="4">4</option>
-            <option value="4.5">4.5</option>
-            <option value="5">5</option>
-            <option value="5.5">5.5</option>
-            <option value="5+">5+</option>
+          <select name="brojSoba" class="input" [(ngModel)]="filter.brojSoba">
+            <option value="undefined" disabled>Izaberite broj soba</option>
+            <option *ngFor="let izbor of brojSobaIzbor" value="{{ izbor }}">
+              {{ izbor }}
+            </option>
           </select>
         </div>
       </div>
-      <input
-        type="submit"
-        value="Detaljna pretraga"
-        name="pretraga"
-        class="btn2"
-        routerLink="/detaljna-pretraga"
-      />
-      <input
-        routerLink="/rezultat-pretrage"
-        type="submit"
-        value="Traži"
-        name="pretraga"
-        class="btn"
-      />
+      <input type="submit" value="Traži" name="pretraga" class="btn" />
+      <button class="btn2" routerLink="/detaljna-pretraga">
+        Detaljna pretraga
+      </button>
     </form>
   </section>
 </div>

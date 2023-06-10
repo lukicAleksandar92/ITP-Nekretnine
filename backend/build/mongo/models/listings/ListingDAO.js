@@ -75,6 +75,28 @@ class ListingDAO {
             }
         });
     }
+    searchListings(filter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = {};
+            if (filter.lokacija !== undefined) {
+                query.lokacija = filter.lokacija;
+            }
+            if (filter.tip !== undefined) {
+                query.tipNekretnine = filter.tip;
+            }
+            if (filter.cena !== undefined) {
+                query.cena = { $lte: filter.cena };
+            }
+            if (filter.kvadratura !== undefined) {
+                query.kvadratura = { $gte: filter.kvadratura };
+            }
+            if (filter.brojSoba !== undefined) {
+                query.brojSoba = { $gte: filter.brojSoba };
+            }
+            const filteredResults = this.listingModel.find(query);
+            return filteredResults;
+        });
+    }
 }
 exports.listingDAO = new ListingDAO();
 //# sourceMappingURL=ListingDAO.js.map

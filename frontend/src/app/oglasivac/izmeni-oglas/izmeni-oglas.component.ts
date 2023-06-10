@@ -223,6 +223,7 @@ export class IzmeniOglasComponent implements OnInit {
     { name: 'Lift', checked: false },
     { name: 'Klima', checked: false },
   ];
+  //pamtimo odabrane karakteristike
   osveziOdabraneKarakteristike($event: any) {
     const name = $event.target.value;
     const isChecked = $event.target.checked;
@@ -257,6 +258,7 @@ export class IzmeniOglasComponent implements OnInit {
     { name: '19', checked: false },
     { name: '20', checked: false },
   ];
+  //pamtimo odabrane linije
   osveziOdabraneLinije($event: any) {
     const name = $event.target.value;
     const isChecked = $event.target.checked;
@@ -269,14 +271,17 @@ export class IzmeniOglasComponent implements OnInit {
     });
   }
 
+  //broj soba iz stringa u number
   brojSobaToNum(brojSoba: string) {
     if (brojSoba == '5+') return 6;
     else return parseFloat(brojSoba);
   }
+  //broj soba iz number u string
   brojSobaToString(brojSoba: number) {
     if (brojSoba == 6) return '5+';
     else return brojSoba.toString();
   }
+  // sprat iz string u number
   spratToNum(sprat: string) {
     if (sprat == 'Podrum') return -2;
     if (sprat == 'Suteren') return -1;
@@ -285,6 +290,7 @@ export class IzmeniOglasComponent implements OnInit {
     if (sprat == 'Potkrovlje') return 32;
     else return parseInt(sprat);
   }
+  // sprat is number u string
   spratToString(sprat: number) {
     if (sprat == -2) return 'Podrum';
     if (sprat == -1) return 'Suteren';

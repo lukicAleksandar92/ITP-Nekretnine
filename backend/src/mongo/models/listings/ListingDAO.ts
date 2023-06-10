@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { listingSchema } from "./ListingSchema";
-import { Listing } from "./Listing";
+import { Listing, SearchCriteria } from "./Listing";
 
 class ListingDAO {
   private listingModel = mongoose.model("listing", listingSchema, "oglasi");
@@ -57,6 +57,27 @@ class ListingDAO {
         }
       );
     }
+  }
+  async searchListings(filter: SearchCriteria) {
+    const query: any = {};
+    if (filter.lokacija !== undefined) {
+      query.lokacija = filter.lokacija;
+    }
+    if (filter.tip !== undefined) {
+      query.tipNekretnine = filter.tip;
+    }
+    if (filter.cena !== undefined) {
+      query.cena = { $lte: filter.cena };
+    }
+    if (filter.kvadratura !== undefined) {
+      query.kvadratura = { $gte: filter.kvadratura };
+    }
+    if (filter.brojSoba !== undefined) {
+      query.brojSoba = { $gte: filter.brojSoba };
+    }
+
+    const filteredResults = this.listingModel.find(query);
+    return filteredResults;
   }
 }
 

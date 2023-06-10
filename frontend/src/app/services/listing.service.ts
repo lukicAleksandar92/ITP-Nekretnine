@@ -31,4 +31,9 @@ export class ListingService {
       this.http.put(`${this.back}/listings/sell/${id}`, {})
     );
   }
+  searchListings(filter: any) {
+    return firstValueFrom(
+      this.http.post(`${this.back}/listings/search`, filter)
+    );
+  }
 }
