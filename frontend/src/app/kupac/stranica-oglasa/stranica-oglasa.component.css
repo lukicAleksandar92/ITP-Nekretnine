@@ -84,3 +84,66 @@ img {
 .btn {
   width: auto;
 }
+
+/* za slider slika */
+.img-wrapper {
+  position: relative;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.controls-overlay {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+
+.previous-button,
+.next-button {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(48, 48, 48, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.previous-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+
+.slider .image-wrapper img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.slider img {
+  display: block;
+  max-width: 100%;
+  height: 400px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.arrow {
+  color: var(--black);
+}
+.previous-button:disabled .arrow,
+.next-button:disabled .arrow {
+  color: transparent;
+}

@@ -10,14 +10,13 @@ export interface Listing {
   godinaIzgradnje: number;
   stanjeNekretnine: string;
   tipGrejanja: string;
-
   sprat: number;
   ukupnaSpratnost: number;
-
   mesecneRezije: number;
   karakteristike: string[];
   linije: string[];
   opis: string;
+  slike: Slika[];
 
   status: string;
 }
@@ -27,4 +26,8 @@ export class SearchCriteria {
   kvadratura: number | undefined = undefined;
   cena: number | undefined = undefined;
   brojSoba: number | undefined = undefined;
+}
+export interface Slika {
+  name: string;
+  source: string;
 }

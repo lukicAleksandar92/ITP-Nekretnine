@@ -38,6 +38,15 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"FlattenMaps_T_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Slika": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "source": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Listing": {
         "dataType": "refObject",
         "properties": {
@@ -58,6 +67,7 @@ const models: TsoaRoute.Models = {
             "karakteristike": {"dataType":"array","array":{"dataType":"string"},"required":true},
             "linije": {"dataType":"array","array":{"dataType":"string"},"required":true},
             "opis": {"dataType":"string","required":true},
+            "slike": {"dataType":"array","array":{"dataType":"refObject","ref":"Slika"},"required":true},
             "status": {"dataType":"string","required":true},
         },
         "additionalProperties": false,

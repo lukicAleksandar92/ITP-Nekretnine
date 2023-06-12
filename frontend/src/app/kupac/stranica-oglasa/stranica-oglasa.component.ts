@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
-import { faCheck, faX } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faX,
+  faCaretRight,
+  faCaretLeft,
+} from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from 'src/app/login/login.component';
 import { Listing } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
@@ -24,9 +29,13 @@ export class StranicaOglasaComponent implements OnInit {
         this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
         this.sprat = this.spratToString(this.listing.sprat);
         this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
+        console.log(this.listing);
       });
   }
+
   listing!: Listing;
+  left = faCaretLeft;
+  right = faCaretRight;
   checkMark = faCheck;
   xMark = faX;
   vidiVise: boolean = false;
@@ -82,5 +91,15 @@ export class StranicaOglasaComponent implements OnInit {
     if (sprat == 31) return '30+';
     if (sprat == 32) return 'Potkrovlje';
     else return sprat.toString();
+  }
+
+  nextImage(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.listing.slike.length;
+  }
+  currentIndex: number = 0;
+  previousImage(): void {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.listing.slike.length) %
+      this.listing.slike.length;
   }
 }

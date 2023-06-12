@@ -17,6 +17,11 @@ export class Listing {
   karakteristike: string[] = [];
   linije: string[] = [];
   opis!: string;
+  slike: Slika[] = [];
 
   status: string = 'nije prodato';
+}
+export interface Slika {
+  name: string;
+  source: string;
 }

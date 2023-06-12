@@ -13,14 +13,13 @@ export const listingSchema = new mongoose.Schema<Listing>({
   godinaIzgradnje: { type: Number },
   stanjeNekretnine: { type: String },
   tipGrejanja: { type: String },
-
   sprat: { type: Number },
   ukupnaSpratnost: { type: Number },
-
   mesecneRezije: { type: Number },
   karakteristike: [{ type: String }],
   linije: [{ type: String }],
   opis: { type: String },
+  slike: [{ name: { type: String }, source: { type: String } }],
 
   status: { type: String },
 });

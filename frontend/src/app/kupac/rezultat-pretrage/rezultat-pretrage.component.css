@@ -1,7 +1,14 @@
-.err {
-  font-size: 2rem;
+.result {
+  display: grid;
+  grid-template-columns: 35% auto;
 }
-
-section {
-  min-height: calc(100vh - 399px);
+.opis {
+  grid-column: span 2;
+  margin: 10px 0;
+}
+.btn {
+  grid-column: span 2;
+}
+img {
+  object-fit: contain;
 }

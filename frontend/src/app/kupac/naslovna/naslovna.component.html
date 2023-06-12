@@ -85,7 +85,16 @@
     <div class="box-container">
       <div class="box" *ngFor="let listing of allListings">
         <div class="thumb">
-          <img src="assets/images/house-img-2.jpg" alt="" />
+          <img
+            [src]="listing.slike[0].source"
+            alt=""
+            *ngIf="listing.slike.length > 0"
+          />
+          <img
+            src="assets/images/house-img-2.jpg"
+            *ngIf="listing.slike.length == 0"
+            alt=""
+          />
         </div>
         <h3 class="name">{{ listing.nazivOglasa }}</h3>
         <p class="location">

@@ -23,6 +23,7 @@ exports.listingSchema = new mongoose_1.default.Schema({
     karakteristike: [{ type: String }],
     linije: [{ type: String }],
     opis: { type: String },
+    slike: [{ name: { type: String }, source: { type: String } }],
     status: { type: String },
 });
 //# sourceMappingURL=ListingSchema.js.map

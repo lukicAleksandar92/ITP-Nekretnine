@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Listing } from 'src/app/models/Listing';
+import { Listing, Slika } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
@@ -21,7 +21,6 @@ export class PostaviOglasComponent {
   stanjeNekretnine!: string;
   tipGrejanja!: string;
   sprat!: string;
-
   ukupnaSpratnost!: string;
   mesecneRezije!: number;
   opis!: string;
@@ -38,6 +37,7 @@ export class PostaviOglasComponent {
   tipGrejanjaGreska: boolean = false;
   spratGreska: boolean = false;
   mesecneRezijeGreska: boolean = false;
+  slikeGreska: boolean = false;
 
   lokacijaIzbor: string[] = [
     'Barajevo',
@@ -237,6 +237,7 @@ export class PostaviOglasComponent {
     if (sprat == 'Potkrovlje') return 32;
     else return parseInt(sprat);
   }
+
   postavi() {
     let inputGreska = 0;
     let listing = new Listing();
@@ -381,6 +382,15 @@ export class PostaviOglasComponent {
 
     listing.linije = this.sveLinije.filter((l) => l.checked).map((l) => l.name);
 
+    if (this.slikeString64.length < 3) {
+      inputGreska = 1;
+      this.slikeGreska = true;
+    } else {
+      this.slikeGreska = false;
+      listing.slike = this.slikeString64;
+    }
+    console.log(listing);
+
     if (inputGreska == 0) {
       this.listingService
         .insertListing(listing)
@@ -390,5 +400,34 @@ export class PostaviOglasComponent {
         })
         .catch((res) => {});
     }
+  }
+  odabraneSlike: File[] = [];
+  slikeString64: Slika[] = [];
+
+  handleFileInput(event: any) {
+    const files: FileList = event.target.files;
+    /* if (this.slike.length + files.length > 5) {
+      // Display an error message or take any appropriate action
+      alert('Maximum number of pictures exceeded');
+      return;
+    } */
+
+    for (let i = 0; i < files.length; i++) {
+      const file: File = files[i];
+      const reader: FileReader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String: string = reader.result as string;
+        this.slikeString64.push({ name: file.name, source: base64String });
+      };
+      this.odabraneSlike.push(file);
+      reader.readAsDataURL(file);
+    }
+  }
+  deselectFile(file: File) {
+    this.odabraneSlike = this.odabraneSlike.filter((f) => f !== file);
+    this.slikeString64 = this.slikeString64.filter(
+      (img) => img.name !== file.name
+    );
   }
 }
