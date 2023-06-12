@@ -95,7 +95,7 @@ const models: TsoaRoute.Models = {
     "SearchCriteria": {
         "dataType": "refObject",
         "properties": {
-            "lokacija": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"undefined"}]},
+            "lokacija": {"dataType":"array","array":{"dataType":"string"},"default":[]},
             "tip": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"undefined"}]},
             "kvadratura": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
             "cena": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},

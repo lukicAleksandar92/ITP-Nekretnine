@@ -22,7 +22,7 @@ export interface Listing {
   datumProdaje: Date | undefined;
 }
 export class SearchCriteria {
-  lokacija: string | undefined = undefined;
+  lokacija: string[] = [];
   tip: string | undefined = undefined;
   kvadratura: number | undefined = undefined;
   cena: number | undefined = undefined;

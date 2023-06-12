@@ -27,3 +27,10 @@ export interface Slika {
   name: string;
   source: string;
 }
+export class Filter {
+  lokacija: string[] = [];
+  tip: string | undefined = undefined;
+  cena: number | undefined = undefined;
+  kvadratura: number | undefined = undefined;
+  brojSoba: number | undefined = undefined;
+}

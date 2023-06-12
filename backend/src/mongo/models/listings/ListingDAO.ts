@@ -66,8 +66,8 @@ class ListingDAO {
   }
   async searchListings(filter: SearchCriteria) {
     const query: any = {};
-    if (filter.lokacija !== undefined) {
-      query.lokacija = filter.lokacija;
+    if (filter.lokacija.length > 0) {
+      query.lokacija = { $in: filter.lokacija };
     }
     if (filter.tip !== undefined) {
       query.tipNekretnine = filter.tip;

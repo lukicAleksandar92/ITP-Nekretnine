@@ -83,8 +83,8 @@ class ListingDAO {
     searchListings(filter) {
         return __awaiter(this, void 0, void 0, function* () {
             const query = {};
-            if (filter.lokacija !== undefined) {
-                query.lokacija = filter.lokacija;
+            if (filter.lokacija.length > 0) {
+                query.lokacija = { $in: filter.lokacija };
             }
             if (filter.tip !== undefined) {
                 query.tipNekretnine = filter.tip;

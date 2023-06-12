@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Listing } from 'src/app/models/Listing';
+import { Filter, Listing } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
@@ -26,19 +26,13 @@ export class RezultatPretrageComponent implements OnInit {
       if (params['brojSoba'] != undefined)
         this.filter.brojSoba = this.brojSobaToNum(params['brojSoba']);
     });
-
+    console.log(this.filter);
     this.listingService.searchListings(this.filter).then((res) => {
       this.allListings = JSON.parse(JSON.stringify(res));
     });
   }
   allListings: Listing[] = [];
-  filter: any = {
-    lokacija: undefined,
-    tip: undefined,
-    cena: undefined,
-    kvadratura: undefined,
-    brojSoba: undefined,
-  };
+  filter = new Filter();
   spratToString(sprat: number) {
     if (sprat == -2) return 'Podrum';
     if (sprat == -1) return 'Suteren';

@@ -5,17 +5,33 @@
       <h3>Pronađite savršeni dom</h3>
       <div class="box">
         <p>Lokacija</p>
-        <select
-          name="lokacija"
-          class="input"
-          required
-          [(ngModel)]="filter.lokacija"
-        >
-          <option value="undefined" disabled>Izaberite lokaciju</option>
-          <option *ngFor="let izbor of lokacijaIzbor" value="{{ izbor }}">
-            {{ izbor }}
-          </option>
-        </select>
+        <div class="dropdown input">
+          <button
+            class="dropdown-toggle"
+            type="button"
+            (click)="toggleDropdown()"
+          >
+            <span *ngIf="filter.lokacija.length === 0">Izaberite Lokaciju</span>
+            <div class="odabraneLokacije">
+              <span
+                class="truncated-text"
+                *ngFor="let lokacija of filter.lokacija"
+                >{{ lokacija }},
+              </span>
+            </div>
+          </button>
+          <div class="dropdown-menu" [ngClass]="{ show: isDropdownOpen }">
+            <div *ngFor="let lokacija of lokacijaIzbor">
+              <div
+                class="dropdown-item"
+                (click)="select(lokacija)"
+                [ngClass]="{ selected: filter.lokacija.includes(lokacija) }"
+              >
+                {{ lokacija }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="flex">
         <!-- tip nekretnien -->

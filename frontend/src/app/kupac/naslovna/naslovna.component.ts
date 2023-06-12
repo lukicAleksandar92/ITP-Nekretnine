@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Listing } from 'src/app/models/Listing';
+import { Filter, Listing } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
@@ -55,13 +55,7 @@ export class NaslovnaComponent implements OnInit {
     '5.5',
     '5+',
   ];
-  filter = {
-    lokacija: undefined,
-    tip: undefined,
-    cena: undefined,
-    kvadratura: undefined,
-    brojSoba: undefined,
-  };
+  filter = new Filter();
 
   pretrazi() {
     if (this.filter.tip == undefined) {
@@ -70,5 +64,26 @@ export class NaslovnaComponent implements OnInit {
       this.router.navigate(['/rezultat-pretrage'], {
         queryParams: this.filter,
       });
+  }
+
+  isDropdownOpen = false;
+  odabraneLokacije: string[] = [];
+  select(lok: string) {
+    if (this.filter.lokacija.includes(lok)) {
+      this.filter.lokacija = this.filter.lokacija.filter((l) => l !== lok);
+    } else {
+      this.filter.lokacija.push(lok);
+    }
+    console.log(this.filter.lokacija);
+  }
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.dropdown')) {
+      this.isDropdownOpen = false;
+    }
   }
 }
