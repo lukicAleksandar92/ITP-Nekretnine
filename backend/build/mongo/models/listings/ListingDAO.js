@@ -39,6 +39,7 @@ class ListingDAO {
         return __awaiter(this, void 0, void 0, function* () {
             let activeListing = this.getListingById(id);
             if (activeListing != null) {
+                const currentDate = new Date();
                 return this.listingModel.updateOne({ _id: id }, {
                     $set: {
                         lokacija: listing.lokacija,
@@ -57,6 +58,8 @@ class ListingDAO {
                         karakteristike: listing.karakteristike,
                         linije: listing.linije,
                         opis: listing.opis,
+                        slike: listing.slike,
+                        datumIzmene: currentDate,
                     },
                 });
             }
@@ -67,9 +70,11 @@ class ListingDAO {
         return __awaiter(this, void 0, void 0, function* () {
             let activeLisitng = this.getListingById(id);
             if (activeLisitng != null) {
+                const currentDate = new Date();
                 return this.listingModel.updateOne({ _id: id }, {
                     $set: {
                         status: "prodato",
+                        datumProdaje: currentDate,
                     },
                 });
             }

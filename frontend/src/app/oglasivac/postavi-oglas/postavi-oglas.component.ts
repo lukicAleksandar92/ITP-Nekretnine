@@ -37,7 +37,8 @@ export class PostaviOglasComponent {
   tipGrejanjaGreska: boolean = false;
   spratGreska: boolean = false;
   mesecneRezijeGreska: boolean = false;
-  slikeGreska: boolean = false;
+  slikeGreskaMalo: boolean = false;
+  slikeGreskaPuno: boolean = false;
 
   lokacijaIzbor: string[] = [
     'Barajevo',
@@ -384,12 +385,21 @@ export class PostaviOglasComponent {
 
     if (this.slikeString64.length < 3) {
       inputGreska = 1;
-      this.slikeGreska = true;
+      this.slikeGreskaMalo = true;
     } else {
-      this.slikeGreska = false;
+      this.slikeGreskaMalo = false;
       listing.slike = this.slikeString64;
     }
-    console.log(listing);
+    if (this.slikeString64.length > 6) {
+      inputGreska = 1;
+      this.slikeGreskaPuno = true;
+    } else {
+      this.slikeGreskaPuno = false;
+      listing.slike = this.slikeString64;
+    }
+
+    listing.datumIzmene = undefined;
+    listing.datumProdaje = undefined;
 
     if (inputGreska == 0) {
       this.listingService
@@ -406,11 +416,6 @@ export class PostaviOglasComponent {
 
   handleFileInput(event: any) {
     const files: FileList = event.target.files;
-    /* if (this.slike.length + files.length > 5) {
-      // Display an error message or take any appropriate action
-      alert('Maximum number of pictures exceeded');
-      return;
-    } */
 
     for (let i = 0; i < files.length; i++) {
       const file: File = files[i];
@@ -424,10 +429,10 @@ export class PostaviOglasComponent {
       reader.readAsDataURL(file);
     }
   }
-  deselectFile(file: File) {
-    this.odabraneSlike = this.odabraneSlike.filter((f) => f !== file);
+  deselectFile(imeSlike: string) {
+    this.odabraneSlike = this.odabraneSlike.filter((f) => f.name !== imeSlike);
     this.slikeString64 = this.slikeString64.filter(
-      (img) => img.name !== file.name
+      (img) => img.name !== imeSlike
     );
   }
 }

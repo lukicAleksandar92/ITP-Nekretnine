@@ -17,8 +17,9 @@ export interface Listing {
   linije: string[];
   opis: string;
   slike: Slika[];
-
   status: string;
+  datumIzmene: Date | undefined;
+  datumProdaje: Date | undefined;
 }
 export class SearchCriteria {
   lokacija: string | undefined = undefined;

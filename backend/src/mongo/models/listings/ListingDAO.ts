@@ -17,7 +17,9 @@ class ListingDAO {
   }
   async updateListing(listing: Listing, id: string) {
     let activeListing = this.getListingById(id);
+
     if (activeListing != null) {
+      const currentDate = new Date();
       return this.listingModel.updateOne(
         { _id: id },
         {
@@ -38,6 +40,8 @@ class ListingDAO {
             karakteristike: listing.karakteristike,
             linije: listing.linije,
             opis: listing.opis,
+            slike: listing.slike,
+            datumIzmene: currentDate,
           },
         }
       );
@@ -48,11 +52,13 @@ class ListingDAO {
   async sellListing(id: string) {
     let activeLisitng = this.getListingById(id);
     if (activeLisitng != null) {
+      const currentDate = new Date();
       return this.listingModel.updateOne(
         { _id: id },
         {
           $set: {
             status: "prodato",
+            datumProdaje: currentDate,
           },
         }
       );

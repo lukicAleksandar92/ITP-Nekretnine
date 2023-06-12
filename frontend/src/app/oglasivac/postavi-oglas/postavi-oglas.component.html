@@ -261,9 +261,12 @@
       <!-- Slike -->
       <div class="box">
         <p>
-          Slike
-          <span *ngIf="slikeGreska" class="greska"
+          Slike (3 - 6)
+          <span *ngIf="slikeGreskaMalo" class="greska"
             >Morate uneti bar tri slike</span
+          >
+          <span *ngIf="slikeGreskaPuno" class="greska"
+            >Možete uneti najviše 6 slika</span
           >
         </p>
         <div class="input tall">
@@ -283,9 +286,9 @@
               />
             </div>
             <div class="names">
-              <div *ngFor="let file of odabraneSlike">
-                {{ file.name }}
-                <button (click)="deselectFile(file)">X</button>
+              <div *ngFor="let slika of slikeString64">
+                {{ slika.name }}
+                <button (click)="deselectFile(slika.name)">X</button>
               </div>
             </div>
           </div>

@@ -22,8 +22,12 @@ section {
 }
 img {
   height: 100%;
-  width: auto;
-  transition: 0.2s linear;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .info {
   margin: 1.5rem 0;
@@ -63,5 +67,9 @@ img {
   text-align: center;
   font-size: 1.8rem;
   font-weight: 1000;
-  cursor: unset;
+  cursor: default;
+}
+button:disabled {
+  background-color: var(--black);
+  cursor: default;
 }

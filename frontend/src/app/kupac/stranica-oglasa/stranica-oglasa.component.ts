@@ -29,7 +29,6 @@ export class StranicaOglasaComponent implements OnInit {
         this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
         this.sprat = this.spratToString(this.listing.sprat);
         this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
-        console.log(this.listing);
       });
   }
 

@@ -10,5 +10,8 @@
   grid-column: span 2;
 }
 img {
-  object-fit: contain;
+  object-fit: cover;
+}
+section {
+  min-height: calc(100vh - 399px);
 }

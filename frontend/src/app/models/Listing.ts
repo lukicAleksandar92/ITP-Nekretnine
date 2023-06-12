@@ -20,6 +20,8 @@ export class Listing {
   slike: Slika[] = [];
 
   status: string = 'nije prodato';
+  datumIzmene!: Date | undefined;
+  datumProdaje!: Date | undefined;
 }
 export interface Slika {
   name: string;

@@ -69,6 +69,8 @@ const models: TsoaRoute.Models = {
             "opis": {"dataType":"string","required":true},
             "slike": {"dataType":"array","array":{"dataType":"refObject","ref":"Slika"},"required":true},
             "status": {"dataType":"string","required":true},
+            "datumIzmene": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"undefined"}],"required":true},
+            "datumProdaje": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"undefined"}],"required":true},
         },
         "additionalProperties": false,
     },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Listing } from 'src/app/models/Listing';
+import { Listing, Slika } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
@@ -51,6 +51,9 @@ export class IzmeniOglasComponent implements OnInit {
             l.checked = true;
           }
         }
+        this.slikeString64 = this.listing.slike.map((obj) => {
+          return { name: obj.name, source: obj.source };
+        });
       });
   }
   listing!: Listing;
@@ -70,6 +73,8 @@ export class IzmeniOglasComponent implements OnInit {
   ukupnaSpratnost!: string;
   mesecneRezije!: number;
   opis!: string;
+  odabraneSlike: File[] = [];
+  slikeString64: Slika[] = [];
 
   lokacijaIzbor: string[] = [
     'Barajevo',
@@ -209,7 +214,7 @@ export class IzmeniOglasComponent implements OnInit {
   tipGrejanjaGreska: boolean = false;
   spratGreska: boolean = false;
   mesecneRezijeGreska: boolean = false;
-
+  slikeGreska: boolean = false;
   sveKarakteristike: any[] = [
     { name: 'Terasa', checked: false },
     { name: 'Podrum', checked: false },
@@ -298,6 +303,33 @@ export class IzmeniOglasComponent implements OnInit {
     if (sprat == 31) return '30+';
     if (sprat == 32) return 'Potkrovlje';
     else return sprat.toString();
+  }
+  handleFileInput(event: any) {
+    const files: FileList = event.target.files;
+    /* if (this.slike.length + files.length > 5) {
+      // Display an error message or take any appropriate action
+      alert('Maximum number of pictures exceeded');
+      return;
+    } */
+
+    for (let i = 0; i < files.length; i++) {
+      let file: File = files[i];
+      const reader: FileReader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String: string = reader.result as string;
+        this.slikeString64.push({ name: file.name, source: base64String });
+      };
+      this.odabraneSlike.push(file);
+      reader.readAsDataURL(file);
+    }
+  }
+  deselectFile(imeSlike: string) {
+    this.odabraneSlike = this.odabraneSlike.filter((f) => f.name !== imeSlike);
+    this.slikeString64 = this.slikeString64.filter(
+      (img) => img.name !== imeSlike
+    );
+    console.log(this.odabraneSlike);
   }
   izmeni() {
     let inputGreska = 0;
@@ -443,12 +475,21 @@ export class IzmeniOglasComponent implements OnInit {
 
     listing.linije = this.sveLinije.filter((l) => l.checked).map((l) => l.name);
 
+    if (this.slikeString64.length < 3 || this.slikeString64.length > 6) {
+      inputGreska = 1;
+      this.slikeGreska = true;
+    } else {
+      this.slikeGreska = false;
+      listing.slike = this.slikeString64;
+    }
+
+    console.log(listing, this.id);
     if (inputGreska == 0) {
-      this.listingService.updateListing(listing, this.id);
+      this.listingService.updateListing(listing, this.id).then((res) => {
+        alert('Oglas uspesno izmenjen');
 
-      alert('Oglas uspesno izmenjen');
-
-      this.router.navigate(['/moji-oglasi']);
+        this.router.navigate(['/moji-oglasi']);
+      });
     }
   }
 }
