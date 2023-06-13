@@ -20,6 +20,10 @@ export class ListingController extends Controller {
   async getListingById(@Path() id: string): Promise<Listing | null> {
     return listingDAO.getListingById(id);
   }
+  @Get("getAverageValue/:location")
+  async getAverageValue(@Path() location: string): Promise<any | null> {
+    return await listingDAO.getAverageValue(location);
+  }
   @Put("update/:id")
   async updateListing(@Body() listing: Listing, @Path() id: string) {
     let result = await listingDAO.updateListing(listing, id);

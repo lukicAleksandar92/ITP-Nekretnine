@@ -21,6 +21,9 @@ export class ListingService {
   getListingById(id: string) {
     return firstValueFrom(this.http.get(`${this.back}/listings/getOne/${id}`));
   }
+  getAverageValue(location: string) {
+    return firstValueFrom(this.http.get(`${this.back}/listings/getAverageValue/${location}`));
+  }
   updateListing(listing: Listing, id: string) {
     return firstValueFrom(
       this.http.put(`${this.back}/listings/update/${id}`, listing)

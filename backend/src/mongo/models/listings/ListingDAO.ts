@@ -15,6 +15,17 @@ class ListingDAO {
   async getListingById(id: string): Promise<Listing | null> {
     return this.listingModel.findById(id);
   }
+  async getAverageValue(location: string): Promise<any | null> {
+    return this.listingModel.aggregate([
+       { $match: {lokacija: location} },
+       { $group: {
+            _id: "$lokacija",
+            srednjaVrednost: 
+              { $avg: { $divide: ["$cena", "$kvadratura" ] } } 
+          }
+        }
+    ]);
+  }
   async updateListing(listing: Listing, id: string) {
     let activeListing = this.getListingById(id);
     if (activeListing != null) {

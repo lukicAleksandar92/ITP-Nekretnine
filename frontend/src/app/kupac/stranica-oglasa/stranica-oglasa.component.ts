@@ -24,7 +24,7 @@ export class StranicaOglasaComponent implements OnInit {
   ngOnInit(): void {
     // ucitavamo id oglasa koji prikazujemo
     const id = this.route.snapshot.paramMap.get('id');
-    if (id != null)
+    if (id != null) {
       // trazimo oglas u bazi na osnovu id-a
       this.listingService.getListingById(id).then((res) => {
         // kad ga nobijemo ucitavamo ga u lokalnu promenljivu listing
@@ -33,9 +33,21 @@ export class StranicaOglasaComponent implements OnInit {
         this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
         this.sprat = this.spratToString(this.listing.sprat);
         this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
+
+        // trazimo srednju vrednost na lokaciji gde je i taj oglas
+        this.listingService.getAverageValue(this.listing.lokacija).then((res) => {
+          // kad ga dobijemo ucitavamo ga u lokalnu promenljivu avgValue
+          this.avgValue = JSON.parse(JSON.stringify(res));
+          this.srednjaVrednost = this.avgValue.srednjaVrednost;
+        });
+      //this.avgValue = 100;
       });
+      
+    }
   }
 
+  avgValue!: any;
+  srednjaVrednost!: number;
   listing!: Listing;
   // ikonice iz fontawesome
   left = faCaretLeft;
