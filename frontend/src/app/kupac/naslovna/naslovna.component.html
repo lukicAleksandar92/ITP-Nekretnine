@@ -1,8 +1,10 @@
 <app-kupac-header></app-kupac-header>
 <div class="home">
   <section class="left">
+    <!-- Forma osnovne pretrage -->
     <form (ngSubmit)="pretrazi()">
       <h3>Pronađite savršeni dom</h3>
+      <!-- Lokacija -->
       <div class="box">
         <p>Lokacija</p>
         <div class="dropdown input">
@@ -60,7 +62,7 @@
             name="cenaDo"
             placeholder="€"
             class="input"
-            [(ngModel)]="filter.cena"
+            [(ngModel)]="filter.cenaDo"
           />
         </div>
         <!-- kvadratura -->
@@ -71,12 +73,13 @@
             name="kvadraturaDo"
             placeholder="m²"
             class="input"
-            [(ngModel)]="filter.kvadratura"
+            [(ngModel)]="filter.kvadraturaOd"
           />
         </div>
+        <!-- Broj soba -->
         <div class="box">
           <p>Broj soba</p>
-          <select name="brojSoba" class="input" [(ngModel)]="filter.brojSoba">
+          <select name="brojSoba" class="input" [(ngModel)]="filter.brojSobaOd">
             <option value="undefined" disabled>Izaberite broj soba</option>
             <option *ngFor="let izbor of brojSobaIzbor" value="{{ izbor }}">
               {{ izbor }}
@@ -97,7 +100,6 @@
 <div class="sekcija">
   <div class="listings">
     <h1 class="heading">Najnovije Nekretnine</h1>
-
     <div class="box-container">
       <div class="box" *ngFor="let listing of allListings">
         <div class="thumb">
@@ -133,128 +135,6 @@
           >Pogledaj oglas</a
         >
       </div>
-
-      <!-- <div class="box">
-        <div class="thumb">
-          <img src="assets/images/house-img-2.jpg" alt="" />
-        </div>
-        <h3 class="name">Crveni Krst - Mileševska novogradnja</h3>
-        <p class="location">
-          <i class="fas fa-euro-sign"></i>Cena: <span>208 750 €</span>
-        </p>
-
-        <p class="location">
-          <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd - opština Vračar - Crveni Krst - Mileševska</span>
-        </p>
-
-        <div class="flex">
-          <p>
-            <i class="fas fa-bus"></i>Lista prevoza: <span>3, 4, 6, 7, 11</span>
-          </p>
-        </div>
-        <a routerLink="/stranica-oglasa" class="btn">Pogledaj oglas</a>
-      </div>
-
-      <div class="box">
-        <div class="thumb">
-          <img src="assets/images/house-img-1.jpg" alt="" />
-        </div>
-        <h3 class="name">Prodajem stan <br /><br /></h3>
-        <p class="location">
-          <i class="fas fa-euro-sign"></i>Cena: <span>120000</span>
-        </p>
-
-        <p class="location">
-          <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd-Vračar-Crveni krst <br /><br /></span>
-        </p>
-
-        <div class="flex">
-          <p><i class="fas fa-bus"></i>Lista prevoza: <span>1, 2, 3</span></p>
-        </div>
-        <a href="#" class="btn">Pogledaj oglas </a>
-      </div>
-
-      <div class="box">
-        <div class="thumb">
-          <img src="assets/images/house-img-1.jpg" alt="" />
-        </div>
-        <h3 class="name">Prodajem stan <br /><br /></h3>
-        <p class="location">
-          <i class="fas fa-euro-sign"></i>Cena: <span>120000</span>
-        </p>
-
-        <p class="location">
-          <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd-Vračar-Crveni krst <br /><br /></span>
-        </p>
-
-        <div class="flex">
-          <p><i class="fas fa-bus"></i>Lista prevoza: <span>1, 2, 3</span></p>
-        </div>
-        <a href="#" class="btn">Pogledaj oglas</a>
-      </div>
-
-      <div class="box">
-        <div class="thumb">
-          <img src="assets/images/house-img-1.jpg" alt="" />
-        </div>
-        <h3 class="name">Prodajem stan</h3>
-        <p class="location">
-          <i class="fas fa-euro-sign"></i>Cena: <span>120000</span>
-        </p>
-
-        <p class="location">
-          <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd-Vračar-Crveni krst</span>
-        </p>
-
-        <div class="flex">
-          <p><i class="fas fa-bus"></i>Lista prevoza: <span>1, 2, 3</span></p>
-        </div>
-        <a href="#" class="btn">Pogledaj oglas</a>
-      </div>
-
-      <div class="box">
-        <div class="thumb">
-          <img src="assets/images/house-img-1.jpg" alt="" />
-        </div>
-        <h3 class="name">Prodajem stan</h3>
-        <p class="location">
-          <i class="fas fa-euro-sign"></i>Cena: <span>120000</span>
-        </p>
-
-        <p class="location">
-          <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd-Vračar-Crveni krst</span>
-        </p>
-
-        <div class="flex">
-          <p><i class="fas fa-bus"></i>Lista prevoza: <span>1, 2, 3</span></p>
-        </div>
-        <a href="#" class="btn">Pogledaj oglas</a>
-      </div>
-
-      <div class="box">
-        <div class="thumb">
-          <img src="assets/images/house-img-1.jpg" alt="" />
-        </div>
-        <h3 class="name">Prodajem stan</h3>
-        <p class="location">
-          <i class="fas fa-euro-sign"></i>Cena: <span>120000</span>
-        </p>
-
-        <p class="location">
-          <i class="fas fa-map-marker-alt"></i
-          ><span>Beograd-Vračar-Crveni krst</span>
-        </p>
-
-        <div class="flex">
-          <p><i class="fas fa-bus"></i>Lista prevoza: <span>1, 2, 3</span></p>
-        </div>
-        <a href="#" class="btn">Pogledaj oglas</a>
-      </div> -->
     </div>
   </div>
 

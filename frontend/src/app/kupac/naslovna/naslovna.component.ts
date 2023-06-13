@@ -15,7 +15,9 @@ export class NaslovnaComponent implements OnInit {
       this.allListings = JSON.parse(JSON.stringify(res));
     });
   }
+  // promenljiva u koju ucitavamo oglas
   allListings: Listing[] = [];
+  // lokacije od kojih biramo
   lokacijaIzbor: string[] = [
     'Barajevo',
     'Voždovac',
@@ -35,6 +37,7 @@ export class NaslovnaComponent implements OnInit {
     'Surčin',
     'Čukarica',
   ];
+  // tipovi nekretnine od kojih biramo
   tipNekretnineIzbor: string[] = [
     'Stan',
     'Kuća',
@@ -42,6 +45,7 @@ export class NaslovnaComponent implements OnInit {
     'Lokal',
     'Magacin',
   ];
+  // broj soba od kojih biramo
   brojSobaIzbor: string[] = [
     '1',
     '1.5',
@@ -65,20 +69,21 @@ export class NaslovnaComponent implements OnInit {
         queryParams: this.filter,
       });
   }
-
+  // promenljiva koja prati da li je dropdown za izbor lokacija otvoren
   isDropdownOpen = false;
-  odabraneLokacije: string[] = [];
+  //selektujemo ili unselektujemo lokacije
   select(lok: string) {
     if (this.filter.lokacija.includes(lok)) {
       this.filter.lokacija = this.filter.lokacija.filter((l) => l !== lok);
     } else {
       this.filter.lokacija.push(lok);
     }
-    console.log(this.filter.lokacija);
   }
+  // otvara i zatvara dropdown za lokacije
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+  // zatvara dropdown kad je otvoren a kliknemo negde van njega
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;

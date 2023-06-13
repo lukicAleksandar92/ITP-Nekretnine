@@ -244,6 +244,7 @@ export class PostaviOglasComponent {
     let listing = new Listing();
     // ovde ubaciti aktivnog korisnika, local storage ili sta god
     listing.oglasivac = 'anailic';
+    listing.tipOglasivaca = 'samostalniProdavac';
     // lokacija
     if (
       this.lokacija == undefined ||
@@ -376,13 +377,13 @@ export class PostaviOglasComponent {
     } else {
       listing.opis = this.opis;
     }
-
+    // karakteristike
     listing.karakteristike = this.sveKarakteristike
       .filter((k) => k.checked)
       .map((k) => k.name);
-
+    // linije prevoza
     listing.linije = this.sveLinije.filter((l) => l.checked).map((l) => l.name);
-
+    // slike
     if (this.slikeString64.length < 3) {
       inputGreska = 1;
       this.slikeGreskaMalo = true;
@@ -397,7 +398,7 @@ export class PostaviOglasComponent {
       this.slikeGreskaPuno = false;
       listing.slike = this.slikeString64;
     }
-
+    // datum izmene i prodaje
     listing.datumIzmene = undefined;
     listing.datumProdaje = undefined;
 

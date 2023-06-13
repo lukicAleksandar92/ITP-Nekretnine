@@ -5,9 +5,21 @@ class SearchCriteria {
     constructor() {
         this.lokacija = [];
         this.tip = undefined;
-        this.kvadratura = undefined;
-        this.cena = undefined;
-        this.brojSoba = undefined;
+        this.cenaOd = undefined;
+        this.cenaDo = undefined;
+        this.kvadraturaOd = undefined;
+        this.kvadraturaDo = undefined;
+        this.brojSobaOd = undefined;
+        this.brojSobaDo = undefined;
+        this.godinaIzgradnjeOd = undefined;
+        this.godinaIzgradnjeDo = undefined;
+        this.tipOglasivaca = [];
+        this.stanjeNekretnine = [];
+        this.tipGrejanja = [];
+        this.spratOd = undefined;
+        this.spratDo = undefined;
+        this.mesecneRezijeOd = undefined;
+        this.mesecneRezijeDo = undefined;
     }
 }
 exports.SearchCriteria = SearchCriteria;

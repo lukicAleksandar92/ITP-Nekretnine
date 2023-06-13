@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.listingSchema = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 exports.listingSchema = new mongoose_1.default.Schema({
-    oglasivac: { type: String },
     lokacija: { type: String },
     ulica: { type: String },
     nazivOglasa: { type: String },
@@ -24,8 +23,10 @@ exports.listingSchema = new mongoose_1.default.Schema({
     linije: [{ type: String }],
     opis: { type: String },
     slike: [{ name: { type: String }, source: { type: String } }],
-    status: { type: String },
     datumIzmene: { type: Date, sparse: true },
     datumProdaje: { type: Date, sparse: true },
+    status: { type: String },
+    oglasivac: { type: String },
+    tipOglasivaca: { type: String },
 });
 //# sourceMappingURL=ListingSchema.js.map

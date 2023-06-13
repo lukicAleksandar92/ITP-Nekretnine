@@ -22,6 +22,7 @@ export class IzmeniOglasComponent implements OnInit {
 
         this.id = this.listing._id;
         this.oglasivac = this.listing.oglasivac;
+        this.tipOglasivaca = this.listing.tipOglasivaca;
         this.lokacija = this.listing.lokacija;
         this.ulica = this.listing.ulica;
         this.nazivOglasa = this.listing.nazivOglasa;
@@ -58,6 +59,7 @@ export class IzmeniOglasComponent implements OnInit {
   }
   listing!: Listing;
   oglasivac!: string;
+  tipOglasivaca!: string;
   id!: string;
   lokacija!: string;
   ulica!: string;
@@ -336,6 +338,7 @@ export class IzmeniOglasComponent implements OnInit {
     let listing = new Listing();
 
     listing.oglasivac = this.oglasivac;
+    listing.tipOglasivaca = this.tipOglasivaca;
     // lokacija
     if (
       this.lokacija == undefined ||
@@ -483,7 +486,6 @@ export class IzmeniOglasComponent implements OnInit {
       listing.slike = this.slikeString64;
     }
 
-    console.log(listing, this.id);
     if (inputGreska == 0) {
       this.listingService.updateListing(listing, this.id).then((res) => {
         alert('Oglas uspesno izmenjen');

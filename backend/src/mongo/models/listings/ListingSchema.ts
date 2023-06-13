@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { Listing } from "./Listing";
 
 export const listingSchema = new mongoose.Schema<Listing>({
-  oglasivac: { type: String },
   lokacija: { type: String },
   ulica: { type: String },
   nazivOglasa: { type: String },
@@ -21,7 +20,10 @@ export const listingSchema = new mongoose.Schema<Listing>({
   opis: { type: String },
   slike: [{ name: { type: String }, source: { type: String } }],
 
-  status: { type: String },
   datumIzmene: { type: Date, sparse: true },
   datumProdaje: { type: Date, sparse: true },
+
+  status: { type: String },
+  oglasivac: { type: String },
+  tipOglasivaca: { type: String },
 });

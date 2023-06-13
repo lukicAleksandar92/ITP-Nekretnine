@@ -1,6 +1,5 @@
 export class Listing {
   _id!: string;
-  oglasivac!: string;
   lokacija!: string;
   ulica!: string;
   nazivOglasa!: string;
@@ -19,9 +18,12 @@ export class Listing {
   opis!: string;
   slike: Slika[] = [];
 
-  status: string = 'nije prodato';
   datumIzmene!: Date | undefined;
   datumProdaje!: Date | undefined;
+
+  status: string = 'nije prodato';
+  oglasivac!: string;
+  tipOglasivaca!: string;
 }
 export interface Slika {
   name: string;
@@ -30,7 +32,19 @@ export interface Slika {
 export class Filter {
   lokacija: string[] = [];
   tip: string | undefined = undefined;
-  cena: number | undefined = undefined;
-  kvadratura: number | undefined = undefined;
-  brojSoba: number | undefined = undefined;
+  cenaOd: number | undefined = undefined;
+  cenaDo: number | undefined = undefined;
+  kvadraturaOd: number | undefined = undefined;
+  kvadraturaDo: number | undefined = undefined;
+  brojSobaOd: number | undefined = undefined;
+  brojSobaDo: number | undefined = undefined;
+  godinaIzgradnjeOd: number | undefined = undefined;
+  godinaIzgradnjeDo: number | undefined = undefined;
+  tipOglasivaca: string[] = [];
+  stanjeNekretnine: string[] = [];
+  tipGrejanja: string[] = [];
+  spratOd: number | undefined = undefined;
+  spratDo: number | undefined = undefined;
+  mesecneRezijeOd: number | undefined = undefined;
+  mesecneRezijeDo: number | undefined = undefined;
 }

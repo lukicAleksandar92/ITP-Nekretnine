@@ -1,16 +1,17 @@
 <app-kupac-header></app-kupac-header>
-
 <section class="listings2">
   <h1 class="heading">Rezultat pretrage</h1>
-
   <div class="box-container">
+    <!-- uspisujemo svaki oglas iz liste svih dovucenih ogalsa -->
     <div *ngFor="let listing of allListings" class="box result">
       <div class="thumb">
+        <!-- slika iz oglasa -->
         <img
           [src]="listing.slike[0].source"
           alt=""
           *ngIf="listing.slike.length > 0"
         />
+        <!-- slika ako oglas nema slika -->
         <img
           src="assets/images/house-img-2.jpg"
           *ngIf="listing.slike.length == 0"
