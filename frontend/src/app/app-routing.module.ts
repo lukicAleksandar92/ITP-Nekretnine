@@ -13,24 +13,28 @@ import { KupacMojProfilComponent } from './kupac/kupac-moj-profil/kupac-moj-prof
 import { OmiljeneNekretnineComponent } from './kupac/omiljene-nekretnine/omiljene-nekretnine.component';
 import { StranicaOglasaComponent } from './kupac/stranica-oglasa/stranica-oglasa.component';
 import { IzmeniOglasComponent } from './oglasivac/izmeni-oglas/izmeni-oglas.component';
+import { KupacGuard } from './guards/kupac.guard';
+import { ProdavacGuard } from './guards/prodavac.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registracija', component: RegistracijaComponent },
   { path: 'promena-lozinke', component: PromenaLozinkeComponent },
-  { path: 'naslovna', component: NaslovnaComponent },
-  { path: 'detaljna-pretraga', component: DetaljnaPretragaComponent },
-  { path: 'rezultat-pretrage', component: RezultatPretrageComponent },
-
-  { path: 'moji-oglasi', component: MojiOglasiComponent },
-  { path: 'postavi-oglas', component: PostaviOglasComponent },
-  { path: 'moj-profil', component: OgMojProfilComponent },
-
-  { path: 'kupac-moj-profil', component: KupacMojProfilComponent },
-  { path: 'omiljene-nekretnine', component: OmiljeneNekretnineComponent },
   { path: 'stranica-oglasa/:id', component: StranicaOglasaComponent },
-  { path: 'izmeni-oglas/:id', component: IzmeniOglasComponent },
+
+  //kupac
+  { path: 'naslovna', component: NaslovnaComponent, canActivate: [KupacGuard] },
+  { path: 'detaljna-pretraga', component: DetaljnaPretragaComponent, canActivate: [KupacGuard] },
+  { path: 'rezultat-pretrage', component: RezultatPretrageComponent, canActivate: [KupacGuard] },
+  { path: 'kupac-moj-profil', component: KupacMojProfilComponent, canActivate: [KupacGuard] },
+  { path: 'omiljene-nekretnine', component: OmiljeneNekretnineComponent, canActivate: [KupacGuard] },
+  
+  //prodavac
+  { path: 'moji-oglasi', component: MojiOglasiComponent, canActivate: [ProdavacGuard] },
+  { path: 'postavi-oglas', component: PostaviOglasComponent, canActivate: [ProdavacGuard] },
+  { path: 'izmeni-oglas/:id', component: IzmeniOglasComponent, canActivate: [ProdavacGuard] },
+  { path: 'moj-profil', component: OgMojProfilComponent, canActivate: [ProdavacGuard] },
 ];
 
 @NgModule({
