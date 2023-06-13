@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Listing } from 'src/app/models/Listing';
+import { Listing, Slika } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
@@ -17,11 +17,10 @@ export class PostaviOglasComponent {
   cena!: number;
   kvadratura!: number;
   brojSoba!: string;
-  godinaIzgradnje!: string;
+  godinaIzgradnje!: number;
   stanjeNekretnine!: string;
   tipGrejanja!: string;
   sprat!: string;
-
   ukupnaSpratnost!: string;
   mesecneRezije!: number;
   opis!: string;
@@ -38,6 +37,8 @@ export class PostaviOglasComponent {
   tipGrejanjaGreska: boolean = false;
   spratGreska: boolean = false;
   mesecneRezijeGreska: boolean = false;
+  slikeGreskaMalo: boolean = false;
+  slikeGreskaPuno: boolean = false;
 
   lokacijaIzbor: string[] = [
     'Barajevo',
@@ -78,63 +79,12 @@ export class PostaviOglasComponent {
     '5.5',
     '5+',
   ];
-  godinaIzgradnjeIzbor: string[] = [
-    '1970',
-    '1971',
-    '1972',
-    '1973',
-    '1974',
-    '1975',
-    '1976',
-    '1977',
-    '1978',
-    '1979',
-    '1980',
-    '1981',
-    '1982',
-    '1983',
-    '1984',
-    '1985',
-    '1986',
-    '1987',
-    '1988',
-    '1989',
-    '1990',
-    '1991',
-    '1992',
-    '1993',
-    '1994',
-    '1995',
-    '1996',
-    '1997',
-    '1998',
-    '1999',
-    '2000',
-    '2001',
-    '2002',
-    '2003',
-    '2004',
-    '2005',
-    '2006',
-    '2007',
-    '2008',
-    '2009',
-    '2010',
-    '2011',
-    '2012',
-    '2013',
-    '2014',
-    '2015',
-    '2016',
-    '2017',
-    '2018',
-    '2019',
-    '2020',
-    '2021',
-    '2022',
-    '2023',
-    '2024',
-    '2025',
+  godinaIzgradnjeIzbor: number[] = [
+    1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981,
+    1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993,
+    1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+    2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+    2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
   ];
   stanjeNekretnineIzbor: string[] = ['Izvorno', 'Renovirano', 'LUX'];
   tipGrejanjaIzbor: string[] = [
@@ -276,12 +226,25 @@ export class PostaviOglasComponent {
       } else return l;
     });
   }
+  brojSobaToNum(brojSoba: string) {
+    if (brojSoba == '5+') return 6;
+    else return parseFloat(brojSoba);
+  }
+  spratToNum(sprat: string) {
+    if (sprat == 'Podrum') return -2;
+    if (sprat == 'Suteren') return -1;
+    if (sprat == 'Prizemlje') return 0;
+    if (sprat == '30+') return 31;
+    if (sprat == 'Potkrovlje') return 32;
+    else return parseInt(sprat);
+  }
 
   postavi() {
     let inputGreska = 0;
     let listing = new Listing();
     // ovde ubaciti aktivnog korisnika, local storage ili sta god
     listing.oglasivac = 'anailic';
+    listing.tipOglasivaca = 'samostalniProdavac';
     // lokacija
     if (
       this.lokacija == undefined ||
@@ -352,7 +315,7 @@ export class PostaviOglasComponent {
       this.brojSobaGreska = true;
     } else {
       this.brojSobaGreska = false;
-      listing.brojSoba = this.brojSoba;
+      listing.brojSoba = this.brojSobaToNum(this.brojSoba);
     }
     //  godina izgradnje
     if (this.godinaIzgradnje == undefined || this.godinaIzgradnje == null) {
@@ -397,8 +360,8 @@ export class PostaviOglasComponent {
       this.spratGreska = true;
     } else {
       this.spratGreska = false;
-      listing.sprat = this.sprat;
-      listing.ukupnaSpratnost = this.ukupnaSpratnost;
+      listing.sprat = this.spratToNum(this.sprat);
+      listing.ukupnaSpratnost = this.spratToNum(this.ukupnaSpratnost);
     }
     // mesecne rezije
     if (this.mesecneRezije == undefined || this.mesecneRezije == null) {
@@ -414,12 +377,30 @@ export class PostaviOglasComponent {
     } else {
       listing.opis = this.opis;
     }
-
+    // karakteristike
     listing.karakteristike = this.sveKarakteristike
       .filter((k) => k.checked)
       .map((k) => k.name);
-
+    // linije prevoza
     listing.linije = this.sveLinije.filter((l) => l.checked).map((l) => l.name);
+    // slike
+    if (this.slikeString64.length < 3) {
+      inputGreska = 1;
+      this.slikeGreskaMalo = true;
+    } else {
+      this.slikeGreskaMalo = false;
+      listing.slike = this.slikeString64;
+    }
+    if (this.slikeString64.length > 6) {
+      inputGreska = 1;
+      this.slikeGreskaPuno = true;
+    } else {
+      this.slikeGreskaPuno = false;
+      listing.slike = this.slikeString64;
+    }
+    // datum izmene i prodaje
+    listing.datumIzmene = undefined;
+    listing.datumProdaje = undefined;
 
     if (inputGreska == 0) {
       this.listingService
@@ -430,5 +411,29 @@ export class PostaviOglasComponent {
         })
         .catch((res) => {});
     }
+  }
+  odabraneSlike: File[] = [];
+  slikeString64: Slika[] = [];
+
+  handleFileInput(event: any) {
+    const files: FileList = event.target.files;
+
+    for (let i = 0; i < files.length; i++) {
+      const file: File = files[i];
+      const reader: FileReader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String: string = reader.result as string;
+        this.slikeString64.push({ name: file.name, source: base64String });
+      };
+      this.odabraneSlike.push(file);
+      reader.readAsDataURL(file);
+    }
+  }
+  deselectFile(imeSlike: string) {
+    this.odabraneSlike = this.odabraneSlike.filter((f) => f.name !== imeSlike);
+    this.slikeString64 = this.slikeString64.filter(
+      (img) => img.name !== imeSlike
+    );
   }
 }

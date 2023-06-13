@@ -5,9 +5,10 @@ import cors from "cors";
 export function initApi() {
   const app = express();
 
+  app.use(express.json({ limit: "10mb" }));
   app.use(urlencoded({ extended: true }));
   app.use(json());
-  app.use(cors())
+  app.use(cors());
 
   registerTsoaRoutes(app);
 

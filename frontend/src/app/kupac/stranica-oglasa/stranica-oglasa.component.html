@@ -1,18 +1,19 @@
 <app-kupac-header></app-kupac-header>
 <section>
   <div class="content" *ngIf="listing">
+    <!-- naziv oglasa -->
     <h1>{{ listing.nazivOglasa }}</h1>
+    <!-- grad, lokacija, ulica -->
     <h2>Beograd - {{ listing.lokacija }} - {{ listing.ulica }}</h2>
     <div class="flex">
+      <!-- generalne informacije o nekretnini -->
       <div class="info">
         <div class="box"><b>Cena:</b> {{ listing.cena }} €</div>
         <div class="box"><b>Tip:</b> {{ listing.tipNekretnine }}</div>
         <div class="box"><b>Kvadratura:</b> {{ listing.kvadratura }}m²</div>
-        <div class="box"><b>Broj soba:</b> {{ listing.brojSoba }}</div>
-        <div class="box"><b>Sprat:</b> {{ listing.sprat }}</div>
-        <div class="box">
-          <b>Ukupna spratnost:</b> {{ listing.ukupnaSpratnost }}
-        </div>
+        <div class="box"><b>Broj soba:</b> {{ brojSoba }}</div>
+        <div class="box"><b>Sprat:</b> {{ sprat }}</div>
+        <div class="box"><b>Ukupna spratnost:</b> {{ ukupnaSpratnost }}</div>
         <div class="box"><b>Tip grejanja:</b> {{ listing.tipGrejanja }}</div>
         <div class="box">
           <b>Stanje nekretnine:</b> {{ listing.stanjeNekretnine }}
@@ -47,7 +48,6 @@
         </div>
         <br />
         <!-- Linije prevoza -->
-
         <div class="box">
           <b>Linije prevoza:</b>
           <div class="input linije-prevoza">
@@ -68,16 +68,38 @@
         </div>
       </div>
       <div class="info">
+        <!-- slike nekretenine -->
         <div class="img-wrapper">
-          <img src="/assets/house-img-2.webp" alt="" />
+          <div class="slider">
+            <img [src]="listing.slike[currentIndex].source" alt="Slide Image" />
+            <div class="controls-overlay">
+              <button
+                class="previous-button"
+                (click)="previousImage()"
+                [disabled]="currentIndex === 0"
+              >
+                <fa-icon [icon]="left" size="2x" class="arrow"></fa-icon>
+              </button>
+              <button
+                class="next-button"
+                (click)="nextImage()"
+                [disabled]="currentIndex === listing.slike.length - 1"
+              >
+                <fa-icon [icon]="right" size="2x" class="arrow"></fa-icon>
+              </button>
+            </div>
+          </div>
         </div>
+        <!-- informacije o oglasivacu -->
         <div class="box"><b> Prosečna cena na lokaciji:</b> 2398 €/m²</div>
         <div class="box oglasivac">
           <p><b>Oglašivač:</b> {{ listing.oglasivac }}</p>
         </div>
+        <!-- dugme da se vidi vise informacija o oglasivacu -->
         <div class="btn-wrapper">
           <button class="btn" (click)="vidiViseToggle()">Kontakt</button>
         </div>
+        <!-- vise informacija o oglasivacu -->
         <div class="box" *ngIf="vidiVise">
           <br />
           <div class="box">

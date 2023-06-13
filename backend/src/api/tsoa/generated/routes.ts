@@ -3,6 +3,8 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { AgencijeController } from './../../routes/agencije/AgencijeController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { HelloWorldController } from './../../routes/helloWorld/HelloWorldController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ListingController } from './../../routes/listings/ListingController';
@@ -14,6 +16,18 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "Agencije": {
+        "dataType": "refObject",
+        "properties": {
+            "naziv": {"dataType":"string","required":true},
+            "adresa": {"dataType":"string","required":true},
+            "grad": {"dataType":"string","required":true},
+            "telefon": {"dataType":"double","required":true},
+            "PIB": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "FlattenMaps_T_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"validators":{}},
@@ -24,27 +38,40 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"FlattenMaps_T_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Slika": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "source": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Listing": {
         "dataType": "refObject",
         "properties": {
-            "oglasivac": {"dataType":"string","required":true},
             "lokacija": {"dataType":"string","required":true},
             "ulica": {"dataType":"string","required":true},
             "nazivOglasa": {"dataType":"string","required":true},
             "tipNekretnine": {"dataType":"string","required":true},
             "cena": {"dataType":"double","required":true},
             "kvadratura": {"dataType":"double","required":true},
-            "brojSoba": {"dataType":"string","required":true},
-            "godinaIzgradnje": {"dataType":"string","required":true},
+            "brojSoba": {"dataType":"double","required":true},
+            "godinaIzgradnje": {"dataType":"double","required":true},
             "stanjeNekretnine": {"dataType":"string","required":true},
             "tipGrejanja": {"dataType":"string","required":true},
-            "sprat": {"dataType":"string","required":true},
-            "ukupnaSpratnost": {"dataType":"string","required":true},
+            "sprat": {"dataType":"double","required":true},
+            "ukupnaSpratnost": {"dataType":"double","required":true},
             "mesecneRezije": {"dataType":"double","required":true},
             "karakteristike": {"dataType":"array","array":{"dataType":"string"},"required":true},
             "linije": {"dataType":"array","array":{"dataType":"string"},"required":true},
             "opis": {"dataType":"string","required":true},
+            "slike": {"dataType":"array","array":{"dataType":"refObject","ref":"Slika"},"required":true},
+            "datumIzmene": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"undefined"}],"required":true},
+            "datumProdaje": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"undefined"}],"required":true},
             "status": {"dataType":"string","required":true},
+            "oglasivac": {"dataType":"string","required":true},
+            "tipOglasivaca": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -62,6 +89,30 @@ const models: TsoaRoute.Models = {
             "modifiedCount": {"dataType":"double","required":true},
             "upsertedCount": {"dataType":"double","required":true},
             "upsertedId": {"ref":"ObjectId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SearchCriteria": {
+        "dataType": "refObject",
+        "properties": {
+            "lokacija": {"dataType":"array","array":{"dataType":"string"},"default":[]},
+            "tip": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"undefined"}]},
+            "cenaOd": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "cenaDo": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "kvadraturaOd": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "kvadraturaDo": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "brojSobaOd": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "brojSobaDo": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "godinaIzgradnjeOd": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "godinaIzgradnjeDo": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "tipOglasivaca": {"dataType":"array","array":{"dataType":"string"},"default":[]},
+            "stanjeNekretnine": {"dataType":"array","array":{"dataType":"string"},"default":[]},
+            "tipGrejanja": {"dataType":"array","array":{"dataType":"string"},"default":[]},
+            "spratOd": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "spratDo": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "mesecneRezijeOd": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "mesecneRezijeDo": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
         },
         "additionalProperties": false,
     },
@@ -92,6 +143,30 @@ export function RegisterRoutes(app: express.Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+        app.get('/agencije/getAll',
+            ...(fetchMiddlewares<RequestHandler>(AgencijeController)),
+            ...(fetchMiddlewares<RequestHandler>(AgencijeController.prototype.getAllListings)),
+
+            function AgencijeController_getAllListings(request: any, response: any, next: any) {
+            const args = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new AgencijeController();
+
+
+              const promise = controller.getAllListings.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/helloWorld/message',
             ...(fetchMiddlewares<RequestHandler>(HelloWorldController)),
             ...(fetchMiddlewares<RequestHandler>(HelloWorldController.prototype.getHelloWorldMessage)),
@@ -235,6 +310,31 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.sellListing.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/listings/search',
+            ...(fetchMiddlewares<RequestHandler>(ListingController)),
+            ...(fetchMiddlewares<RequestHandler>(ListingController.prototype.searchListings)),
+
+            function ListingController_searchListings(request: any, response: any, next: any) {
+            const args = {
+                    filter: {"in":"body","name":"filter","required":true,"ref":"SearchCriteria"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ListingController();
+
+
+              const promise = controller.searchListings.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

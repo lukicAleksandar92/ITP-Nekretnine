@@ -2,8 +2,20 @@
 <section class="form-container">
   <form action="" method="post">
     <h3>Napravi nov nalog</h3>
-    <input type="text" name="ime" placeholder="Ime" class="box" [(ngModel)] = "ime" />
-    <input type="text" name="prezime" placeholder="Prezime" class="box" [(ngModel)] = "prezime"/>
+    <input
+      type="text"
+      name="ime"
+      placeholder="Ime"
+      class="box"
+      [(ngModel)]="ime"
+    />
+    <input
+      type="text"
+      name="prezime"
+      placeholder="Prezime"
+      class="box"
+      [(ngModel)]="prezime"
+    />
     <input
       placeholder="Datum rođenja"
       name="datumRodjenja"
@@ -12,38 +24,78 @@
       onfocus="(this.type='date')"
       onblur="(this.type='text')"
       id="date"
-      [(ngModel)] = "datumRodjenja"
+      [(ngModel)]="datumRodjenja"
     />
-    <input type="text" name="grad" placeholder="Grad" class="box" [(ngModel)] = "grad" />
-    <input type="tel" name="telefon" placeholder="Telefon" class="box" [(ngModel)] = "telefon"/>
-    <input type="email" name="email" placeholder="Email adresa" class="box" [(ngModel)] = "email"/>
-    <input type="text" name="kor_ime" placeholder="Korisničko ime" class="box" [(ngModel)] = "kor_ime"/>
-    <input type="password" name="lozinka" placeholder="Lozinka" class="box" [(ngModel)] = "lozinka"/>
-
+    <input
+      type="text"
+      name="grad"
+      placeholder="Grad"
+      class="box"
+      [(ngModel)]="grad"
+    />
+    <input
+      type="tel"
+      name="telefon"
+      placeholder="Telefon"
+      class="box"
+      [(ngModel)]="telefon"
+    />
+    <input
+      type="email"
+      name="email"
+      placeholder="Email adresa"
+      class="box"
+      [(ngModel)]="email"
+    />
+    <input
+      type="text"
+      name="kor_ime"
+      placeholder="Korisničko ime"
+      class="box"
+      [(ngModel)]="kor_ime"
+    />
+    <input
+      type="password"
+      name="lozinka"
+      placeholder="Lozinka"
+      class="box"
+      [(ngModel)]="lozinka"
+    />
 
     <label style="font-size: 1.8rem">Izaberite tip korisnika</label>
     <select name="tip" id="tip" class="box" [(ngModel)]="tip" required>
+      <option value="undefined" disabled>Izaberite tip korisnika</option>
       <option value="kupac">kupac</option>
-      <option value="samostalni prodavac" >samostalni prodavac</option>
+      <option value="samostalni prodavac">samostalni prodavac</option>
       <option value="agent">agent</option>
     </select>
-    
-    
-    <select name="agencija" id="agencija" class="box" style="display: none;">
-      <option value="">Izaberite agenciju</option>
-      <option value="euromont">Euromont</option>
-      <option value="zidart">Zidart</option>
-      <option value="cityexpert">City Expert</option>
-    </select>
-  
+
+    <!-- stavljamo da se vidi izbor agencije samo ako je tip korisnika agent-->
+    <div *ngIf="tip == 'agent'">
+      <label for="agencija" id="agencijaLabel" style="font-size: 1.8rem"
+        >Izaberite agenciju</label
+      >
+      <select
+        name="lokacija"
+        class="input box"
+        required
+        [(ngModel)]="selectedAgency"
+      >
+        <option value="undefined" disabled>Izaberite agenciju</option>
+        <option *ngFor="let a of agencije" value="{{ a.naziv }}">
+          {{ a.naziv }}
+        </option>
+      </select>
+    </div>
+
     <input
       type="number"
       name="licenca"
       id="licenca"
       placeholder="Broj licence"
       class="box"
-      style="display: none;"
-    >
+      style="display: none"
+    />
 
     <label for="profile-picture" style="font-size: 1.8rem"
       >Dodaj profilnu sliku:</label
@@ -56,9 +108,6 @@
       accept="image/jpg, image/png"
     />
 
-    
-
-
     <p align="left">
       <i class="fas fa-circle-exclamation"></i>
       Lozinka mora da ima minimalno 8 karaktera, i to: <br />
@@ -69,6 +118,12 @@
     </p>
 
     <p>Već imaš nalog? <a routerLink="/login">Prijavi se</a></p>
-    <input type="submit" value="Registruj se" name="submit" class="btn" (click)="register()"/>
+    <input
+      type="submit"
+      value="Registruj se"
+      name="submit"
+      class="btn"
+      (click)="register()"
+    />
   </form>
 </section>

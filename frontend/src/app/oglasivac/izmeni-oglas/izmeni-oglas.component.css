@@ -65,3 +65,29 @@ p {
 .tall {
   min-height: 150px;
 }
+.preview {
+  display: flex;
+}
+.imgs {
+  display: flex;
+  flex-direction: column;
+}
+.imgs img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  padding: 5px 0;
+}
+.names div {
+  height: 50px;
+  padding: 5px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.names button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}

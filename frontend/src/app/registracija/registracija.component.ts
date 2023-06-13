@@ -3,6 +3,8 @@ import { User } from '../models/User';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { SharedCurrUserService } from '../services/shared-curr-user.service';
+import { Agencije } from '../models/Agencije';
+import { AgencijeService } from '../services/agencije.service';
 
 @Component({
   selector: 'app-registracija',
@@ -13,11 +15,16 @@ export class RegistracijaComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private sharedCurrUserService: SharedCurrUserService
+    private sharedCurrUserService: SharedCurrUserService,
+    private agencijeService: AgencijeService
   ) {}
 
   ngOnInit(): void {
+    /* this.getAgencije();
     const tipSelect = document.getElementById('tip') as HTMLSelectElement;
+    const agencijaLabel = document.getElementById(
+      'agencijaLabel'
+    ) as HTMLLabelElement;
     const agencijaSelect = document.getElementById(
       'agencija'
     ) as HTMLSelectElement;
@@ -27,14 +34,29 @@ export class RegistracijaComponent implements OnInit {
 
     function showHideFields() {
       if (tipSelect.value === 'agent') {
+        agencijaLabel.style.display = 'inline-block';
         agencijaSelect.style.display = 'inline-block';
         licencaInput.style.display = 'inline-block';
       } else {
+        agencijaLabel.style.display = 'none';
         agencijaSelect.style.display = 'none';
         licencaInput.style.display = 'none';
       }
-    }
+    } */
+
+    // hvatamo iz baze agencije i smestamo ih u niz agencije[]
+    this.agencijeService.getAgencije().then((res) => {
+      this.agencije = JSON.parse(JSON.stringify(res));
+    });
   }
+
+  /*  async getAgencije() {
+    try {
+      this.agencije = await this.agencijeService.getAgencije().toPromise();
+    } catch (error) {
+      console.error('Error retrieving agencije', error);
+    }
+  } */
 
   ime!: string;
   prezime!: string;
@@ -45,7 +67,10 @@ export class RegistracijaComponent implements OnInit {
   kor_ime!: string;
   lozinka!: string;
   tip!: string;
-
+  agencija: string | null = null;
+  naziv!: string;
+  agencije!: Agencije[];
+  selectedAgency!: string;
 
   register() {
     let user = new User();
@@ -80,10 +105,5 @@ export class RegistracijaComponent implements OnInit {
       //oglasivac
       this.router.navigate(['/moji-oglasi']);
     }
-
-    
   }
-
-  
-  
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Listing } from 'src/app/models/Listing';
+import { Listing, Slika } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
@@ -22,6 +22,7 @@ export class IzmeniOglasComponent implements OnInit {
 
         this.id = this.listing._id;
         this.oglasivac = this.listing.oglasivac;
+        this.tipOglasivaca = this.listing.tipOglasivaca;
         this.lokacija = this.listing.lokacija;
         this.ulica = this.listing.ulica;
         this.nazivOglasa = this.listing.nazivOglasa;
@@ -29,12 +30,13 @@ export class IzmeniOglasComponent implements OnInit {
         this.cena = this.listing.cena;
         this.kvadratura = this.listing.kvadratura;
         this.kvadratura = this.listing.cena;
-        this.brojSoba = this.listing.brojSoba;
+        this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
+
         this.godinaIzgradnje = this.listing.godinaIzgradnje;
         this.stanjeNekretnine = this.listing.stanjeNekretnine;
         this.tipGrejanja = this.listing.tipGrejanja;
-        this.sprat = this.listing.sprat;
-        this.ukupnaSpratnost = this.listing.ukupnaSpratnost;
+        this.sprat = this.spratToString(this.listing.sprat);
+        this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
         this.mesecneRezije = this.listing.mesecneRezije;
         if (this.listing.opis == 'nema opisa') {
           this.opis = '';
@@ -50,10 +52,14 @@ export class IzmeniOglasComponent implements OnInit {
             l.checked = true;
           }
         }
+        this.slikeString64 = this.listing.slike.map((obj) => {
+          return { name: obj.name, source: obj.source };
+        });
       });
   }
   listing!: Listing;
   oglasivac!: string;
+  tipOglasivaca!: string;
   id!: string;
   lokacija!: string;
   ulica!: string;
@@ -62,13 +68,15 @@ export class IzmeniOglasComponent implements OnInit {
   cena!: number;
   kvadratura!: number;
   brojSoba!: string;
-  godinaIzgradnje!: string;
+  godinaIzgradnje!: number;
   stanjeNekretnine!: string;
   tipGrejanja!: string;
   sprat!: string;
   ukupnaSpratnost!: string;
   mesecneRezije!: number;
   opis!: string;
+  odabraneSlike: File[] = [];
+  slikeString64: Slika[] = [];
 
   lokacijaIzbor: string[] = [
     'Barajevo',
@@ -109,63 +117,12 @@ export class IzmeniOglasComponent implements OnInit {
     '5.5',
     '5+',
   ];
-  godinaIzgradnjeIzbor: string[] = [
-    '1970',
-    '1971',
-    '1972',
-    '1973',
-    '1974',
-    '1975',
-    '1976',
-    '1977',
-    '1978',
-    '1979',
-    '1980',
-    '1981',
-    '1982',
-    '1983',
-    '1984',
-    '1985',
-    '1986',
-    '1987',
-    '1988',
-    '1989',
-    '1990',
-    '1991',
-    '1992',
-    '1993',
-    '1994',
-    '1995',
-    '1996',
-    '1997',
-    '1998',
-    '1999',
-    '2000',
-    '2001',
-    '2002',
-    '2003',
-    '2004',
-    '2005',
-    '2006',
-    '2007',
-    '2008',
-    '2009',
-    '2010',
-    '2011',
-    '2012',
-    '2013',
-    '2014',
-    '2015',
-    '2016',
-    '2017',
-    '2018',
-    '2019',
-    '2020',
-    '2021',
-    '2022',
-    '2023',
-    '2024',
-    '2025',
+  godinaIzgradnjeIzbor: number[] = [
+    1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981,
+    1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993,
+    1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+    2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+    2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
   ];
   stanjeNekretnineIzbor: string[] = ['Izvorno', 'Renovirano', 'LUX'];
   tipGrejanjaIzbor: string[] = [
@@ -211,7 +168,7 @@ export class IzmeniOglasComponent implements OnInit {
     '29',
     '30',
     '30+',
-    'Poktrovlje',
+    'Potkrovlje',
   ];
   ukupnaSpratnostIzbor: string[] = [
     '1',
@@ -259,7 +216,7 @@ export class IzmeniOglasComponent implements OnInit {
   tipGrejanjaGreska: boolean = false;
   spratGreska: boolean = false;
   mesecneRezijeGreska: boolean = false;
-
+  slikeGreska: boolean = false;
   sveKarakteristike: any[] = [
     { name: 'Terasa', checked: false },
     { name: 'Podrum', checked: false },
@@ -273,6 +230,7 @@ export class IzmeniOglasComponent implements OnInit {
     { name: 'Lift', checked: false },
     { name: 'Klima', checked: false },
   ];
+  //pamtimo odabrane karakteristike
   osveziOdabraneKarakteristike($event: any) {
     const name = $event.target.value;
     const isChecked = $event.target.checked;
@@ -307,6 +265,7 @@ export class IzmeniOglasComponent implements OnInit {
     { name: '19', checked: false },
     { name: '20', checked: false },
   ];
+  //pamtimo odabrane linije
   osveziOdabraneLinije($event: any) {
     const name = $event.target.value;
     const isChecked = $event.target.checked;
@@ -319,11 +278,67 @@ export class IzmeniOglasComponent implements OnInit {
     });
   }
 
+  //broj soba iz stringa u number
+  brojSobaToNum(brojSoba: string) {
+    if (brojSoba == '5+') return 6;
+    else return parseFloat(brojSoba);
+  }
+  //broj soba iz number u string
+  brojSobaToString(brojSoba: number) {
+    if (brojSoba == 6) return '5+';
+    else return brojSoba.toString();
+  }
+  // sprat iz string u number
+  spratToNum(sprat: string) {
+    if (sprat == 'Podrum') return -2;
+    if (sprat == 'Suteren') return -1;
+    if (sprat == 'Prizemlje') return 0;
+    if (sprat == '30+') return 31;
+    if (sprat == 'Potkrovlje') return 32;
+    else return parseInt(sprat);
+  }
+  // sprat is number u string
+  spratToString(sprat: number) {
+    if (sprat == -2) return 'Podrum';
+    if (sprat == -1) return 'Suteren';
+    if (sprat == 0) return 'Prizemlje';
+    if (sprat == 31) return '30+';
+    if (sprat == 32) return 'Potkrovlje';
+    else return sprat.toString();
+  }
+  handleFileInput(event: any) {
+    const files: FileList = event.target.files;
+    /* if (this.slike.length + files.length > 5) {
+      // Display an error message or take any appropriate action
+      alert('Maximum number of pictures exceeded');
+      return;
+    } */
+
+    for (let i = 0; i < files.length; i++) {
+      let file: File = files[i];
+      const reader: FileReader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String: string = reader.result as string;
+        this.slikeString64.push({ name: file.name, source: base64String });
+      };
+      this.odabraneSlike.push(file);
+      reader.readAsDataURL(file);
+    }
+  }
+  deselectFile(imeSlike: string) {
+    this.odabraneSlike = this.odabraneSlike.filter((f) => f.name !== imeSlike);
+    this.slikeString64 = this.slikeString64.filter(
+      (img) => img.name !== imeSlike
+    );
+    console.log(this.odabraneSlike);
+  }
   izmeni() {
     let inputGreska = 0;
     let listing = new Listing();
 
     listing.oglasivac = this.oglasivac;
+    listing.tipOglasivaca = this.tipOglasivaca;
     // lokacija
     if (
       this.lokacija == undefined ||
@@ -394,7 +409,7 @@ export class IzmeniOglasComponent implements OnInit {
       this.brojSobaGreska = true;
     } else {
       this.brojSobaGreska = false;
-      listing.brojSoba = this.brojSoba;
+      listing.brojSoba = this.brojSobaToNum(this.brojSoba);
     }
     //  godina izgradnje
     if (this.godinaIzgradnje == undefined || this.godinaIzgradnje == null) {
@@ -439,8 +454,8 @@ export class IzmeniOglasComponent implements OnInit {
       this.spratGreska = true;
     } else {
       this.spratGreska = false;
-      listing.sprat = this.sprat;
-      listing.ukupnaSpratnost = this.ukupnaSpratnost;
+      listing.sprat = this.spratToNum(this.sprat);
+      listing.ukupnaSpratnost = this.spratToNum(this.ukupnaSpratnost);
     }
     // mesecne rezije
     if (this.mesecneRezije == undefined || this.mesecneRezije == null) {
@@ -463,11 +478,20 @@ export class IzmeniOglasComponent implements OnInit {
 
     listing.linije = this.sveLinije.filter((l) => l.checked).map((l) => l.name);
 
-    if (inputGreska == 0) {
-      this.listingService.updateListing(listing, this.id);
-      alert('Oglas uspesno izmenjen');
+    if (this.slikeString64.length < 3 || this.slikeString64.length > 6) {
+      inputGreska = 1;
+      this.slikeGreska = true;
+    } else {
+      this.slikeGreska = false;
+      listing.slike = this.slikeString64;
+    }
 
-      this.router.navigate(['/moji-oglasi']);
+    if (inputGreska == 0) {
+      this.listingService.updateListing(listing, this.id).then((res) => {
+        alert('Oglas uspesno izmenjen');
+
+        this.router.navigate(['/moji-oglasi']);
+      });
     }
   }
 }

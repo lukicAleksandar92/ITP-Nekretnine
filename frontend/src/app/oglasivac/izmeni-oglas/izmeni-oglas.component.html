@@ -260,8 +260,36 @@
       </div>
       <!-- Slike -->
       <div class="box">
-        <p>Slike</p>
-        <input type="file" class="input tall" />
+        <p>
+          Slike
+          <span *ngIf="slikeGreska" class="greska"
+            >Morate uneti bar tri slike</span
+          >
+        </p>
+        <div class="input tall">
+          <input
+            type="file"
+            #fileInput
+            (change)="handleFileInput($event)"
+            style="color: transparent; border: none"
+            multiple
+          />
+          <div class="preview">
+            <div class="imgs">
+              <img
+                [src]="slika.source"
+                alt=""
+                *ngFor="let slika of slikeString64"
+              />
+            </div>
+            <div class="names">
+              <div *ngFor="let slika of slikeString64">
+                {{ slika.name }}
+                <button (click)="deselectFile(slika.name)">X</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <input

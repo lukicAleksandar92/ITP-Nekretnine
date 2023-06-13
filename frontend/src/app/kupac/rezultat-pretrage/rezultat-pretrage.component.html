@@ -1,12 +1,22 @@
 <app-kupac-header></app-kupac-header>
-
 <section class="listings2">
   <h1 class="heading">Rezultat pretrage</h1>
-
   <div class="box-container">
-    <div *ngFor="let listing of allListings" class="box">
+    <!-- uspisujemo svaki oglas iz liste svih dovucenih ogalsa -->
+    <div *ngFor="let listing of allListings" class="box result">
       <div class="thumb">
-        <img src="assets/images/house-img-2.jpg" alt="" />
+        <!-- slika iz oglasa -->
+        <img
+          [src]="listing.slike[0].source"
+          alt=""
+          *ngIf="listing.slike.length > 0"
+        />
+        <!-- slika ako oglas nema slika -->
+        <img
+          src="assets/images/house-img-2.jpg"
+          *ngIf="listing.slike.length == 0"
+          alt=""
+        />
       </div>
 
       <div class="atributiRezultatPretrage">
@@ -29,24 +39,23 @@
         <!-- spratnost -->
         <p class="location">
           <i class="fas fa-building"></i>Sprat:
-          <span> {{ listing.sprat }} </span>
+          <span> {{ spratToString(listing.sprat) }} </span>
         </p>
         <!-- prosecna cena !!! treba da se poveze !!! -->
         <p class="location">
           <i class="fas fa-circle-question"></i>Prosečna cena po m²:<span
           > </span>
         </p>
-        <div class="flex">
-          <p class="location">
-            <i class="fas fa-euro-sign"></i
-            ><b
-              >Cena: <span> {{ listing.cena }} </span></b
-            >
-          </p>
-        </div>
+
+        <p class="location">
+          <i class="fas fa-euro-sign"></i
+          ><b
+            >Cena: <span> {{ listing.cena }} </span></b
+          >
+        </p>
       </div>
 
-      <div class="opisRezultatPretrage">
+      <div class="opis">
         <p class="location">
           {{ listing.opis }}
         </p>
@@ -56,5 +65,8 @@
         >Pogledaj oglas</a
       >
     </div>
+    <p class="err" *ngIf="allListings.length == 0">
+      Nema oglasa koji zadovoljavaju vaše kriterijume
+    </p>
   </div>
 </section>

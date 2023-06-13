@@ -8,6 +8,6 @@ export class User{
     kor_ime: string = '';
     lozinka: string = '';
     tip: string = '';
-    
+    agencija: string | null = null
 }
 
