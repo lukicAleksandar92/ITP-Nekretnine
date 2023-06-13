@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Filter, Listing } from 'src/app/models/Listing';
+import { AverageValue, Filter, Listing } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
@@ -59,8 +59,20 @@ export class RezultatPretrageComponent implements OnInit {
     // nakon ucitavanja filtera pravimo pretragu baze pomocu njega
     this.listingService.searchListings(this.filter).then((res) => {
       this.allListings = JSON.parse(JSON.stringify(res));
+
+      // trazimo niz srednjih vrednosti grupisanih po lokaciji i tipu nekretnine
+      this.listingService.getAverageValues().then((res) => {
+        // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
+        this.avgValues = JSON.parse(JSON.stringify(res));
+      //  this.srednjaVrednost = this.avgValuesToNumber(this.avgValues, this.listing.lokacija, this.listing.tipNekretnine);
+      });
     });
   }
+
+  avgValues: AverageValue[] = [];
+  avgValue!: AverageValue;
+  srednjaVrednost!: number;
+
   allListings: Listing[] = [];
   filter = new Filter();
   // pretvara sprat iz number u string(za prikaz na stranici 0 -> podruim, itd...)
@@ -84,5 +96,15 @@ export class RezultatPretrageComponent implements OnInit {
     if (sprat == '30+') return 31;
     if (sprat == 'Potkrovlje') return 32;
     else return parseInt(sprat);
+  }
+  // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine 
+  avgValuesToNumber(avgValues: AverageValue[], lokacija: string, tipNekretnine:string):number {
+    let rezultat:number = 0;
+    for (let avgValue of avgValues) {
+      if (avgValue._id.lokacija == lokacija && avgValue._id.tip == tipNekretnine) {
+        rezultat = Math.round(avgValue.srednjaVrednost); 
+      }
+    }
+    return rezultat;
   }
 }

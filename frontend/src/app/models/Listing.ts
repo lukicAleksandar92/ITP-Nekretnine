@@ -48,3 +48,13 @@ export class Filter {
   mesecneRezijeOd: number | undefined = undefined;
   mesecneRezijeDo: number | undefined = undefined;
 }
+
+export class AverageValue {
+  _id!: AverageValueId;
+  srednjaVrednost!: number;
+}
+
+export class AverageValueId{
+  lokacija!: string;
+  tip!: string;
+}

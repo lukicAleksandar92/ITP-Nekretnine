@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { listingSchema } from "./ListingSchema";
-import { Listing, SearchCriteria } from "./Listing";
+import { AverageValue, Listing, SearchCriteria } from "./Listing";
 
 class ListingDAO {
   private listingModel = mongoose.model("listing", listingSchema, "oglasi");
@@ -15,11 +15,13 @@ class ListingDAO {
   async getListingById(id: string): Promise<Listing | null> {
     return this.listingModel.findById(id);
   }
-  async getAverageValue(location: string): Promise<any | null> {
+  async getAverageValues(): Promise<AverageValue[] | null> {
     return this.listingModel.aggregate([
-       { $match: {lokacija: location} },
        { $group: {
-            _id: "$lokacija",
+            _id: {
+              lokacija: "$lokacija",
+              tip: "$tipNekretnine"
+            },
             srednjaVrednost: 
               { $avg: { $divide: ["$cena", "$kvadratura" ] } } 
           }
