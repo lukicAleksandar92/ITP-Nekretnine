@@ -38,14 +38,15 @@ class ListingDAO {
     getAverageValues() {
         return __awaiter(this, void 0, void 0, function* () {
             return this.listingModel.aggregate([
-                { $group: {
+                {
+                    $group: {
                         _id: {
                             lokacija: "$lokacija",
-                            tip: "$tipNekretnine"
+                            tip: "$tipNekretnine",
                         },
-                        srednjaVrednost: { $avg: { $divide: ["$cena", "$kvadratura"] } }
-                    }
-                }
+                        srednjaVrednost: { $avg: { $divide: ["$cena", "$kvadratura"] } },
+                    },
+                },
             ]);
         });
     }
@@ -189,6 +190,14 @@ class ListingDAO {
             else if (filter.mesecneRezijeDo !== undefined) {
                 query.mesecneRezije = { $lte: filter.mesecneRezijeDo };
             }
+            const filteredResults = this.listingModel.find(query);
+            return filteredResults;
+        });
+    }
+    getFavoriteListings(listings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = {};
+            query._id = { $in: listings };
             const filteredResults = this.listingModel.find(query);
             return filteredResults;
         });

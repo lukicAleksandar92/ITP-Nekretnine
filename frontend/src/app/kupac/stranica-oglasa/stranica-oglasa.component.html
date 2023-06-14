@@ -64,7 +64,9 @@
           </div>
         </div>
         <div class="btn-wrapper">
-          <button class="btn">Dodaj u omiljene</button>
+          <button class="btn" (click)="dodajUOmiljeno(listing._id)">
+            Dodaj u omiljene
+          </button>
         </div>
       </div>
       <div class="info">
@@ -91,7 +93,9 @@
           </div>
         </div>
         <!-- informacije o oglasivacu -->
-        <div class="box"><b> Prosečna cena na lokaciji:</b> {{ srednjaVrednost }} </div>
+        <div class="box">
+          <b> Prosečna cena na lokaciji:</b> {{ srednjaVrednost }}
+        </div>
         <div class="box oglasivac">
           <p><b>Oglašivač:</b> {{ listing.oglasivac }}</p>
         </div>

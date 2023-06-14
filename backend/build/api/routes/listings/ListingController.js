@@ -67,6 +67,14 @@ let ListingController = class ListingController extends tsoa_1.Controller {
             return result;
         });
     }
+    getFavoriteListing(listings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield ListingDAO_1.listingDAO.getFavoriteListings(listings);
+            if (result == null)
+                this.setStatus(404);
+            return result;
+        });
+    }
 };
 __decorate([
     (0, tsoa_1.Post)("insert"),
@@ -95,6 +103,10 @@ __decorate([
     (0, tsoa_1.Post)("search"),
     __param(0, (0, tsoa_1.Body)())
 ], ListingController.prototype, "searchListings", null);
+__decorate([
+    (0, tsoa_1.Post)("getFavoriteListings"),
+    __param(0, (0, tsoa_1.Body)())
+], ListingController.prototype, "getFavoriteListing", null);
 ListingController = __decorate([
     (0, tsoa_1.Route)("listings")
 ], ListingController);

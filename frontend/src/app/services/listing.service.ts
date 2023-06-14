@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Listing } from '../models/Listing';
+import { Filter, Listing } from '../models/Listing';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -36,9 +36,14 @@ export class ListingService {
       this.http.put(`${this.back}/listings/sell/${id}`, {})
     );
   }
-  searchListings(filter: any) {
+  searchListings(filter: Filter) {
     return firstValueFrom(
       this.http.post(`${this.back}/listings/search`, filter)
+    );
+  }
+  getFavoriteListings(listings: string[]) {
+    return firstValueFrom(
+      this.http.post(`${this.back}/listings/getFavoriteListings`, listings)
     );
   }
 }

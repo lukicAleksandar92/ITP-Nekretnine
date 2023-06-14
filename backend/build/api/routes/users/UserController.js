@@ -52,6 +52,14 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    updateListing(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield UserDAO_1.userDAO.updateFavoriteListing(user);
+            if (result == null)
+                this.setStatus(404);
+            return result;
+        });
+    }
 };
 __decorate([
     (0, tsoa_1.Post)("login"),
@@ -69,6 +77,10 @@ __decorate([
     (0, tsoa_1.Get)("fetchUser/:kor_ime"),
     __param(0, (0, tsoa_1.Path)())
 ], UserController.prototype, "getUserByKorIme", null);
+__decorate([
+    (0, tsoa_1.Put)("updateFavoriteListing"),
+    __param(0, (0, tsoa_1.Body)())
+], UserController.prototype, "updateListing", null);
 UserController = __decorate([
     (0, tsoa_1.Route)("users")
 ], UserController);

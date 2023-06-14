@@ -5,7 +5,16 @@
   <!-- u ng if ide prikaz svih oglasa oglasivaca -->
   <div *ngFor="let listing of allListings" class="box">
     <div class="thumb">
-      <img src="./assets/house-img-2.webp" alt="" />
+      <img
+        [src]="listing.slike[0].source"
+        alt=""
+        *ngIf="listing.slike.length > 0"
+      />
+      <img
+        src="assets/images/house-img-2.jpg"
+        *ngIf="listing.slike.length == 0"
+        alt=""
+      />
     </div>
     <div class="info">
       <h3 class="name">{{ listing.nazivOglasa }}</h3>
@@ -22,8 +31,8 @@
       <a routerLink="/stranica-oglasa/{{ listing._id }}" class="btn"
         >Vidi oglas</a
       >
-      <a class="btn"
-        >Ukloni iz omiljenih  <fa-icon [icon]="heartMinus"></fa-icon
+      <a class="btn" (click)="ukloniIzOmiljenih(listing._id)"
+        >Ukloni iz omiljenih <fa-icon [icon]="heartMinus"></fa-icon
       ></a>
     </div>
   </div>

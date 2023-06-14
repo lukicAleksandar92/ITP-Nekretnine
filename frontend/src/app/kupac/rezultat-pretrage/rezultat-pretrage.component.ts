@@ -57,10 +57,6 @@ export class RezultatPretrageComponent implements OnInit {
         this.filter.mesecneRezijeOd = parseFloat(params['mesecneRezijeOd']);
       if (params['mesecneRezijeDo'] != undefined)
         this.filter.mesecneRezijeDo = parseFloat(params['mesecneRezijeDo']);
-      this.userService.parseLoggedUser()?.then((res) => {
-        this.user = JSON.parse(JSON.stringify(res));
-        console.log(this.user);
-      });
     });
 
     // nakon ucitavanja filtera pravimo pretragu baze pomocu njega

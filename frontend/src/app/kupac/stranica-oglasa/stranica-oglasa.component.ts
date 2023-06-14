@@ -10,7 +10,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from 'src/app/login/login.component';
 import { AverageValue, Listing } from 'src/app/models/Listing';
+import { User } from 'src/app/models/User';
 import { ListingService } from 'src/app/services/listing.service';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-stranica-oglasa',
   templateUrl: './stranica-oglasa.component.html',
@@ -19,7 +21,8 @@ import { ListingService } from 'src/app/services/listing.service';
 export class StranicaOglasaComponent implements OnInit {
   constructor(
     private listingService: ListingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {}
   ngOnInit(): void {
     // ucitavamo id oglasa koji prikazujemo
@@ -38,13 +41,20 @@ export class StranicaOglasaComponent implements OnInit {
         this.listingService.getAverageValues().then((res) => {
           // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
           this.avgValues = JSON.parse(JSON.stringify(res));
-          this.srednjaVrednost = this.avgValuesToNumber(this.avgValues, this.listing.lokacija, this.listing.tipNekretnine);
+          this.srednjaVrednost = this.avgValuesToNumber(
+            this.avgValues,
+            this.listing.lokacija,
+            this.listing.tipNekretnine
+          );
         });
       });
-      
+      //ucitavamo podatke ulogovanog korisnika
+      this.userService.parseLoggedUser()?.then((res) => {
+        this.user = JSON.parse(JSON.stringify(res));
+      });
     }
   }
-
+  user = new User();
   avgValues: AverageValue[] = [];
   avgValue!: AverageValue;
   srednjaVrednost!: number;
@@ -128,14 +138,38 @@ export class StranicaOglasaComponent implements OnInit {
       (this.currentIndex - 1 + this.listing.slike.length) %
       this.listing.slike.length;
   }
-  // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine 
-  avgValuesToNumber(avgValues: AverageValue[], lokacija: string, tipNekretnine:string):number {
-    let rezultat:number = 0;
+  // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine
+  avgValuesToNumber(
+    avgValues: AverageValue[],
+    lokacija: string,
+    tipNekretnine: string
+  ): number {
+    let rezultat: number = 0;
     for (let avgValue of avgValues) {
-      if (avgValue._id.lokacija == lokacija && avgValue._id.tip == tipNekretnine) {
-        rezultat = Math.round(avgValue.srednjaVrednost); 
+      if (
+        avgValue._id.lokacija == lokacija &&
+        avgValue._id.tip == tipNekretnine
+      ) {
+        rezultat = Math.round(avgValue.srednjaVrednost);
       }
     }
     return rezultat;
+  }
+  dodajUOmiljeno(id: string) {
+    if (this.user.omiljeniOglasi.includes(id)) {
+      alert('Ovaj glas vam je već u omiljenim oglasima!');
+      return;
+    }
+    if (this.user.omiljeniOglasi.length > 5) {
+      alert('Ne možete imati više od 5 omiljenih oglasa');
+      return;
+    } else {
+      this.user.omiljeniOglasi.push(id);
+      this.userService.updateFavoriteListing({
+        kor_ime: this.user.kor_ime,
+        omiljeniOglasi: this.user.omiljeniOglasi,
+      });
+      alert('Dodato!');
+    }
   }
 }

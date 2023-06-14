@@ -8,9 +8,16 @@ export class User {
   kor_ime: string = '';
   lozinka: string = '';
   tip: string = '';
+  agencija: string | undefined = undefined;
+  omiljeniOglasi: string[] = [];
 }
 
 export interface LoggedUser {
   kor_ime: string;
   tip: string;
+}
+
+export interface UserFavoriteListing {
+  kor_ime: string;
+  omiljeniOglasi: string[];
 }

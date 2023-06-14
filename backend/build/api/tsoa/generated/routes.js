@@ -146,6 +146,17 @@ const models = {
             "kor_ime": { "dataType": "string", "required": true },
             "lozinka": { "dataType": "string", "required": true },
             "tip": { "dataType": "string", "required": true },
+            "agencija": { "dataType": "union", "subSchemas": [{ "dataType": "string" }, { "dataType": "undefined" }], "required": true },
+            "omiljeniOglasi": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserFavoriteListing": {
+        "dataType": "refObject",
+        "properties": {
+            "kor_ime": { "dataType": "string", "required": true },
+            "omiljeniOglasi": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
         },
         "additionalProperties": false,
     },
@@ -304,6 +315,23 @@ function RegisterRoutes(app) {
         }
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/listings/getFavoriteListings', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.getFavoriteListing)), function ListingController_getFavoriteListing(request, response, next) {
+        const args = {
+            listings: { "in": "body", "name": "listings", "required": true, "dataType": "array", "array": { "dataType": "string" } },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new ListingController_1.ListingController();
+            const promise = controller.getFavoriteListing.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     app.post('/users/login', ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController)), ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController.prototype.login)), function UserController_login(request, response, next) {
         const args = {
             user: { "in": "body", "name": "user", "required": true, "ref": "User" },
@@ -365,6 +393,23 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new UserController_1.UserController();
             const promise = controller.getUserByKorIme.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/users/updateFavoriteListing', ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController)), ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController.prototype.updateListing)), function UserController_updateListing(request, response, next) {
+        const args = {
+            user: { "in": "body", "name": "user", "required": true, "ref": "UserFavoriteListing" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new UserController_1.UserController();
+            const promise = controller.updateListing.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

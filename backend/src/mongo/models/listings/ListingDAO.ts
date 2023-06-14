@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { listingSchema } from "./ListingSchema";
 import { AverageValue, Listing, SearchCriteria } from "./Listing";
+import { query } from "express";
 
 class ListingDAO {
   private listingModel = mongoose.model("listing", listingSchema, "oglasi");
@@ -17,15 +18,15 @@ class ListingDAO {
   }
   async getAverageValues(): Promise<AverageValue[] | null> {
     return this.listingModel.aggregate([
-       { $group: {
-            _id: {
-              lokacija: "$lokacija",
-              tip: "$tipNekretnine"
-            },
-            srednjaVrednost: 
-              { $avg: { $divide: ["$cena", "$kvadratura" ] } } 
-          }
-        }
+      {
+        $group: {
+          _id: {
+            lokacija: "$lokacija",
+            tip: "$tipNekretnine",
+          },
+          srednjaVrednost: { $avg: { $divide: ["$cena", "$kvadratura"] } },
+        },
+      },
     ]);
   }
   async updateListing(listing: Listing, id: string) {
@@ -170,6 +171,13 @@ class ListingDAO {
       query.mesecneRezije = { $lte: filter.mesecneRezijeDo };
     }
 
+    const filteredResults = this.listingModel.find(query);
+    return filteredResults;
+  }
+  async getFavoriteListings(listings: string[]) {
+    const query: any = {};
+
+    query._id = { $in: listings };
     const filteredResults = this.listingModel.find(query);
     return filteredResults;
   }

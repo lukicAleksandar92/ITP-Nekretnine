@@ -21,7 +21,10 @@ class UserDAO {
     }
     login(korisnicko_ime, lozinka) {
         return __awaiter(this, void 0, void 0, function* () {
-            let user = yield this.userModel.findOne({ kor_ime: korisnicko_ime, lozinka: lozinka });
+            let user = yield this.userModel.findOne({
+                kor_ime: korisnicko_ime,
+                lozinka: lozinka,
+            });
             if (user != null) {
                 this.logUserLogin(user.kor_ime);
             }
@@ -30,12 +33,12 @@ class UserDAO {
     }
     logUserLogin(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userModel.updateOne({ "kor_ime": kor_ime }, { $push: { "logins": new Date() } });
+            return yield this.userModel.updateOne({ kor_ime: kor_ime }, { $push: { logins: new Date() } });
         });
     }
     getUserByKorIme(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.userModel.findOne({ "kor_ime": kor_ime });
+            return this.userModel.findOne({ kor_ime: kor_ime });
         });
     }
     insertUser(user) {
@@ -52,9 +55,21 @@ class UserDAO {
         return __awaiter(this, void 0, void 0, function* () {
             let userInDB = yield this.getUserByKorIme(user.kor_ime);
             if (userInDB != null) {
-                return this.userModel.updateOne({ "kor_ime": user.kor_ime }, { $set: { "ime": user.ime, "prezime": user.prezime } });
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { ime: user.ime, prezime: user.prezime } });
             }
-            return 'Korisnik ne psotoji';
+            return "Korisnik ne psotoji";
+        });
+    }
+    updateFavoriteListing(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let activeUser = yield this.getUserByKorIme(user.kor_ime);
+            if (activeUser != null) {
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, {
+                    $set: {
+                        omiljeniOglasi: user.omiljeniOglasi,
+                    },
+                });
+            }
         });
     }
 }

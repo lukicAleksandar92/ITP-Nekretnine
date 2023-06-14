@@ -29,7 +29,7 @@ export class IzmeniOglasComponent implements OnInit {
         this.tipNekretnine = this.listing.tipNekretnine;
         this.cena = this.listing.cena;
         this.kvadratura = this.listing.kvadratura;
-        this.kvadratura = this.listing.cena;
+
         this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
 
         this.godinaIzgradnje = this.listing.godinaIzgradnje;

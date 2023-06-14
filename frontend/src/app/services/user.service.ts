@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
-import { User } from '../models/User';
+import { first, firstValueFrom } from 'rxjs';
+import { User, UserFavoriteListing } from '../models/User';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,13 @@ export class UserService {
     if (!userJson) return null;
     else {
       const user = JSON.parse(userJson + '');
+
       return this.getUserByKorIme(user.kor_ime);
     }
+  }
+  updateFavoriteListing(user: UserFavoriteListing) {
+    return firstValueFrom(
+      this.http.put(`${this.back}/users/updateFavoriteListing`, user)
+    );
   }
 }

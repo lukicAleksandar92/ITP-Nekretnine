@@ -43,4 +43,10 @@ export class ListingController extends Controller {
     if (result == null) this.setStatus(404);
     return result;
   }
+  @Post("getFavoriteListings")
+  async getFavoriteListing(@Body() listings: string[]) {
+    let result = await listingDAO.getFavoriteListings(listings);
+    if (result == null) this.setStatus(404);
+    return result;
+  }
 }
