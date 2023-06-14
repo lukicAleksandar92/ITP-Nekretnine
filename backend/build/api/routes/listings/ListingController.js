@@ -38,6 +38,11 @@ let ListingController = class ListingController extends tsoa_1.Controller {
             return ListingDAO_1.listingDAO.getListingById(id);
         });
     }
+    getAverageValues() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield ListingDAO_1.listingDAO.getAverageValues();
+        });
+    }
     updateListing(listing, id) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield ListingDAO_1.listingDAO.updateListing(listing, id);
@@ -74,6 +79,9 @@ __decorate([
     (0, tsoa_1.Get)("getOne/:id"),
     __param(0, (0, tsoa_1.Path)())
 ], ListingController.prototype, "getListingById", null);
+__decorate([
+    (0, tsoa_1.Get)("getAverageValues")
+], ListingController.prototype, "getAverageValues", null);
 __decorate([
     (0, tsoa_1.Put)("update/:id"),
     __param(0, (0, tsoa_1.Body)()),

@@ -80,6 +80,24 @@ const models = {
         "type": { "dataType": "string", "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AverageValueId": {
+        "dataType": "refObject",
+        "properties": {
+            "lokacija": { "dataType": "string", "required": true },
+            "tip": { "dataType": "string", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AverageValue": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": { "ref": "AverageValueId", "required": true },
+            "srednjaVrednost": { "dataType": "double", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UpdateResult": {
         "dataType": "refObject",
         "properties": {
@@ -212,6 +230,21 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new ListingController_1.ListingController();
             const promise = controller.getListingById.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/listings/getAverageValues', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.getAverageValues)), function ListingController_getAverageValues(request, response, next) {
+        const args = {};
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new ListingController_1.ListingController();
+            const promise = controller.getAverageValues.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

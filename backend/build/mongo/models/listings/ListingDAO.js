@@ -35,6 +35,20 @@ class ListingDAO {
             return this.listingModel.findById(id);
         });
     }
+    getAverageValues() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.listingModel.aggregate([
+                { $group: {
+                        _id: {
+                            lokacija: "$lokacija",
+                            tip: "$tipNekretnine"
+                        },
+                        srednjaVrednost: { $avg: { $divide: ["$cena", "$kvadratura"] } }
+                    }
+                }
+            ]);
+        });
+    }
     updateListing(listing, id) {
         return __awaiter(this, void 0, void 0, function* () {
             let activeListing = this.getListingById(id);
