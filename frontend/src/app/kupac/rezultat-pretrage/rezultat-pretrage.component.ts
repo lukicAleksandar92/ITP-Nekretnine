@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AverageValue, Filter, Listing } from 'src/app/models/Listing';
+import { User } from 'src/app/models/User';
 import { ListingService } from 'src/app/services/listing.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-rezultat-pretrage',
@@ -13,7 +15,8 @@ export class RezultatPretrageComponent implements OnInit {
   constructor(
     private listingService: ListingService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
   ngOnInit(): void {
     // ucitavamo uslove pretrage koje smo dobiliod prethodne strane
@@ -54,6 +57,10 @@ export class RezultatPretrageComponent implements OnInit {
         this.filter.mesecneRezijeOd = parseFloat(params['mesecneRezijeOd']);
       if (params['mesecneRezijeDo'] != undefined)
         this.filter.mesecneRezijeDo = parseFloat(params['mesecneRezijeDo']);
+      this.userService.parseLoggedUser()?.then((res) => {
+        this.user = JSON.parse(JSON.stringify(res));
+        console.log(this.user);
+      });
     });
 
     // nakon ucitavanja filtera pravimo pretragu baze pomocu njega
@@ -64,7 +71,7 @@ export class RezultatPretrageComponent implements OnInit {
       this.listingService.getAverageValues().then((res) => {
         // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
         this.avgValues = JSON.parse(JSON.stringify(res));
-      //  this.srednjaVrednost = this.avgValuesToNumber(this.avgValues, this.listing.lokacija, this.listing.tipNekretnine);
+        //  this.srednjaVrednost = this.avgValuesToNumber(this.avgValues, this.listing.lokacija, this.listing.tipNekretnine);
       });
     });
   }
@@ -75,6 +82,9 @@ export class RezultatPretrageComponent implements OnInit {
 
   allListings: Listing[] = [];
   filter = new Filter();
+
+  kor_ime!: string;
+  user: User = new User();
   // pretvara sprat iz number u string(za prikaz na stranici 0 -> podruim, itd...)
   spratToString(sprat: number) {
     if (sprat == -2) return 'Podrum';
@@ -97,12 +107,19 @@ export class RezultatPretrageComponent implements OnInit {
     if (sprat == 'Potkrovlje') return 32;
     else return parseInt(sprat);
   }
-  // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine 
-  avgValuesToNumber(avgValues: AverageValue[], lokacija: string, tipNekretnine:string):number {
-    let rezultat:number = 0;
+  // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine
+  avgValuesToNumber(
+    avgValues: AverageValue[],
+    lokacija: string,
+    tipNekretnine: string
+  ): number {
+    let rezultat: number = 0;
     for (let avgValue of avgValues) {
-      if (avgValue._id.lokacija == lokacija && avgValue._id.tip == tipNekretnine) {
-        rezultat = Math.round(avgValue.srednjaVrednost); 
+      if (
+        avgValue._id.lokacija == lokacija &&
+        avgValue._id.tip == tipNekretnine
+      ) {
+        rezultat = Math.round(avgValue.srednjaVrednost);
       }
     }
     return rezultat;

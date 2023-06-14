@@ -30,7 +30,7 @@ let UserController = class UserController extends tsoa_1.Controller {
     insertUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.insertUser(user);
-            if (result == 'Korisnik vec postoji') {
+            if (result == "Korisnik vec postoji") {
                 this.setStatus(409);
             }
             return result;
@@ -39,7 +39,15 @@ let UserController = class UserController extends tsoa_1.Controller {
     updateUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.updateUser(user);
-            if (result == 'Korisnik ne postoji')
+            if (result == "Korisnik ne postoji")
+                this.setStatus(404);
+            return result;
+        });
+    }
+    getUserByKorIme(kor_ime) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield UserDAO_1.userDAO.getUserByKorIme(kor_ime);
+            if (result == null)
                 this.setStatus(404);
             return result;
         });
@@ -57,6 +65,10 @@ __decorate([
     (0, tsoa_1.Put)("update"),
     __param(0, (0, tsoa_1.Body)())
 ], UserController.prototype, "updateUser", null);
+__decorate([
+    (0, tsoa_1.Get)("fetchUser/:kor_ime"),
+    __param(0, (0, tsoa_1.Path)())
+], UserController.prototype, "getUserByKorIme", null);
 UserController = __decorate([
     (0, tsoa_1.Route)("users")
 ], UserController);
