@@ -1,57 +1,67 @@
 section {
-    min-height: calc(100vh - 399px);
-  }
-  
-  .box {
-    background-color: var(--white);
-    box-shadow: var(--box-shodow);
-    padding: 2rem;
-    overflow-x: hidden;
-    width: 100%;
-    display: grid;
-    gap: 4rem;
-    grid-template-columns: 1fr 1fr 35%;
-    align-items: center;
-  }
-  .thumb {
-    position: relative;
-    height: 22rem;
-    width: auto;
-    overflow: hidden;
-    margin: 1.5rem 0;
-  }
-  img {
-    height: 100%;
-    width: auto;
-    transition: 0.2s linear;
-  }
-  .info {
-    margin: 1.5rem 0;
-  }
-  .name {
-    font-size: 2rem;
-    text-overflow: ellipsis;
-    overflow-x: hidden;
-    color: var(--black);
-    margin-bottom: 0.5rem;
-  }
-  .location {
-    padding-top: 1rem;
-    font-size: 1.6rem;
-    color: var(--light-color);
-  }
-  .location fa-icon {
-    margin-right: 1rem;
-    color: var(--main-color);
-  }
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-  }
-  .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
+  min-height: calc(100vh - 399px);
+}
+
+.box {
+  background-color: var(--white);
+  box-shadow: var(--box-shodow);
+  padding: 2rem;
+  overflow-x: hidden;
+  width: 100%;
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: 1fr 1fr 35%;
+  align-items: center;
+}
+.thumb {
+  position: relative;
+  height: 22rem;
+  width: auto;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+img {
+  height: 100%;
+  width: auto;
+  transition: 0.2s linear;
+}
+.info {
+  margin: 1.5rem 0;
+}
+.name {
+  font-size: 2rem;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+.location {
+  padding-top: 1rem;
+  font-size: 1.6rem;
+  color: var(--light-color);
+}
+.location fa-icon {
+  margin-right: 1rem;
+  color: var(--main-color);
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.prodato {
+  margin-top: 1rem;
+  padding: 1rem 3rem;
+  background-color: transparent;
+  color: var(--main-color);
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 1000;
+  cursor: default;
+}

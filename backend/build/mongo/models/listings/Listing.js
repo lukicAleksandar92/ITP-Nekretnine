@@ -20,6 +20,7 @@ class SearchCriteria {
         this.spratDo = undefined;
         this.mesecneRezijeOd = undefined;
         this.mesecneRezijeDo = undefined;
+        this.status = undefined;
     }
 }
 exports.SearchCriteria = SearchCriteria;

@@ -28,9 +28,13 @@
       </p>
     </div>
     <div class="buttons">
-      <a routerLink="/stranica-oglasa/{{ listing._id }}" class="btn"
+      <a
+        routerLink="/stranica-oglasa/{{ listing._id }}"
+        class="btn"
+        *ngIf="listing.status == 'nije prodato'"
         >Vidi oglas</a
       >
+      <a class="btn prodato" *ngIf="listing.status == 'prodato'">PRODATO</a>
       <a class="btn" (click)="ukloniIzOmiljenih(listing._id)"
         >Ukloni iz omiljenih <fa-icon [icon]="heartMinus"></fa-icon
       ></a>

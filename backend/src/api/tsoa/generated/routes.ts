@@ -131,6 +131,7 @@ const models: TsoaRoute.Models = {
             "spratDo": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
             "mesecneRezijeOd": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
             "mesecneRezijeDo": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}]},
+            "status": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"undefined"}]},
         },
         "additionalProperties": false,
     },

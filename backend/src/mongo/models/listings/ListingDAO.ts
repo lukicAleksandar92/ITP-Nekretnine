@@ -170,6 +170,10 @@ class ListingDAO {
     } else if (filter.mesecneRezijeDo !== undefined) {
       query.mesecneRezije = { $lte: filter.mesecneRezijeDo };
     }
+    //status
+    if (filter.status !== undefined) {
+      query.status = filter.status;
+    }
 
     const filteredResults = this.listingModel.find(query);
     return filteredResults;

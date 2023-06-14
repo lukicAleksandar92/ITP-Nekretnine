@@ -31,11 +31,11 @@ export class ProdavacGuard implements CanActivate {
       }
   } */
     const userJson = localStorage.getItem('loggedUser');
-    console.log(userJson);
+
     if (userJson) {
       try {
         const user = JSON.parse(userJson);
-        console.log(user.tip);
+
         if (user.tip === 'samostalniProdavac' || user.tip === 'agent') {
           return true;
         } else if (user.tip === 'kupac') {

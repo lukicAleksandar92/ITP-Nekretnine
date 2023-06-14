@@ -42,6 +42,7 @@ export class SearchCriteria {
   spratDo: number | undefined = undefined;
   mesecneRezijeOd: number | undefined = undefined;
   mesecneRezijeDo: number | undefined = undefined;
+  status: string | undefined = undefined;
 }
 export interface Slika {
   name: string;
@@ -52,7 +53,7 @@ export interface AverageValue {
   srednjaVrednost: number;
 }
 
-export interface AverageValueId{
+export interface AverageValueId {
   lokacija: string;
   tip: string;
 }

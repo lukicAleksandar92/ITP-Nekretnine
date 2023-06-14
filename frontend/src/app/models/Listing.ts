@@ -47,6 +47,7 @@ export class Filter {
   spratDo: number | undefined = undefined;
   mesecneRezijeOd: number | undefined = undefined;
   mesecneRezijeDo: number | undefined = undefined;
+  status: string | undefined;
 }
 
 export class AverageValue {
@@ -54,7 +55,7 @@ export class AverageValue {
   srednjaVrednost!: number;
 }
 
-export class AverageValueId{
+export class AverageValueId {
   lokacija!: string;
   tip!: string;
 }
