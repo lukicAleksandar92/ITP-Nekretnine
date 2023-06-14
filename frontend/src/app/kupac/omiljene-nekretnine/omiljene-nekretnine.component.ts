@@ -24,9 +24,10 @@ export class OmiljeneNekretnineComponent implements OnInit {
     this.ucitajKorisnikaIOglase();
   }
   ucitajKorisnikaIOglase() {
+    //parsiranje korisnika iz localstorage i dovlacenje svih informacija o njemu iz base
     this.userService.parseLoggedUser()?.then((res) => {
       this.user = JSON.parse(JSON.stringify(res));
-
+      //dovlacenje omiljenih oglasa
       this.listingService
         .getFavoriteListings(this.user.omiljeniOglasi)
         .then((res) => {
@@ -40,6 +41,7 @@ export class OmiljeneNekretnineComponent implements OnInit {
   mapMarker = faMapMarkerAlt;
   euroMarker = faEuroSign;
   heartMinus = faHeartCircleMinus;
+  //uklanjamo oglas iz omiljenih i ponovo ucitavamo sve oglase
   ukloniIzOmiljenih(id: string) {
     this.user.omiljeniOglasi = this.user.omiljeniOglasi.filter((f) => f != id);
     this.userService.updateFavoriteListing({

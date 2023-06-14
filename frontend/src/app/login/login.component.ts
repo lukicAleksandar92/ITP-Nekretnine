@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         if (user == null) {
           alert('Nije ok login');
         } else {
+          //pamtimo samo korisnicko ime i tip ui lokal storage
           this.loggedUser = {
             kor_ime: user.kor_ime,
             tip: user.tip,

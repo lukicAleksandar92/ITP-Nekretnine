@@ -11,6 +11,7 @@ import { ListingService } from 'src/app/services/listing.service';
 export class NaslovnaComponent implements OnInit {
   constructor(private listingService: ListingService, private router: Router) {}
   ngOnInit(): void {
+    //ucitavamo samo neprodate oglase i to 6 najnovijih
     this.iniFilter.status = 'nije prodato';
     this.listingService.searchListings(this.iniFilter).then((res) => {
       this.allListings = JSON.parse(JSON.stringify(res));

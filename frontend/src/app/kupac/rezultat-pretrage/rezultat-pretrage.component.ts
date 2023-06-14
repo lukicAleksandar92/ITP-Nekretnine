@@ -58,6 +58,7 @@ export class RezultatPretrageComponent implements OnInit {
       if (params['mesecneRezijeDo'] != undefined)
         this.filter.mesecneRezijeDo = parseFloat(params['mesecneRezijeDo']);
     });
+    // trazimo samo oglase koji nisu prodati
     this.filter.status = 'nije prodato';
     // nakon ucitavanja filtera pravimo pretragu baze pomocu njega
     this.listingService.searchListings(this.filter).then((res) => {
