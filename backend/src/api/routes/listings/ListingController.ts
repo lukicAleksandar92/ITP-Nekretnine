@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Path, Post, Put, Route } from "tsoa";
 import {
+  AverageValue,
   Listing,
   SearchCriteria,
 } from "../../../mongo/models/listings/Listing";
@@ -19,6 +20,10 @@ export class ListingController extends Controller {
   @Get("getOne/:id")
   async getListingById(@Path() id: string): Promise<Listing | null> {
     return listingDAO.getListingById(id);
+  }
+  @Get("getAverageValues")
+  async getAverageValues(): Promise<AverageValue[] | null> {
+    return await listingDAO.getAverageValues();
   }
   @Put("update/:id")
   async updateListing(@Body() listing: Listing, @Path() id: string) {

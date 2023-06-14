@@ -47,3 +47,12 @@ export interface Slika {
   name: string;
   source: string;
 }
+export interface AverageValue {
+  _id: AverageValueId;
+  srednjaVrednost: number;
+}
+
+export interface AverageValueId{
+  lokacija: string;
+  tip: string;
+}

@@ -9,7 +9,7 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from 'src/app/login/login.component';
-import { Listing } from 'src/app/models/Listing';
+import { AverageValue, Listing } from 'src/app/models/Listing';
 import { ListingService } from 'src/app/services/listing.service';
 @Component({
   selector: 'app-stranica-oglasa',
@@ -24,7 +24,7 @@ export class StranicaOglasaComponent implements OnInit {
   ngOnInit(): void {
     // ucitavamo id oglasa koji prikazujemo
     const id = this.route.snapshot.paramMap.get('id');
-    if (id != null)
+    if (id != null) {
       // trazimo oglas u bazi na osnovu id-a
       this.listingService.getListingById(id).then((res) => {
         // kad ga nobijemo ucitavamo ga u lokalnu promenljivu listing
@@ -33,8 +33,21 @@ export class StranicaOglasaComponent implements OnInit {
         this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
         this.sprat = this.spratToString(this.listing.sprat);
         this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
+
+        // trazimo niz srednjih vrednosti grupisanih po lokaciji i tipu nekretnine
+        this.listingService.getAverageValues().then((res) => {
+          // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
+          this.avgValues = JSON.parse(JSON.stringify(res));
+          this.srednjaVrednost = this.avgValuesToNumber(this.avgValues, this.listing.lokacija, this.listing.tipNekretnine);
+        });
       });
+      
+    }
   }
+
+  avgValues: AverageValue[] = [];
+  avgValue!: AverageValue;
+  srednjaVrednost!: number;
 
   listing!: Listing;
   // ikonice iz fontawesome
@@ -114,5 +127,15 @@ export class StranicaOglasaComponent implements OnInit {
     this.currentIndex =
       (this.currentIndex - 1 + this.listing.slike.length) %
       this.listing.slike.length;
+  }
+  // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine 
+  avgValuesToNumber(avgValues: AverageValue[], lokacija: string, tipNekretnine:string):number {
+    let rezultat:number = 0;
+    for (let avgValue of avgValues) {
+      if (avgValue._id.lokacija == lokacija && avgValue._id.tip == tipNekretnine) {
+        rezultat = Math.round(avgValue.srednjaVrednost); 
+      }
+    }
+    return rezultat;
   }
 }
