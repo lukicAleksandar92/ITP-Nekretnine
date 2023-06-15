@@ -4,7 +4,7 @@ import { userDAO } from "../../../mongo/models/users/UserDAO";
 
 @Route("users")
 export class UserController extends Controller {
-  @Post("login")
+  @Get("login")
   async login(@Body() user: User) {
     return await userDAO.login(user.kor_ime, user.lozinka);
   }

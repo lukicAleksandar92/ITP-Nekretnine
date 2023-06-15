@@ -86,16 +86,17 @@
           {{ a.naziv }}
         </option>
       </select>
-    </div>
-
-    <input
+      <input
       type="number"
       name="licenca"
       id="licenca"
       placeholder="Broj licence"
       class="box"
-      style="display: none"
-    />
+      [(ngModel)]="licenca"
+      />
+    </div>
+
+
 
     <label for="profile-picture" style="font-size: 1.8rem"
       >Dodaj profilnu sliku:</label

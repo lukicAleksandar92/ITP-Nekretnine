@@ -70,7 +70,7 @@ let UserController = class UserController extends tsoa_1.Controller {
     }
 };
 __decorate([
-    (0, tsoa_1.Post)("login"),
+    (0, tsoa_1.Get)("login"),
     __param(0, (0, tsoa_1.Body)())
 ], UserController.prototype, "login", null);
 __decorate([

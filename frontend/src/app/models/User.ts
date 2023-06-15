@@ -8,7 +8,8 @@ export class User {
   kor_ime: string = '';
   lozinka: string = '';
   tip: string = '';
-  agencija: string | undefined = undefined;
+  selectedAgency: string = '';
+  licenca: number = 0;
   omiljeniOglasi: string[] = [];
 }
 

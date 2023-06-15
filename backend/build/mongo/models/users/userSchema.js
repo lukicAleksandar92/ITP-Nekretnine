@@ -15,7 +15,8 @@ exports.userSchema = new mongoose_1.default.Schema({
     kor_ime: { type: String },
     lozinka: { type: String },
     tip: { type: String },
-    agencija: { type: String, sparse: true },
+    selectedAgency: { type: String },
+    licenca: { type: Number },
     omiljeniOglasi: [{ type: String }],
 });
 //# sourceMappingURL=UserSchema.js.map

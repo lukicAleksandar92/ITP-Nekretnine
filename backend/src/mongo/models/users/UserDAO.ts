@@ -68,10 +68,6 @@ class UserDAO {
 
 
 
-
-
-
-
   async updateFavoriteListing(user: UserFavoriteListing) {
     let activeUser = await this.getUserByKorIme(user.kor_ime);
     if (activeUser != null) {

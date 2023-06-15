@@ -20,43 +20,11 @@ export class RegistracijaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /* this.getAgencije();
-    const tipSelect = document.getElementById('tip') as HTMLSelectElement;
-    const agencijaLabel = document.getElementById(
-      'agencijaLabel'
-    ) as HTMLLabelElement;
-    const agencijaSelect = document.getElementById(
-      'agencija'
-    ) as HTMLSelectElement;
-    const licencaInput = document.getElementById('licenca') as HTMLInputElement;
-
-    tipSelect.addEventListener('change', showHideFields);
-
-    function showHideFields() {
-      if (tipSelect.value === 'agent') {
-        agencijaLabel.style.display = 'inline-block';
-        agencijaSelect.style.display = 'inline-block';
-        licencaInput.style.display = 'inline-block';
-      } else {
-        agencijaLabel.style.display = 'none';
-        agencijaSelect.style.display = 'none';
-        licencaInput.style.display = 'none';
-      }
-    } */
-
     // hvatamo iz baze agencije i smestamo ih u niz agencije[]
     this.agencijeService.getAgencije().then((res) => {
       this.agencije = JSON.parse(JSON.stringify(res));
     });
   }
-
-  /*  async getAgencije() {
-    try {
-      this.agencije = await this.agencijeService.getAgencije().toPromise();
-    } catch (error) {
-      console.error('Error retrieving agencije', error);
-    }
-  } */
 
   ime!: string;
   prezime!: string;
@@ -67,10 +35,10 @@ export class RegistracijaComponent implements OnInit {
   kor_ime!: string;
   lozinka!: string;
   tip!: string;
-  agencija: string | null = null;
   naziv!: string;
   agencije!: Agencije[];
   selectedAgency!: string;
+  licenca!: number;
 
   register() {
     let user = new User();
@@ -84,6 +52,9 @@ export class RegistracijaComponent implements OnInit {
     user.kor_ime = this.kor_ime;
     user.lozinka = this.lozinka;
     user.tip = this.tip;
+    user.selectedAgency = this.selectedAgency;
+    user.licenca = this.licenca;
+    
 
     this.userService
       .insertUser(user)
@@ -105,5 +76,6 @@ export class RegistracijaComponent implements OnInit {
       //oglasivac
       this.router.navigate(['/moji-oglasi']);
     }
+    
   }
 }

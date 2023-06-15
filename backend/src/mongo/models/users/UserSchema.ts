@@ -11,6 +11,7 @@ export const userSchema = new mongoose.Schema<User>({
   kor_ime: { type: String },
   lozinka: { type: String },
   tip: { type: String },
-  agencija: { type: String, sparse: true },
+  selectedAgency: {type: String},
+  licenca: {type: Number},
   omiljeniOglasi: [{ type: String }],
 });
