@@ -40,4 +40,7 @@ export class UserService {
       this.http.put(`${this.back}/users/updateFavoriteListing`, user)
     );
   }
+  updateUser(user: User){
+    return firstValueFrom(this.http.put(`${this.back}/users/update`, user));
+  }
 }

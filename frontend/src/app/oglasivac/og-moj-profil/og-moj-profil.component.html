@@ -5,22 +5,22 @@
     <!-- Informacije koji se ne menjaju-->
     <div>
       <div class="flex">
-        <span> <b>Korisničko ime:</b> Prodavac Pera </span>
+        <span> <b>Korisničko ime:</b> {{user.kor_ime}} </span>
       </div>
       <div class="flex">
-        <span> <b>Ime i prezime:</b> Pera Peric </span>
+        <span> <b>Ime i prezime:</b> {{user.ime}} {{user.prezime}} </span>
       </div>
       <div class="flex">
-        <span> <b>Grad:</b> Beograd </span>
+        <span> <b>Grad:</b> {{user.grad}} </span>
       </div>
       <div class="flex">
-        <span> <b>Broj licence:</b> 226558 </span>
+        <span> <b>Broj licence:</b> 379516 </span>
       </div>
     </div>
     <!-- Email adresa i njena promena -->
 
     <div class="flex">
-      <span> <b>Email adresa:</b> email@adresa.com </span>
+      <span> <b>Email adresa:</b> {{ user.email }} </span>
       <fa-icon
         [icon]="arrowRight"
         *ngIf="!mailSeMenja"
@@ -34,13 +34,14 @@
         name="newMail"
         placeholder="nova e-mail adresa"
         class="box"
+        [(ngModel)] = "newMail"
       />
-      <button class="btn">Potvrdi promenu</button>
+      <button class="btn" (click) = "izmenaMail()">Potvrdi promenu</button>
     </div>
     <!-- Telefon i njegova promena -->
 
     <div class="flex">
-      <span> <b>Broj Telefona:</b> 069/ 99 88 9898 </span>
+      <span> <b>Broj Telefona:</b> {{user.telefon}} </span>
       <fa-icon
         [icon]="arrowRight"
         *ngIf="!telefonSeMenja"
