@@ -47,5 +47,9 @@ export class UserService {
     return firstValueFrom(this.http.put(`${this.back}/users/updateTel`, user));
   }
 
+  updateUserAgency(user: User){
+    return firstValueFrom(this.http.put(`${this.back}/users/updateAgency`, user));
+  }
+
 
 }

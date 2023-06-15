@@ -66,6 +66,19 @@ class UserDAO {
     return "Korisnik ne psotoji";
   }
 
+  async updateUserAgency(user: User) {
+    let userInDB = await this.getUserByKorIme(user.kor_ime);
+
+    if (userInDB != null) {
+      return this.userModel.updateOne(
+        { kor_ime: user.kor_ime },
+        { $set: { selectedAgency: user.selectedAgency } }
+      );
+    }
+
+    return "Korisnik ne psotoji";
+  }
+
 
 
   async updateFavoriteListing(user: UserFavoriteListing) {

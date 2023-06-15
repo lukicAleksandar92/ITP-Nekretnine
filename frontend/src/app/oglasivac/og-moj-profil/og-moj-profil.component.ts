@@ -57,7 +57,7 @@ export class OgMojProfilComponent implements OnInit {
   kor_ime!: string;
   newTel!: number;
   agencije!: Agencije[];
-  selectedAgency!: string;
+  newSelectedAgency!: string;
 
   ngOnChanges(changes: SimpleChanges) {
     this.newMail = this.user.email;
@@ -93,6 +93,23 @@ export class OgMojProfilComponent implements OnInit {
     .catch((res) => {
       alert(res.error);
     })
+  }
+
+  izmenaAgencije() {
+    let changedUser = new User();
+    changedUser.selectedAgency = this.newSelectedAgency;
+    changedUser.kor_ime = this.user.kor_ime
+    console.log(changedUser)
+    this.userService.updateUserAgency(changedUser)
+    .then((res) => {
+      alert("Uspesno izmenjena agencija");
+      this.ucitajInfoKorisnika();
+      this.updateUser.emit(changedUser);
+    })
+    .catch((res) => {
+      alert(res.error);
+    })
+
   }
 
 
