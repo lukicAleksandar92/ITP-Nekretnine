@@ -51,12 +51,18 @@ class UserDAO {
             return "Korisnik vec postoji";
         });
     }
-    updateUser(user) {
+    updateUserEmail(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let userInDB = yield this.getUserByKorIme(user.kor_ime);
             if (userInDB != null) {
                 return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { email: user.email } });
             }
+            return "Korisnik ne psotoji";
+        });
+    }
+    updateUserTel(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let userInDB = yield this.getUserByKorIme(user.kor_ime);
             if (userInDB != null) {
                 return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { telefon: user.telefon } });
             }

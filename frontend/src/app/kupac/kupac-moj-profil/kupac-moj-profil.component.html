@@ -54,11 +54,12 @@
     <div *ngIf="telefonSeMenja">
       <input
         type="phone"
-        name="newPhone"
+        name="newTel"
         placeholder="novi broj telefona"
         class="box"
+        [(ngModel)] = "newTel"
       />
-      <button class="btn">Potvrdi promenu</button>
+      <button class="btn" (click) = "izmenaTel()">Potvrdi promenu</button>
     </div>
 
     <!-- Promena lozinke -->

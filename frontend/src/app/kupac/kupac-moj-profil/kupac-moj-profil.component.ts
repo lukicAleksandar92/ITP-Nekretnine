@@ -44,17 +44,18 @@ export class KupacMojProfilComponent implements OnInit{
 
   newMail!: string;
   kor_ime!: string;
+  newTel!: number;
 
   ngOnChanges(changes: SimpleChanges) {
     this.newMail = this.user.email;
-   
+    this.newTel = this.user.telefon;
   }
   izmenaMail(){ 
     let changedUser = new User();
     changedUser.email = this.newMail;
     changedUser.kor_ime = this.user.kor_ime
     console.log(changedUser)
-    this.userService.updateUser(changedUser)
+    this.userService.updateUserEmail(changedUser)
     .then((res) => {
       alert("Uspesno izmenjena email adresa");
       this.updateUser.emit(changedUser);
@@ -64,6 +65,20 @@ export class KupacMojProfilComponent implements OnInit{
     })
   }
 
+  izmenaTel(){ 
+    let changedUser = new User();
+    changedUser.telefon = this.newTel;
+    changedUser.kor_ime = this.user.kor_ime
+    console.log(changedUser)
+    this.userService.updateUserTel(changedUser)
+    .then((res) => {
+      alert("Uspesno izmenjen broj telefona");
+      this.updateUser.emit(changedUser);
+    })
+    .catch((res) => {
+      alert(res.error);
+    })
+  }
 
 
 

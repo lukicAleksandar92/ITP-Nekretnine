@@ -53,7 +53,7 @@ export class OgMojProfilComponent implements OnInit {
     changedUser.email = this.newMail;
     changedUser.kor_ime = this.user.kor_ime
     console.log(changedUser)
-    this.userService.updateUser(changedUser)
+    this.userService.updateUserEmail(changedUser)
     .then((res) => {
       alert("Uspesno izmenjena email adresa");
       this.updateUser.emit(changedUser);
@@ -63,20 +63,20 @@ export class OgMojProfilComponent implements OnInit {
     })
   }
 
-  // izmenaTel(){ 
-  //   let changedUser = new User();
-  //   changedUser.telefon = this.newTel;
-  //   changedUser.kor_ime = this.user.kor_ime
-  //   console.log(changedUser)
-  //   this.userService.updateUser(changedUser)
-  //   .then((res) => {
-  //     alert("Uspesno izmenjen broj telefona");
-  //     this.updateUser.emit(changedUser);
-  //   })
-  //   .catch((res) => {
-  //     alert(res.error);
-  //   })
-  // }
+  izmenaTel(){ 
+    let changedUser = new User();
+    changedUser.telefon = this.newTel;
+    changedUser.kor_ime = this.user.kor_ime
+    console.log(changedUser)
+    this.userService.updateUserTel(changedUser)
+    .then((res) => {
+      alert("Uspesno izmenjen broj telefona");
+      this.updateUser.emit(changedUser);
+    })
+    .catch((res) => {
+      alert(res.error);
+    })
+  }
 
 
 

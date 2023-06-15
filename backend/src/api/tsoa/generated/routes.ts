@@ -470,11 +470,11 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/users/update',
+        app.put('/users/updateEmail',
             ...(fetchMiddlewares<RequestHandler>(UserController)),
-            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.updateUser)),
+            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.updateUserEmail)),
 
-            function UserController_updateUser(request: any, response: any, next: any) {
+            function UserController_updateUserEmail(request: any, response: any, next: any) {
             const args = {
                     user: {"in":"body","name":"user","required":true,"ref":"User"},
             };
@@ -488,7 +488,32 @@ export function RegisterRoutes(app: express.Router) {
                 const controller = new UserController();
 
 
-              const promise = controller.updateUser.apply(controller, validatedArgs as any);
+              const promise = controller.updateUserEmail.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/users/updateTel',
+            ...(fetchMiddlewares<RequestHandler>(UserController)),
+            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.updateUserTel)),
+
+            function UserController_updateUserTel(request: any, response: any, next: any) {
+            const args = {
+                    user: {"in":"body","name":"user","required":true,"ref":"User"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new UserController();
+
+
+              const promise = controller.updateUserTel.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
