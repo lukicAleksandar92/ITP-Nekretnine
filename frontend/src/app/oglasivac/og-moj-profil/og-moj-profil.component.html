@@ -1,6 +1,6 @@
 <app-og-header></app-og-header>
 <section>
-  <h1 class="heading">Moj Profil</h1>
+  <h1 class="heading">Moj Profil - {{user.tip}}</h1>
   <div class="content">
     <!-- Informacije koji se ne menjaju-->
     <div>
@@ -64,7 +64,7 @@
       <button class="btn" (click) = "izmenaTel()">Potvrdi promenu</button>
     </div>
     <!-- Promena agencije -->
-    <div class="flex">
+    <div class="flex" *ngIf="user.tip == 'agent'">
       <span> <b>Agencija:</b> {{user.selectedAgency}} </span>
       <fa-icon
         [icon]="arrowRight"
