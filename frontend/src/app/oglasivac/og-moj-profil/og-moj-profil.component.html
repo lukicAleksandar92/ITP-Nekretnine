@@ -78,12 +78,16 @@
       ></fa-icon>
     </div>
     <div *ngIf="agencijaSeMenja">
-      <select name="agencija" class="box">
-        <option value="">Izaberite novu agenciju</option>
-        <option value="euromont">Samostalni prodavac</option>
-        <option value="euromont">Euromont</option>
-        <option value="zidart">Zidart</option>
-        <option value="cityexpert">City Expert</option>
+      <select
+        name="agencija"
+        class="input box"
+        required
+        [(ngModel)]="selectedAgency"
+      >
+        <option value="undefined" disabled>Izaberite agenciju</option>
+        <option *ngFor="let a of agencije" value="{{ a.naziv }}">
+          {{ a.naziv }}
+        </option>
       </select>
       <button class="btn">Potvrdi promenu</button>
     </div>

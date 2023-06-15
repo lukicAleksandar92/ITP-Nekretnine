@@ -37,9 +37,16 @@ export class KupacMojProfilComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.userService.parseLoggedUser()?.then((res) => {
-      this.user = JSON.parse(JSON.stringify(res));
-    })
+    //ucitavamo podatke ulogovanog korisnika
+    this.ucitajInfoKorisnika()
+
+   }
+
+   ucitajInfoKorisnika () {
+        //parsiranje korisnika iz localstorage i dovlacenje svih informacija o njemu iz base
+        this.userService.parseLoggedUser()?.then((res) => {
+          this.user = JSON.parse(JSON.stringify(res));
+        })
    }
 
   newMail!: string;
@@ -58,6 +65,7 @@ export class KupacMojProfilComponent implements OnInit{
     this.userService.updateUserEmail(changedUser)
     .then((res) => {
       alert("Uspesno izmenjena email adresa");
+      this.ucitajInfoKorisnika();
       this.updateUser.emit(changedUser);
     })
     .catch((res) => {
@@ -73,6 +81,7 @@ export class KupacMojProfilComponent implements OnInit{
     this.userService.updateUserTel(changedUser)
     .then((res) => {
       alert("Uspesno izmenjen broj telefona");
+      this.ucitajInfoKorisnika();
       this.updateUser.emit(changedUser);
     })
     .catch((res) => {

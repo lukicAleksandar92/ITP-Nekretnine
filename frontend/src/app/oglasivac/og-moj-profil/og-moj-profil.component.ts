@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 import { faArrowRight, faX } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
+import { Agencije } from 'src/app/models/Agencije';
+import { AgencijeService } from 'src/app/services/agencije.service';
 
 @Component({
   selector: 'app-og-moj-profil',
@@ -28,21 +30,34 @@ export class OgMojProfilComponent implements OnInit {
     this.lozinkaSeMenja = !this.lozinkaSeMenja;
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private agencijeService: AgencijeService) { }
 
   @Input() user: User = new User;
   @Output() updateUser = new EventEmitter<User>()
 
 
   ngOnInit(): void {
+    //ucitavamo podatke ulogovanog korisnika
+    this.ucitajInfoKorisnika()
+
+    // hvatamo iz baze agencije i smestamo ih u niz agencije[]
+    this.agencijeService.getAgencije().then((res) => {
+      this.agencije = JSON.parse(JSON.stringify(res));
+    });
+   }
+
+   ucitajInfoKorisnika () {
+    //parsiranje korisnika iz localstorage i dovlacenje svih informacija o njemu iz base
     this.userService.parseLoggedUser()?.then((res) => {
       this.user = JSON.parse(JSON.stringify(res));
     })
-   }
+}
 
   newMail!: string;
   kor_ime!: string;
   newTel!: number;
+  agencije!: Agencije[];
+  selectedAgency!: string;
 
   ngOnChanges(changes: SimpleChanges) {
     this.newMail = this.user.email;
@@ -56,6 +71,7 @@ export class OgMojProfilComponent implements OnInit {
     this.userService.updateUserEmail(changedUser)
     .then((res) => {
       alert("Uspesno izmenjena email adresa");
+      this.ucitajInfoKorisnika();
       this.updateUser.emit(changedUser);
     })
     .catch((res) => {
@@ -71,6 +87,7 @@ export class OgMojProfilComponent implements OnInit {
     this.userService.updateUserTel(changedUser)
     .then((res) => {
       alert("Uspesno izmenjen broj telefona");
+      this.ucitajInfoKorisnika();
       this.updateUser.emit(changedUser);
     })
     .catch((res) => {
