@@ -1,36 +1,59 @@
-[
-  {
-    "ime": "Marko",
-    "prezime": "Marković",
-    "datumRodjenja": "1990-01-01",
-    "grad": "Beograd",
-    "telefon": "1234567890",
-    "email": "marko@example.com",
-    "kor_ime": "markomarko",
-    "lozinka": "lozinka123",
-    "tip": "kupac"
+[{
+  "_id": {
+    "$oid": "64776675fc5554f53408a854"
   },
-  {
-    "ime": "Ana",
-    "prezime": "Ilić",
-    "datumRodjenja": "1985-05-15",
-    "grad": "Novi Sad",
-    "telefon": "9876543210",
-    "email": "ana@example.com",
-    "kor_ime": "anailic",
-    "lozinka": "lozinka456",
-    "tip": "samostalniProdavac"
-
+  "ime": "Marko",
+  "prezime": "Marković",
+  "datumRodjenja": "1990-01-01",
+  "grad": "Beograd",
+  "telefon": "1234567890",
+  "email": "marko@example.com",
+  "kor_ime": "markomarko",
+  "lozinka": "lozinka123",
+  "tip": "kupac"
+},{
+  "_id": {
+    "$oid": "64776675fc5554f53408a855"
   },
-  {
-    "ime": "Milica",
-    "prezime": "Jovanović",
-    "datumRodjenja": "1995-09-20",
-    "grad": "Niš",
-    "telefon": "5555555555",
-    "email": "milica@example.com",
-    "kor_ime": "milicajovanovic",
-    "lozinka": "lozinka789",
-    "tip": "agent"
-  }
-]
+  "ime": "Ana",
+  "prezime": "Ilić",
+  "datumRodjenja": "1985-05-15",
+  "grad": "Novi Sad",
+  "telefon": "9876543210",
+  "email": "ana@example.com",
+  "kor_ime": "anailic",
+  "lozinka": "lozinka456",
+  "tip": "samostalniProdavac"
+},{
+  "_id": {
+    "$oid": "64776675fc5554f53408a856"
+  },
+  "ime": "Milica",
+  "prezime": "Jovanović",
+  "datumRodjenja": "1995-09-20",
+  "grad": "Niš",
+  "telefon": "5555555555",
+  "email": "milica@example.com",
+  "kor_ime": "milicajovanovic",
+  "lozinka": "lozinka789",
+  "tip": "agent"
+},{
+  "_id": {
+    "$oid": "6489c2327f900c9c9932e18e"
+  },
+  "ime": "Petar",
+  "prezime": "Petrovic",
+  "datumRodjenja": "1991-01-01",
+  "grad": "Beograd",
+  "telefon": 123456789,
+  "email": "petar@primer.com",
+  "kor_ime": "pera",
+  "lozinka": "pera123",
+  "tip": "kupac",
+  "omiljeniOglasi": [
+    "648715be5434ba385df8b7ec",
+    "648716fd5434ba385df8b88f",
+    "648717865434ba385df8b8ee"
+  ],
+  "__v": 0
+}]

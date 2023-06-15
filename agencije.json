@@ -1,23 +1,28 @@
-[
-  {
-    "naziv": "Euromont",
-    "adresa": "Branka Vukosavljevića 32",
-    "grad": "Beograd",
-    "telefon": "08649847",
-    "PIB": "100467970"
+[{
+  "_id": {
+    "$oid": "647e384a09effe4666c92355"
   },
-  {
-    "naziv": "Zidart",
-    "adresa": "Džona Kenedija 18",
-    "grad": "Novi Beograd",
-    "telefon": "21161888",
-    "PIB": "109323985"
+  "naziv": "Euromont",
+  "adresa": "Branka Vukosavljevića 32",
+  "grad": "Beograd",
+  "telefon": "08649847",
+  "PIB": "100467970"
+},{
+  "_id": {
+    "$oid": "647e384a09effe4666c92356"
   },
-  {
-    "naziv": "City Expert",
-    "adresa": "Kneza Mihaila 1-3",
-    "grad": "Beograd",
-    "telefon": "21081337",
-    "PIB": "108854724"
-  }
-]
+  "naziv": "Zidart",
+  "adresa": "Džona Kenedija 18",
+  "grad": "Novi Beograd",
+  "telefon": "21161888",
+  "PIB": "109323985"
+},{
+  "_id": {
+    "$oid": "647e384a09effe4666c92357"
+  },
+  "naziv": "City Expert",
+  "adresa": "Kneza Mihaila 1-3",
+  "grad": "Beograd",
+  "telefon": "21081337",
+  "PIB": "108854724"
+}]
