@@ -8,7 +8,8 @@ export interface User {
   kor_ime: string;
   lozinka: string;
   tip: string;
-  agencija: string | undefined;
+  selectedAgency: string;
+  licenca: number;
   omiljeniOglasi: string[];
 }
 export interface UserFavoriteListing {

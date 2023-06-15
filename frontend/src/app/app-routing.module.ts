@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
-import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
+
 import { NaslovnaComponent } from './kupac/naslovna/naslovna.component';
 import { DetaljnaPretragaComponent } from './kupac/detaljna-pretraga/detaljna-pretraga.component';
 import { RezultatPretrageComponent } from './kupac/rezultat-pretrage/rezultat-pretrage.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registracija', component: RegistracijaComponent },
-  { path: 'promena-lozinke', component: PromenaLozinkeComponent },
+
   { path: 'stranica-oglasa/:id', component: StranicaOglasaComponent },
 
   //kupac

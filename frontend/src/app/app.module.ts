@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NaslovnaComponent } from './kupac/naslovna/naslovna.component';
 import { LoginComponent } from './login/login.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
-import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RezultatPretrageComponent } from './kupac/rezultat-pretrage/rezultat-pretrage.component';
@@ -33,7 +33,7 @@ import { IzmeniOglasComponent } from './oglasivac/izmeni-oglas/izmeni-oglas.comp
     NaslovnaComponent,
     LoginComponent,
     RegistracijaComponent,
-    PromenaLozinkeComponent,
+
     HeaderComponent,
     FooterComponent,
     RezultatPretrageComponent,

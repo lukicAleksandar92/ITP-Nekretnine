@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         let strUser = JSON.stringify(response);
         let user: User = JSON.parse(strUser);
         if (user == null) {
-          alert('Nije ok login');
+          alert('Nisu ispravni podaci');
         } else {
           //pamtimo samo korisnicko ime i tip ui lokal storage
           this.loggedUser = {
@@ -50,5 +50,7 @@ export class LoginComponent implements OnInit {
           }
         }
       });
+      
   }
+
 }

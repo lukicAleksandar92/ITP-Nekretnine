@@ -4,7 +4,7 @@ import { userDAO } from "../../../mongo/models/users/UserDAO";
 
 @Route("users")
 export class UserController extends Controller {
-  @Post("login")
+  @Get("login")
   async login(@Body() user: User) {
     return await userDAO.login(user.kor_ime, user.lozinka);
   }
@@ -19,13 +19,23 @@ export class UserController extends Controller {
     return result;
   }
 
-  @Put("update")
-  async updateUser(@Body() user: User) {
-    let result = await userDAO.updateUser(user);
+  @Put("updateEmail")
+  async updateUserEmail(@Body() user: User) {
+    let result = await userDAO.updateUserEmail(user);
     if (result == "Korisnik ne postoji") this.setStatus(404);
 
     return result;
   }
+  @Put("updateTel")
+  async updateUserTel(@Body() user: User) {
+    let result = await userDAO.updateUserTel(user);
+    if (result == "Korisnik ne postoji") this.setStatus(404);
+
+    return result;
+  }
+  
+
+
   @Get("fetchUser/:kor_ime")
   async getUserByKorIme(@Path() kor_ime: string) {
     let result = await userDAO.getUserByKorIme(kor_ime);

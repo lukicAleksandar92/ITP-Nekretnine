@@ -40,18 +40,34 @@ class UserDAO {
     return "Korisnik vec postoji";
   }
 
-  async updateUser(user: User) {
+  async updateUserEmail(user: User) {
     let userInDB = await this.getUserByKorIme(user.kor_ime);
 
     if (userInDB != null) {
       return this.userModel.updateOne(
         { kor_ime: user.kor_ime },
-        { $set: { ime: user.ime, prezime: user.prezime } }
+        { $set: { email: user.email } }
       );
     }
 
     return "Korisnik ne psotoji";
   }
+
+  async updateUserTel(user: User) {
+    let userInDB = await this.getUserByKorIme(user.kor_ime);
+
+    if (userInDB != null) {
+      return this.userModel.updateOne(
+        { kor_ime: user.kor_ime },
+        { $set: { telefon: user.telefon } }
+      );
+    }
+
+    return "Korisnik ne psotoji";
+  }
+
+
+
   async updateFavoriteListing(user: UserFavoriteListing) {
     let activeUser = await this.getUserByKorIme(user.kor_ime);
     if (activeUser != null) {
