@@ -52,6 +52,14 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    updateUserAgency(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield UserDAO_1.userDAO.updateUserAgency(user);
+            if (result == "Korisnik ne postoji")
+                this.setStatus(404);
+            return result;
+        });
+    }
     getUserByKorIme(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.getUserByKorIme(kor_ime);
@@ -70,7 +78,7 @@ let UserController = class UserController extends tsoa_1.Controller {
     }
 };
 __decorate([
-    (0, tsoa_1.Get)("login"),
+    (0, tsoa_1.Post)("login"),
     __param(0, (0, tsoa_1.Body)())
 ], UserController.prototype, "login", null);
 __decorate([
@@ -85,6 +93,10 @@ __decorate([
     (0, tsoa_1.Put)("updateTel"),
     __param(0, (0, tsoa_1.Body)())
 ], UserController.prototype, "updateUserTel", null);
+__decorate([
+    (0, tsoa_1.Put)("updateAgency"),
+    __param(0, (0, tsoa_1.Body)())
+], UserController.prototype, "updateUserAgency", null);
 __decorate([
     (0, tsoa_1.Get)("fetchUser/:kor_ime"),
     __param(0, (0, tsoa_1.Path)())

@@ -147,7 +147,8 @@ const models = {
             "kor_ime": { "dataType": "string", "required": true },
             "lozinka": { "dataType": "string", "required": true },
             "tip": { "dataType": "string", "required": true },
-            "agencija": { "dataType": "union", "subSchemas": [{ "dataType": "string" }, { "dataType": "undefined" }], "required": true },
+            "selectedAgency": { "dataType": "string", "required": true },
+            "licenca": { "dataType": "double", "required": true },
             "omiljeniOglasi": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
         },
         "additionalProperties": false,
@@ -394,6 +395,23 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new UserController_1.UserController();
             const promise = controller.updateUserTel.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/users/updateAgency', ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController)), ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController.prototype.updateUserAgency)), function UserController_updateUserAgency(request, response, next) {
+        const args = {
+            user: { "in": "body", "name": "user", "required": true, "ref": "User" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new UserController_1.UserController();
+            const promise = controller.updateUserAgency.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

@@ -148,7 +148,8 @@ const models: TsoaRoute.Models = {
             "kor_ime": {"dataType":"string","required":true},
             "lozinka": {"dataType":"string","required":true},
             "tip": {"dataType":"string","required":true},
-            "agencija": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"undefined"}],"required":true},
+            "selectedAgency": {"dataType":"string","required":true},
+            "licenca": {"dataType":"double","required":true},
             "omiljeniOglasi": {"dataType":"array","array":{"dataType":"string"},"required":true},
         },
         "additionalProperties": false,
@@ -514,6 +515,31 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.updateUserTel.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/users/updateAgency',
+            ...(fetchMiddlewares<RequestHandler>(UserController)),
+            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.updateUserAgency)),
+
+            function UserController_updateUserAgency(request: any, response: any, next: any) {
+            const args = {
+                    user: {"in":"body","name":"user","required":true,"ref":"User"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new UserController();
+
+
+              const promise = controller.updateUserAgency.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

@@ -1,6 +1,6 @@
 <app-og-header></app-og-header>
 <section>
-  <h1 class="heading">Moj Profil</h1>
+  <h1 class="heading">Moj Profil - {{user.tip}}</h1>
   <div class="content">
     <!-- Informacije koji se ne menjaju-->
     <div>
@@ -14,7 +14,7 @@
         <span> <b>Grad:</b> {{user.grad}} </span>
       </div>
       <div class="flex">
-        <span> <b>Broj licence:</b> 379516 </span>
+        <span> <b>Broj licence:</b> {{user.licenca}} </span>
       </div>
     </div>
     <!-- Email adresa i njena promena -->
@@ -64,8 +64,8 @@
       <button class="btn" (click) = "izmenaTel()">Potvrdi promenu</button>
     </div>
     <!-- Promena agencije -->
-    <div class="flex">
-      <span> <b>Agencija:</b> Samostalni Prodavac </span>
+    <div class="flex" *ngIf="user.tip == 'agent'">
+      <span> <b>Agencija:</b> {{user.selectedAgency}} </span>
       <fa-icon
         [icon]="arrowRight"
         *ngIf="!agencijaSeMenja"
@@ -82,14 +82,14 @@
         name="agencija"
         class="input box"
         required
-        [(ngModel)]="selectedAgency"
+        [(ngModel)]="newSelectedAgency"
       >
         <option value="undefined" disabled>Izaberite agenciju</option>
         <option *ngFor="let a of agencije" value="{{ a.naziv }}">
           {{ a.naziv }}
         </option>
       </select>
-      <button class="btn">Potvrdi promenu</button>
+      <button class="btn" (click) = "izmenaAgencije()">Potvrdi promenu</button>
     </div>
     <!-- Promena lozinke -->
 

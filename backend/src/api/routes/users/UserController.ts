@@ -4,7 +4,7 @@ import { userDAO } from "../../../mongo/models/users/UserDAO";
 
 @Route("users")
 export class UserController extends Controller {
-  @Get("login")
+  @Post("login")
   async login(@Body() user: User) {
     return await userDAO.login(user.kor_ime, user.lozinka);
   }
@@ -33,6 +33,16 @@ export class UserController extends Controller {
 
     return result;
   }
+  @Put("updateAgency")
+  async updateUserAgency(@Body() user: User) {
+    let result = await userDAO.updateUserAgency(user);
+    if (result == "Korisnik ne postoji") this.setStatus(404);
+
+    return result;
+  }
+  
+  
+  
   
 
 
