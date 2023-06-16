@@ -51,7 +51,7 @@ export class KupacMojProfilComponent implements OnInit{
 
   newMail!: string;
   kor_ime!: string;
-  newTel!: number;
+  newTel!: string;
 
   ngOnChanges(changes: SimpleChanges) {
     this.newMail = this.user.email;

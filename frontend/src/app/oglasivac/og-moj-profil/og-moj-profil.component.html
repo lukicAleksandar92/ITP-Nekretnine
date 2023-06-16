@@ -64,7 +64,7 @@
       <button class="btn" (click) = "izmenaTel()">Potvrdi promenu</button>
     </div>
     <!-- Promena agencije -->
-    <div class="flex" *ngIf="user.tip == 'agent'">
+    <div class="flex">
       <span> <b>Agencija:</b> {{user.selectedAgency}} </span>
       <fa-icon
         [icon]="arrowRight"

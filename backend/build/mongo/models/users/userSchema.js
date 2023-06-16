@@ -10,7 +10,7 @@ exports.userSchema = new mongoose_1.default.Schema({
     prezime: { type: String },
     datumRodjenja: { type: String },
     grad: { type: String },
-    telefon: { type: Number },
+    telefon: { type: String },
     email: { type: String },
     kor_ime: { type: String },
     lozinka: { type: String },

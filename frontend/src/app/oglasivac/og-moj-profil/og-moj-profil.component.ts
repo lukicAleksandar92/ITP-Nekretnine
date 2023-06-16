@@ -55,7 +55,7 @@ export class OgMojProfilComponent implements OnInit {
 
   newMail!: string;
   kor_ime!: string;
-  newTel!: number;
+  newTel!: string;
   agencije!: Agencije[];
   newSelectedAgency!: string;
 

@@ -197,6 +197,10 @@ export class DetaljnaPretragaComponent {
     this.filter.tipOglasivaca = this.tipOglasivacaIzbor
       .filter((o) => o.checked)
       .map((o) => o.value);
+      
+    if (this.filter.tip == undefined) {
+      alert('Unesite tip nekretnine!');
+    } else
     this.router.navigate(['/rezultat-pretrage'], {
       queryParams: this.filter,
     });

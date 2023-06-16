@@ -3,7 +3,7 @@ export class User {
   prezime: string = '';
   datumRodjenja: string = '';
   grad: string = '';
-  telefon: number = 0;
+  telefon!: string;
   email: string = '';
   kor_ime: string = '';
   lozinka: string = '';
