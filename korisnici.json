@@ -7,15 +7,14 @@
   "datumRodjenja": "1990-01-01",
   "grad": "Beograd",
   "telefon": "1234567890",
-  "email": "marko@example.com",
+  "email": "marko@marko.com",
   "kor_ime": "markomarko",
   "lozinka": "lozinka123",
   "tip": "kupac",
   "omiljeniOglasi": [
     "648715be5434ba385df8b7ec"
   ]
-},
-{
+},{
   "_id": {
     "$oid": "647741dae3bfe3232008cba6"
   },
@@ -36,8 +35,7 @@
     "648714e85434ba385df8b797",
     "648716fd5434ba385df8b88f"
   ]
-},
-{
+},{
   "_id": {
     "$oid": "648723301c2a340e40aa1eb3"
   },
@@ -53,8 +51,7 @@
   "__v": 0,
   "selectedAgency": "Zidart",
   "licenca": "323565"
-},
-{
+},{
   "_id": {
     "$oid": "648b3302cda4186f7da50b06"
   },
@@ -71,8 +68,7 @@
   "licenca": 555666,
   "omiljeniOglasi": [],
   "__v": 0
-},
-{
+},{
   "_id": {
     "$oid": "648c5cb9f3ab9475421ed6cb"
   },
@@ -89,8 +85,7 @@
   "licenca": 345678,
   "omiljeniOglasi": [],
   "__v": 0
-},
-{
+},{
   "_id": {
     "$oid": "648c7f51b4a6105f783e9e17"
   },
@@ -103,6 +98,23 @@
   "kor_ime": "goran",
   "lozinka": "Goran123!",
   "tip": "samostalni prodavac",
+  "omiljeniOglasi": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "648c94d3101bc84e2744c39b"
+  },
+  "ime": "1231",
+  "prezime": "123",
+  "datumRodjenja": "0333-02-22",
+  "grad": "beograd",
+  "telefon": 6555444,
+  "email": "sadsada@dsadsad.ccc",
+  "kor_ime": "dsad",
+  "lozinka": "lozinka123",
+  "tip": "agent",
+  "selectedAgency": "City Expert",
+  "licenca": 123,
   "omiljeniOglasi": [],
   "__v": 0
 }]
