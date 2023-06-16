@@ -37,4 +37,9 @@ section {
   fa-icon {
     cursor: pointer;
   }
+
+  .greska {
+    color: red;
+    font-size: 1.2rem;
+  }
   
