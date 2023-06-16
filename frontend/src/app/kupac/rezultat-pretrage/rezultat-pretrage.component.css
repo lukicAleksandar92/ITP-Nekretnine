@@ -15,3 +15,26 @@ img {
 section {
   min-height: calc(100vh - 399px);
 }
+.pagNav {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  padding: 1rem !important;
+}
+.numbers {
+  display: flex;
+  gap: 20px;
+}
+.active {
+  background-color: var(--main-color);
+  color: white;
+}
+.pagNavButton {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

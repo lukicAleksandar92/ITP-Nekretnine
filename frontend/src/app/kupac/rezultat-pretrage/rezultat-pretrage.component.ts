@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import { AverageValue, Filter, Listing } from 'src/app/models/Listing';
 import { User } from 'src/app/models/User';
@@ -63,7 +64,8 @@ export class RezultatPretrageComponent implements OnInit {
     // nakon ucitavanja filtera pravimo pretragu baze pomocu njega
     this.listingService.searchListings(this.filter).then((res) => {
       this.allListings = JSON.parse(JSON.stringify(res));
-
+      this.allListings.reverse();
+      this.load();
       // trazimo niz srednjih vrednosti grupisanih po lokaciji i tipu nekretnine
       this.listingService.getAverageValues().then((res) => {
         // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
@@ -121,4 +123,48 @@ export class RezultatPretrageComponent implements OnInit {
     }
     return rezultat;
   }
+  //ukupan broj stranica
+  broj_stranica: number = 0;
+  //brojevi stranica koje prikazujemo u navbaru paginacije
+  stranice: number[] | undefined = [];
+  //broj elementa po stranici, pocetna vrednost 5
+  n: number = 4;
+  //elementi koje trenutno prikazujemo
+  aktivna_lista: Listing[] = [];
+  //stranica koju prikazujemo
+  active: number = 0;
+  //stranica koju prikazujemo dropdown
+
+  izbori: number[] = [...Array(21).keys()].splice(1);
+  //izbor za strnicu kojim popunjavamo dropdown menu, puni se u
+  load() {
+    // racunamo broj stranica
+    this.broj_stranica = Math.ceil(this.allListings.length / this.n);
+    // prikazujemo sadrzaj prve stranice
+    this.stranice = [...Array(this.broj_stranica).keys()];
+
+    this.change(0);
+  }
+  change(i: number) {
+    //menjamu aktivnu listu da prikazuje oglase u odredjenom rasponu
+    this.aktivna_lista = this.allListings.filter((_, index) => {
+      return this.n * i <= index && index < this.n * (i + 1);
+    });
+
+    this.active = i;
+  }
+
+  //pomeraj za jedan u nazad ako nismo na prvom
+  minusOne() {
+    if (this.active < 1) return;
+    else this.change(--this.active);
+  }
+  //pomeraj za jedan u napred ako nisamo na posledenjm
+  plusOne() {
+    if (this.active > this.broj_stranica - 2) return;
+    else this.change(++this.active);
+  }
+
+  levo = faAngleLeft;
+  desno = faAngleRight;
 }
