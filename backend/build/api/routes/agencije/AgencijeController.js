@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -24,10 +27,22 @@ let AgencijeController = class AgencijeController extends tsoa_1.Controller {
             return yield AgencijeDAO_1.agencijeDAO.getAllListings();
         });
     }
+    getAgencijaByNaziv(naziv) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield AgencijeDAO_1.agencijeDAO.getAgencijaByNaziv(naziv);
+            if (result == null)
+                this.setStatus(404);
+            return result;
+        });
+    }
 };
 __decorate([
     (0, tsoa_1.Get)("getAll")
 ], AgencijeController.prototype, "getAllListings", null);
+__decorate([
+    (0, tsoa_1.Get)("fetchAgencija/:naziv"),
+    __param(0, (0, tsoa_1.Path)())
+], AgencijeController.prototype, "getAgencijaByNaziv", null);
 AgencijeController = __decorate([
     (0, tsoa_1.Route)("agencije")
 ], AgencijeController);

@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -9,8 +10,10 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from 'src/app/login/login.component';
+import { Agencije } from 'src/app/models/Agencije';
 import { AverageValue, Listing } from 'src/app/models/Listing';
 import { User } from 'src/app/models/User';
+import { AgencijeService } from 'src/app/services/agencije.service';
 import { ListingService } from 'src/app/services/listing.service';
 import { UserService } from 'src/app/services/user.service';
 @Component({
@@ -22,7 +25,8 @@ export class StranicaOglasaComponent implements OnInit {
   constructor(
     private listingService: ListingService,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private agencijeService: AgencijeService
   ) {}
   ngOnInit(): void {
     // ucitavamo id oglasa koji prikazujemo
@@ -36,7 +40,18 @@ export class StranicaOglasaComponent implements OnInit {
         this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
         this.sprat = this.spratToString(this.listing.sprat);
         this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
+        //ucitavamo oglasivaca
+        this.userService.getUserByKorIme(this.listing.oglasivac).then((res) => {
+          this.oglasivac = JSON.parse(JSON.stringify(res));
 
+          if (this.oglasivac.selectedAgency) {
+            this.agencijeService
+              .getAgencijaByNaziv(this.oglasivac.selectedAgency)
+              .then((res) => {
+                this.agencija = JSON.parse(JSON.stringify(res));
+              });
+          }
+        });
         // trazimo niz srednjih vrednosti grupisanih po lokaciji i tipu nekretnine
         this.listingService.getAverageValues().then((res) => {
           // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
@@ -58,6 +73,8 @@ export class StranicaOglasaComponent implements OnInit {
   avgValues: AverageValue[] = [];
   avgValue!: AverageValue;
   srednjaVrednost!: number;
+  oglasivac = new User();
+  agencija = new Agencije();
 
   listing!: Listing;
   // ikonice iz fontawesome

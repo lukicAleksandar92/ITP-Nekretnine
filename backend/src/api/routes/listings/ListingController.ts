@@ -21,6 +21,10 @@ export class ListingController extends Controller {
   async getListingById(@Path() id: string): Promise<Listing | null> {
     return listingDAO.getListingById(id);
   }
+  @Get("getListingsByOglasivac/:oglasivac")
+  async getListingsByOglasivac(@Path() oglasivac: string) {
+    return listingDAO.getListingsByOglasivac(oglasivac);
+  }
   @Get("getAverageValues")
   async getAverageValues(): Promise<AverageValue[] | null> {
     return await listingDAO.getAverageValues();

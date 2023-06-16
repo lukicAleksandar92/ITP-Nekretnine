@@ -16,6 +16,9 @@ class ListingDAO {
   async getListingById(id: string): Promise<Listing | null> {
     return this.listingModel.findById(id);
   }
+  async getListingsByOglasivac(oglasivac: string): Promise<Listing[] | null> {
+    return this.listingModel.find({ oglasivac: oglasivac });
+  }
   async getAverageValues(): Promise<AverageValue[] | null> {
     return this.listingModel.aggregate([
       {

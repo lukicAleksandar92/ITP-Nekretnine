@@ -24,6 +24,11 @@ class AgencijeDAO {
             return this.agencijegModel.find();
         });
     }
+    getAgencijaByNaziv(naziv) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.agencijegModel.findOne({ naziv: naziv });
+        });
+    }
 }
 exports.agencijeDAO = new AgencijeDAO();
 //# sourceMappingURL=AgencijeDAO.js.map

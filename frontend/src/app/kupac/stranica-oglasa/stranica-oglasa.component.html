@@ -107,26 +107,26 @@
         <div class="box" *ngIf="vidiVise">
           <br />
           <div class="box">
-            <b>Broj telefona:</b>
+            <b>Broj telefona: </b> {{ oglasivac.telefon }}
             <!-- povezati nepohodne podatke -->
           </div>
           <!--dodatne informacije ako radi za agenciju -->
-          <div *ngIf="false">
+          <div *ngIf="oglasivac.selectedAgency">
             <div class="box">
               <b>Broj licence:</b>
-              <!-- povezati nepohodne podatke -->
+              {{ oglasivac.licenca }}
             </div>
             <div class="box">
               <b>Agencija:</b>
-              <!-- povezati nepohodne podatke -->
+              {{ oglasivac.selectedAgency }}
             </div>
             <div class="box">
               <b>Grad agencije:</b>
-              <!-- povezati nepohodne podatke -->
+              {{ agencija.grad }}
             </div>
             <div class="box">
               <b>PIB agencije:</b>
-              <!-- povezati nepohodne podatke -->
+              {{ agencija.PIB }}
             </div>
           </div>
         </div>

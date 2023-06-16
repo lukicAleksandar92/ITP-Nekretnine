@@ -11,9 +11,15 @@ import { ListingService } from 'src/app/services/listing.service';
 export class MojiOglasiComponent implements OnInit {
   constructor(private listingService: ListingService, private router: Router) {}
   ngOnInit(): void {
-    this.listingService.getAllListings().then((res) => {
-      this.allListings = JSON.parse(JSON.stringify(res));
-    });
+    const userJson = localStorage.getItem('loggedUser');
+    if (!userJson) return;
+    else {
+      const user = JSON.parse(userJson + '');
+
+      this.listingService.getListingsByOglasivac(user.kor_ime).then((res) => {
+        this.allListings = JSON.parse(JSON.stringify(res));
+      });
+    }
   }
   allListings: Listing[] = [];
   mapMarker = faMapMarkerAlt;

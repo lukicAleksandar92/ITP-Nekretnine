@@ -35,6 +35,11 @@ class ListingDAO {
             return this.listingModel.findById(id);
         });
     }
+    getListingsByOglasivac(oglasivac) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.listingModel.find({ oglasivac: oglasivac });
+        });
+    }
     getAverageValues() {
         return __awaiter(this, void 0, void 0, function* () {
             return this.listingModel.aggregate([

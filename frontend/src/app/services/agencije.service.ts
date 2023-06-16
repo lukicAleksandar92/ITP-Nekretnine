@@ -13,4 +13,9 @@ export class AgencijeService {
   getAgencije() {
     return firstValueFrom(this.http.get(`${this.back}/agencije/getAll`));
   }
+  getAgencijaByNaziv(naziv: string) {
+    return firstValueFrom(
+      this.http.get(`${this.back}/agencije/fetchAgencija/${naziv}`)
+    );
+  }
 }

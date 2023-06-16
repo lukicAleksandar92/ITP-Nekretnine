@@ -37,6 +37,11 @@ const models = {
         "type": { "ref": "FlattenMaps_T_", "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ObjectId": {
+        "dataType": "refAlias",
+        "type": { "dataType": "string", "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Slika": {
         "dataType": "refObject",
         "properties": {
@@ -73,11 +78,6 @@ const models = {
             "tipOglasivaca": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ObjectId": {
-        "dataType": "refAlias",
-        "type": { "dataType": "string", "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AverageValueId": {
@@ -186,6 +186,23 @@ function RegisterRoutes(app) {
         }
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/agencije/fetchAgencija/:naziv', ...((0, runtime_1.fetchMiddlewares)(AgencijeController_1.AgencijeController)), ...((0, runtime_1.fetchMiddlewares)(AgencijeController_1.AgencijeController.prototype.getAgencijaByNaziv)), function AgencijeController_getAgencijaByNaziv(request, response, next) {
+        const args = {
+            naziv: { "in": "path", "name": "naziv", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new AgencijeController_1.AgencijeController();
+            const promise = controller.getAgencijaByNaziv.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     app.get('/helloWorld/message', ...((0, runtime_1.fetchMiddlewares)(HelloWorldController_1.HelloWorldController)), ...((0, runtime_1.fetchMiddlewares)(HelloWorldController_1.HelloWorldController.prototype.getHelloWorldMessage)), function HelloWorldController_getHelloWorldMessage(request, response, next) {
         const args = {};
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -243,6 +260,23 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new ListingController_1.ListingController();
             const promise = controller.getListingById.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/listings/getListingsByOglasivac/:oglasivac', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.getListingsByOglasivac)), function ListingController_getListingsByOglasivac(request, response, next) {
+        const args = {
+            oglasivac: { "in": "path", "name": "oglasivac", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new ListingController_1.ListingController();
+            const promise = controller.getListingsByOglasivac.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

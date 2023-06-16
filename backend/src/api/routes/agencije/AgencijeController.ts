@@ -8,4 +8,10 @@ export class AgencijeController extends Controller {
   async getAllListings() {
     return await agencijeDAO.getAllListings();
   }
+  @Get("fetchAgencija/:naziv")
+  async getAgencijaByNaziv(@Path() naziv: string) {
+    let result = await agencijeDAO.getAgencijaByNaziv(naziv);
+    if (result == null) this.setStatus(404);
+    return result;
+  }
 }

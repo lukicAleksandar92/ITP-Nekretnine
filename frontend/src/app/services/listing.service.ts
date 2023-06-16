@@ -21,6 +21,11 @@ export class ListingService {
   getListingById(id: string) {
     return firstValueFrom(this.http.get(`${this.back}/listings/getOne/${id}`));
   }
+  getListingsByOglasivac(oglasivac: string) {
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getListingsByOglasivac/${oglasivac}`)
+    );
+  }
   getAverageValues() {
     return firstValueFrom(
       this.http.get(`${this.back}/listings/getAverageValues`)
