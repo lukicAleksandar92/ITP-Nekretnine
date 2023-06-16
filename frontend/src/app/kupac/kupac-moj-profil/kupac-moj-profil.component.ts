@@ -9,6 +9,7 @@ import {
 import { faArrowRight, faX } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-kupac-moj-profil',
@@ -35,7 +36,7 @@ export class KupacMojProfilComponent implements OnInit {
     this.slikaSeMenja = !this.slikaSeMenja;
   }
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   @Input() user: User = new User();
   @Output() updateUser = new EventEmitter<User>();
@@ -124,5 +125,11 @@ export class KupacMojProfilComponent implements OnInit {
       .catch((res) => {
         alert(res.error);
       });
+
+      
+        localStorage.clear();
+        this.user == null;
+        this.router.navigate(['']);
+      
   }
 }
