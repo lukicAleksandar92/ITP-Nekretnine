@@ -36,7 +36,7 @@ export class ProdavacGuard implements CanActivate {
       try {
         const user = JSON.parse(userJson);
 
-        if (user.tip === 'samostalniProdavac' || user.tip === 'agent') {
+        if (user.tip === 'samostalni prodavac' || user.tip === 'agent') {
           return true;
         } else if (user.tip === 'kupac') {
           alert('Nemate pristup');

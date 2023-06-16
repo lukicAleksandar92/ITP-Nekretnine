@@ -1,3 +1,8 @@
 section {
   min-height: calc(100vh - 399px);
 }
+
+.greska {
+  color: red;
+  font-size: 1.2rem;
+}

@@ -36,7 +36,7 @@ export class KupacGuard implements CanActivate {
         const user = JSON.parse(userJson);
         if (user.tip === 'kupac') {
           return true;
-        } else if (user.tip === 'samostalniProdavac' || user.tip === 'agent') {
+        } else if (user.tip === 'samostalni prodavac' || user.tip === 'agent') {
           alert('Nemate pristup');
           this.router.navigate(['/moji-oglasi']);
           return false;

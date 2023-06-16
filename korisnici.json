@@ -1,6 +1,6 @@
 [{
   "_id": {
-    "$oid": "64776675fc5554f53408a854"
+    "$oid": "6476611cff0abe5a9b163fe4"
   },
   "ime": "Marko",
   "prezime": "Marković",
@@ -10,50 +10,99 @@
   "email": "marko@example.com",
   "kor_ime": "markomarko",
   "lozinka": "lozinka123",
-  "tip": "kupac"
-},{
-  "_id": {
-    "$oid": "64776675fc5554f53408a855"
-  },
-  "ime": "Ana",
-  "prezime": "Ilić",
-  "datumRodjenja": "1985-05-15",
-  "grad": "Novi Sad",
-  "telefon": "9876543210",
-  "email": "ana@example.com",
-  "kor_ime": "anailic",
-  "lozinka": "lozinka456",
-  "tip": "samostalniProdavac"
-},{
-  "_id": {
-    "$oid": "64776675fc5554f53408a856"
-  },
-  "ime": "Milica",
-  "prezime": "Jovanović",
-  "datumRodjenja": "1995-09-20",
-  "grad": "Niš",
-  "telefon": "5555555555",
-  "email": "milica@example.com",
-  "kor_ime": "milicajovanovic",
-  "lozinka": "lozinka789",
-  "tip": "agent"
-},{
-  "_id": {
-    "$oid": "6489c2327f900c9c9932e18e"
-  },
-  "ime": "Petar",
-  "prezime": "Petrovic",
-  "datumRodjenja": "1991-01-01",
-  "grad": "Beograd",
-  "telefon": 123456789,
-  "email": "petar@primer.com",
-  "kor_ime": "pera",
-  "lozinka": "pera123",
   "tip": "kupac",
   "omiljeniOglasi": [
+    "648715be5434ba385df8b7ec"
+  ]
+},
+{
+  "_id": {
+    "$oid": "647741dae3bfe3232008cba6"
+  },
+  "ime": "Aleksandar",
+  "prezime": "Lukic",
+  "datumRodjenja": "2023-05-18",
+  "grad": "Pancevo",
+  "telefon": 64789123,
+  "email": "luka789@mail.com",
+  "kor_ime": "lukicaca",
+  "lozinka": "lukicaca123",
+  "tip": "kupac",
+  "__v": 0,
+  "omiljeniOglasi": [
+    "648713a85434ba385df8b732",
+    "648717865434ba385df8b8ee",
     "648715be5434ba385df8b7ec",
-    "648716fd5434ba385df8b88f",
-    "648717865434ba385df8b8ee"
-  ],
+    "648714e85434ba385df8b797",
+    "648716fd5434ba385df8b88f"
+  ]
+},
+{
+  "_id": {
+    "$oid": "648723301c2a340e40aa1eb3"
+  },
+  "ime": "Jovan",
+  "prezime": "Jovanovic",
+  "datumRodjenja": "1992-09-02",
+  "grad": "Pirot",
+  "telefon": 123321,
+  "email": "jovanjovanovic@mail.com",
+  "kor_ime": "jovajova",
+  "lozinka": "jovajova123",
+  "tip": "agent",
+  "__v": 0,
+  "selectedAgency": "Zidart",
+  "licenca": "323565"
+},
+{
+  "_id": {
+    "$oid": "648b3302cda4186f7da50b06"
+  },
+  "ime": "Tijana",
+  "prezime": "Lukic",
+  "datumRodjenja": "1995-05-06",
+  "grad": "Pristina",
+  "telefon": 789456,
+  "email": "tinatina@mail.com",
+  "kor_ime": "tina",
+  "lozinka": "tina123",
+  "tip": "agent",
+  "selectedAgency": "Euromont",
+  "licenca": 555666,
+  "omiljeniOglasi": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c5cb9f3ab9475421ed6cb"
+  },
+  "ime": "Petar",
+  "prezime": "Peric",
+  "datumRodjenja": "1995-05-05",
+  "grad": "Pancevo",
+  "telefon": 6123456,
+  "email": "pera@mail.com",
+  "kor_ime": "pera",
+  "lozinka": "pera123",
+  "tip": "agent",
+  "selectedAgency": "City Expert",
+  "licenca": 345678,
+  "omiljeniOglasi": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c7f51b4a6105f783e9e17"
+  },
+  "ime": "Goran",
+  "prezime": "Goranic",
+  "datumRodjenja": "1967-05-05",
+  "grad": "Pancevo",
+  "telefon": 63229674,
+  "email": "goran@mail.rs",
+  "kor_ime": "goran",
+  "lozinka": "Goran123!",
+  "tip": "samostalni prodavac",
+  "omiljeniOglasi": [],
   "__v": 0
 }]

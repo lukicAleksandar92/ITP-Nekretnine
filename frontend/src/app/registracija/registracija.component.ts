@@ -34,6 +34,7 @@ export class RegistracijaComponent implements OnInit {
   email!: string;
   kor_ime!: string;
   lozinka!: string;
+  confirmPassword!: string;
   tip!: string;
   naziv!: string;
   agencije!: Agencije[];
@@ -41,6 +42,12 @@ export class RegistracijaComponent implements OnInit {
   licenca!: number;
 
   register() {
+    // Proverava da li su sva polja popunjena
+    if (!this.ime || !this.prezime || !this.datumRodjenja || !this.grad || !this.telefon || !this.email || !this.kor_ime || !this.lozinka || !this.tip ) {
+      alert('Morate popuniti sva polja');
+      return; 
+    }
+
     let user = new User();
 
     user.ime = this.ime;
@@ -54,7 +61,6 @@ export class RegistracijaComponent implements OnInit {
     user.tip = this.tip;
     user.selectedAgency = this.selectedAgency;
     user.licenca = this.licenca;
-    
 
     this.userService
       .insertUser(user)
@@ -76,6 +82,8 @@ export class RegistracijaComponent implements OnInit {
       //oglasivac
       this.router.navigate(['/moji-oglasi']);
     }
-    
+
+
   }
+
 }
