@@ -30,7 +30,7 @@ export class RegistracijaComponent implements OnInit {
   prezime!: string;
   datumRodjenja!: string;
   grad!: string;
-  telefon!: string;
+  telefon!: number;
   email!: string;
   kor_ime!: string;
   lozinka!: string;

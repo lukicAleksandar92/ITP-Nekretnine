@@ -142,7 +142,7 @@ const models = {
             "prezime": { "dataType": "string", "required": true },
             "datumRodjenja": { "dataType": "string", "required": true },
             "grad": { "dataType": "string", "required": true },
-            "telefon": { "dataType": "string", "required": true },
+            "telefon": { "dataType": "double", "required": true },
             "email": { "dataType": "string", "required": true },
             "kor_ime": { "dataType": "string", "required": true },
             "lozinka": { "dataType": "string", "required": true },
