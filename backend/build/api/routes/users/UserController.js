@@ -60,6 +60,14 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    updateUserPassword(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield UserDAO_1.userDAO.updateUserPassword(user);
+            if (result == "Korisnik ne postoji")
+                this.setStatus(404);
+            return result;
+        });
+    }
     getUserByKorIme(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.getUserByKorIme(kor_ime);
@@ -97,6 +105,10 @@ __decorate([
     (0, tsoa_1.Put)("updateAgency"),
     __param(0, (0, tsoa_1.Body)())
 ], UserController.prototype, "updateUserAgency", null);
+__decorate([
+    (0, tsoa_1.Put)("updatePassword"),
+    __param(0, (0, tsoa_1.Body)())
+], UserController.prototype, "updateUserPassword", null);
 __decorate([
     (0, tsoa_1.Get)("fetchUser/:kor_ime"),
     __param(0, (0, tsoa_1.Path)())

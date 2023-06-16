@@ -40,11 +40,13 @@ export class UserController extends Controller {
 
     return result;
   }
-  
-  
-  
-  
+  @Put("updatePassword")
+  async updateUserPassword(@Body() user: User) {
+    let result = await userDAO.updateUserPassword(user);
+    if (result == "Korisnik ne postoji") this.setStatus(404);
 
+    return result;
+  }
 
   @Get("fetchUser/:kor_ime")
   async getUserByKorIme(@Path() kor_ime: string) {

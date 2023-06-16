@@ -69,6 +69,15 @@ class UserDAO {
             return "Korisnik ne psotoji";
         });
     }
+    updateUserPassword(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let userInDB = yield this.getUserByKorIme(user.kor_ime);
+            if (userInDB != null) {
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { lozinka: user.lozinka } });
+            }
+            return "Korisnik ne psotoji";
+        });
+    }
     updateUserAgency(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let userInDB = yield this.getUserByKorIme(user.kor_ime);

@@ -40,16 +40,23 @@ export class UserService {
       this.http.put(`${this.back}/users/updateFavoriteListing`, user)
     );
   }
-  updateUserEmail(user: User){
-    return firstValueFrom(this.http.put(`${this.back}/users/updateEmail`, user));
+  updateUserEmail(user: User) {
+    return firstValueFrom(
+      this.http.put(`${this.back}/users/updateEmail`, user)
+    );
   }
-  updateUserTel(user: User){
+  updateUserTel(user: User) {
     return firstValueFrom(this.http.put(`${this.back}/users/updateTel`, user));
   }
-
-  updateUserAgency(user: User){
-    return firstValueFrom(this.http.put(`${this.back}/users/updateAgency`, user));
+  updateUserpassword(user: User) {
+    return firstValueFrom(
+      this.http.put(`${this.back}/users/updatePassword`, user)
+    );
   }
 
-
+  updateUserAgency(user: User) {
+    return firstValueFrom(
+      this.http.put(`${this.back}/users/updateAgency`, user)
+    );
+  }
 }
