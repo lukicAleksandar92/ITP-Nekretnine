@@ -38,7 +38,7 @@
     <!-- Telefon i njegova promena -->
 
     <div class="flex">
-      <span> <b>Broj Telefona:</b> {{ user.telefon }} </span>
+      <span> <b>Broj Telefona:</b> 0{{ user.telefon }} </span>
       <fa-icon
         [icon]="arrowRight"
         *ngIf="!telefonSeMenja"
@@ -121,6 +121,7 @@
     </div>
     <div class="flex">
       <b>Promena profilne slike </b>
+      
       <fa-icon
         [icon]="arrowRight"
         *ngIf="!slikaSeMenja"
@@ -133,18 +134,40 @@
       ></fa-icon>
     </div>
     <div *ngIf="slikaSeMenja">
-      <input
-        type="file"
-        class="box"
-        id="profile-picture"
-        name="profile-picture"
-        accept="image/jpg, image/png"
-      />
+      <div class="input tall">
+        <input
+          type="file"
+          class="box"
+          id="profile-picture"
+          name="profile-picture"
+          accept="image/jpg, image/png"
+          #fileInput
+          (change)="handleFileInput($event)"
+          style="color: transparent; border: none"
+          multiple
+        />
+        <div class="preview">
+          <div class="imgs">
+            <img
+              [src]="slika.source"
+              alt=""
+              *ngFor="let slika of slikeString64"
+            />
+          </div>
+          <div class="names">
+            <div *ngFor="let slika of slikeString64">
+              {{ slika.name }}
+              <button (click)="deselectFile(slika.name)">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <input
         type="submit"
         value="Potvrdi promenu slike"
         name="submit"
         class="btn"
+        (click)="izmenaSlike()"
       />
     </div>
   </div>

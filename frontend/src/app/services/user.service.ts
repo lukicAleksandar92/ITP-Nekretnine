@@ -59,4 +59,11 @@ export class UserService {
       this.http.put(`${this.back}/users/updateAgency`, user)
     );
   }
+
+  updateUserSlike(user: User) {
+    return firstValueFrom(
+      this.http.put(`${this.back}/users/updateSlike`, user)
+    );
+  }
+
 }
