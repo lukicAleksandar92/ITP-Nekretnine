@@ -2,7 +2,9 @@
 <section class="form-container">
   <form action="" method="post">
     <h3>Napravi nov nalog</h3>
-    <span class="greska" *ngIf="imeInput.invalid && imeInput.touched">Morate uneti Ime</span>
+    <span class="greska" *ngIf="imeInput.invalid && imeInput.touched"
+      >Morate uneti Ime</span
+    >
     <input
       type="text"
       name="ime"
@@ -12,7 +14,9 @@
       required
       #imeInput="ngModel"
     />
-    <span class="greska" *ngIf="prezimeInput.invalid && prezimeInput.touched">Morate uneti Prezime</span>
+    <span class="greska" *ngIf="prezimeInput.invalid && prezimeInput.touched"
+      >Morate uneti Prezime</span
+    >
     <input
       type="text"
       name="prezime"
@@ -22,7 +26,11 @@
       required
       #prezimeInput="ngModel"
     />
-    <span class="greska" *ngIf="datumRodjenjaInput.invalid && datumRodjenjaInput.touched">Morate uneti datum rodjenja</span>
+    <span
+      class="greska"
+      *ngIf="datumRodjenjaInput.invalid && datumRodjenjaInput.touched"
+      >Morate uneti datum rodjenja</span
+    >
     <input
       placeholder="Datum rođenja"
       name="datumRodjenja"
@@ -35,7 +43,9 @@
       required
       #datumRodjenjaInput="ngModel"
     />
-    <span class="greska" *ngIf="gradInput.invalid && gradInput.touched">Morate uneti Grad</span>
+    <span class="greska" *ngIf="gradInput.invalid && gradInput.touched"
+      >Morate uneti Grad</span
+    >
     <input
       type="text"
       name="grad"
@@ -45,7 +55,9 @@
       required
       #gradInput="ngModel"
     />
-    <span class="greska" *ngIf="telefonInput.invalid && telefonInput.touched">Morate uneti broj telefona ispravno uz 06 i max 10 cifara</span>
+    <span class="greska" *ngIf="telefonInput.invalid && telefonInput.touched"
+      >Morate uneti broj telefona ispravno uz 06 i max 10 cifara</span
+    >
     <input
       type="tel"
       name="telefon"
@@ -56,7 +68,9 @@
       #telefonInput="ngModel"
       pattern="^06\d{0,8}$"
     />
-    <span class="greska" *ngIf="emailInput.invalid && emailInput.touched">Morate uneti Email ispravno</span>
+    <span class="greska" *ngIf="emailInput.invalid && emailInput.touched"
+      >Morate uneti Email ispravno</span
+    >
     <input
       type="email"
       name="email"
@@ -67,7 +81,9 @@
       #emailInput="ngModel"
       pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
     />
-    <span class="greska" *ngIf="kor_imeInput.invalid && kor_imeInput.touched">Morate uneti Korisnicko Ime</span>
+    <span class="greska" *ngIf="kor_imeInput.invalid && kor_imeInput.touched"
+      >Morate uneti Korisnicko Ime</span
+    >
     <input
       type="text"
       name="kor_ime"
@@ -77,7 +93,9 @@
       required
       #kor_imeInput="ngModel"
     />
-    <span class="greska" *ngIf="lozinkaInput.invalid && lozinkaInput.touched">Morate uneti polje lozinke prema uputstvima</span>
+    <span class="greska" *ngIf="lozinkaInput.invalid && lozinkaInput.touched"
+      >Morate uneti polje lozinke prema uputstvima</span
+    >
     <input
       type="password"
       name="lozinka"
@@ -88,7 +106,11 @@
       #lozinkaInput="ngModel"
       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@?]).{8,}$"
     />
-    <span class="greska" *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched">Morate uneti ponovo lozinku</span>
+    <span
+      class="greska"
+      *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched"
+      >Morate uneti ponovo lozinku</span
+    >
     <input
       type="password"
       name="c_pass"
@@ -99,7 +121,6 @@
       #confirmPasswordInput="ngModel"
     />
 
-    
     <select name="tip" id="tip" class="box" [(ngModel)]="tip" required>
       <option value="undefined" disabled>Izaberite tip korisnika</option>
       <option value="kupac">kupac</option>
@@ -107,9 +128,13 @@
       <option value="agent">agent</option>
     </select>
 
-        <!-- stavljamo da se vidi izbor agencije samo ako je tip korisnika agent-->
+    <!-- stavljamo da se vidi izbor agencije samo ako je tip korisnika agent-->
     <div *ngIf="tip == 'agent'">
-      <span class="greska" *ngIf="selectedAgencyInput.invalid && selectedAgencyInput.touched">Morate odabrati agenciju</span>
+      <span
+        class="greska"
+        *ngIf="selectedAgencyInput.invalid && selectedAgencyInput.touched"
+        >Morate odabrati agenciju</span
+      >
       <select
         name="agencija"
         class="input box"
@@ -122,7 +147,9 @@
           {{ a.naziv }}
         </option>
       </select>
-      <span class="greska" *ngIf="licencaInput.invalid && licencaInput.touched">Morate ispravno upisati licencu sa 6 cifara</span>
+      <span class="greska" *ngIf="licencaInput.invalid && licencaInput.touched"
+        >Morate ispravno upisati licencu sa 6 cifara</span
+      >
       <input
         type="number"
         name="licenca"
@@ -135,7 +162,9 @@
       />
     </div>
 
-    <label for="profile-picture" style="font-size: 1.8rem">Dodaj profilnu sliku:</label>
+    <label for="profile-picture" style="font-size: 1.8rem"
+      >Dodaj profilnu sliku:</label
+    >
     <div class="input tall">
       <input
         type="file"
@@ -146,7 +175,6 @@
         #fileInput
         (change)="handleFileInput($event)"
         style="color: transparent; border: none"
-        multiple
       />
       <div class="preview">
         <div class="imgs">

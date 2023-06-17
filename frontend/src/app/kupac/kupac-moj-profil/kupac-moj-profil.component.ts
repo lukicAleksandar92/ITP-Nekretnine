@@ -82,13 +82,17 @@ export class KupacMojProfilComponent implements OnInit {
     let changedUser = new User();
     changedUser.email = this.newMail;
     changedUser.kor_ime = this.user.kor_ime;
-    console.log(changedUser);
+
     this.userService
       .updateUserEmail(changedUser)
       .then((res) => {
-        alert('Uspesno izmenjena email adresa');
-        this.ucitajInfoKorisnika();
-        this.updateUser.emit(changedUser);
+        if (res == 'Email je zauzet') {
+          alert('Email je zauzet');
+        } else {
+          alert('Uspesno izmenjena email adresa');
+          this.ucitajInfoKorisnika();
+          this.updateUser.emit(changedUser);
+        }
       })
       .catch((res) => {
         alert(res.error);

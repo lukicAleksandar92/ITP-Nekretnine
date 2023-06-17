@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, Slika } from '../models/User';
+import { User, Slika, LoggedUser } from '../models/User';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { SharedCurrUserService } from '../services/shared-curr-user.service';
@@ -40,18 +40,27 @@ export class RegistracijaComponent implements OnInit {
   agencije!: Agencije[];
   selectedAgency!: string;
   licenca!: number;
-
+  loggedUser!: LoggedUser;
   register() {
-
     if (this.lozinka != this.confirmPassword) {
       alert('Lozinke se ne podudaraju!');
       return;
     }
 
     // Proverava da li su sva polja popunjena
-    if (!this.ime || !this.prezime || !this.datumRodjenja || !this.grad || !this.telefon || !this.email || !this.kor_ime || !this.lozinka || !this.tip ) {
+    if (
+      !this.ime ||
+      !this.prezime ||
+      !this.datumRodjenja ||
+      !this.grad ||
+      !this.telefon ||
+      !this.email ||
+      !this.kor_ime ||
+      !this.lozinka ||
+      !this.tip
+    ) {
       alert('Morate popuniti sva polja');
-      return; 
+      return;
     }
 
     let user = new User();
@@ -69,26 +78,36 @@ export class RegistracijaComponent implements OnInit {
     user.licenca = this.licenca;
     user.slike = this.slikeString64;
 
-    this.userService
-      .insertUser(user)
-      .then((res) => {
-        alert('Uspesno kreiran korisnik');
-      })
-      .catch((res) => {
-        alert(res.error);
-      });
+    this.userService.checkNameAndEmail(user).then((res) => {
+      if (res == 'sve ok') {
+        this.userService
+          .insertUser(user)
+          .then((res) => {
+            alert('Uspesno kreiran korisnik');
+            this.loggedUser = {
+              kor_ime: user.kor_ime,
+              tip: user.tip,
+            };
+            localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
+            this.sharedCurrUserService.emitUser(user);
+            //this.output.emit(user);
 
-    localStorage.setItem('loggedUser', JSON.stringify(user));
-    this.sharedCurrUserService.emitUser(user);
-    //this.output.emit(user);
-
-    if (user.tip == 'kupac') {
-      //kupac
-      this.router.navigate(['/naslovna']);
-    } else {
-      //oglasivac
-      this.router.navigate(['/moji-oglasi']);
-    }
+            if (user.tip == 'kupac') {
+              //kupac
+              this.router.navigate(['/naslovna']);
+            } else {
+              //oglasivac
+              this.router.navigate(['/moji-oglasi']);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error.message);
+          });
+      } else {
+        alert(res);
+      }
+    });
   }
   odabraneSlike: File[] = [];
   slikeString64: Slika[] = [];
@@ -114,6 +133,4 @@ export class RegistracijaComponent implements OnInit {
       (img) => img.name !== imeSlike
     );
   }
-
-
 }

@@ -28,6 +28,20 @@ class UserDAO {
   async getUserByKorIme(kor_ime: string): Promise<User | null> {
     return this.userModel.findOne({ kor_ime: kor_ime });
   }
+  async getUserByEmail(email: string): Promise<User | null> {
+    return this.userModel.findOne({ email: email });
+  }
+  async checkKorImeAndEmail(kor_ime: string, email: string) {
+    let resultKorIme = await this.userModel.findOne({ kor_ime: kor_ime });
+    if (resultKorIme != null) {
+      return "Korisnicko ime je zauzeto";
+    }
+    let resultEmail = await this.userModel.findOne({ email: email });
+    if (resultEmail != null) {
+      return "Email je zauzet";
+    }
+    return "sve ok";
+  }
 
   async insertUser(user: User) {
     let userInDB = await this.getUserByKorIme(user.kor_ime);
@@ -42,7 +56,10 @@ class UserDAO {
 
   async updateUserEmail(user: User) {
     let userInDB = await this.getUserByKorIme(user.kor_ime);
-
+    let emailInDB = await this.getUserByEmail(user.email);
+    if (emailInDB != null) {
+      return "Email je zauzet";
+    }
     if (userInDB != null) {
       return this.userModel.updateOne(
         { kor_ime: user.kor_ime },
@@ -50,7 +67,7 @@ class UserDAO {
       );
     }
 
-    return "Korisnik ne psotoji";
+    return "Korisnik ne postoji";
   }
 
   async updateUserTel(user: User) {
@@ -97,7 +114,7 @@ class UserDAO {
     if (userInDB != null) {
       return this.userModel.updateOne(
         { kor_ime: user.kor_ime },
-        { $set: { selectedAgency: user.selectedAgency } }
+        { $set: { slike: user.slike } }
       );
     }
 

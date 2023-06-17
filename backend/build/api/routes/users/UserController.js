@@ -30,9 +30,12 @@ let UserController = class UserController extends tsoa_1.Controller {
     insertUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.insertUser(user);
-            if (result == "Korisnik vec postoji") {
-                this.setStatus(409);
-            }
+            return result;
+        });
+    }
+    checkNameAndEmail(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield UserDAO_1.userDAO.checkKorImeAndEmail(user.kor_ime, user.email);
             return result;
         });
     }
@@ -70,7 +73,7 @@ let UserController = class UserController extends tsoa_1.Controller {
     }
     updateUserSlike(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield UserDAO_1.userDAO.updateUserPassword(user);
+            let result = yield UserDAO_1.userDAO.updateUserSlike(user);
             if (result == "Korisnik ne postoji")
                 this.setStatus(404);
             return result;
@@ -101,6 +104,10 @@ __decorate([
     (0, tsoa_1.Post)("insert"),
     __param(0, (0, tsoa_1.Body)())
 ], UserController.prototype, "insertUser", null);
+__decorate([
+    (0, tsoa_1.Post)("check"),
+    __param(0, (0, tsoa_1.Body)())
+], UserController.prototype, "checkNameAndEmail", null);
 __decorate([
     (0, tsoa_1.Put)("updateEmail"),
     __param(0, (0, tsoa_1.Body)())

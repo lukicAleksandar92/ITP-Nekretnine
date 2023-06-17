@@ -41,6 +41,24 @@ class UserDAO {
             return this.userModel.findOne({ kor_ime: kor_ime });
         });
     }
+    getUserByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.userModel.findOne({ email: email });
+        });
+    }
+    checkKorImeAndEmail(kor_ime, email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let resultKorIme = yield this.userModel.findOne({ kor_ime: kor_ime });
+            if (resultKorIme != null) {
+                return "Korisnicko ime je zauzeto";
+            }
+            let resultEmail = yield this.userModel.findOne({ email: email });
+            if (resultEmail != null) {
+                return "Email je zauzet";
+            }
+            return "sve ok";
+        });
+    }
     insertUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let userInDB = yield this.getUserByKorIme(user.kor_ime);
@@ -54,10 +72,14 @@ class UserDAO {
     updateUserEmail(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let userInDB = yield this.getUserByKorIme(user.kor_ime);
+            let emailInDB = yield this.getUserByEmail(user.email);
+            if (emailInDB != null) {
+                return "Email je zauzet";
+            }
             if (userInDB != null) {
                 return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { email: user.email } });
             }
-            return "Korisnik ne psotoji";
+            return "Korisnik ne postoji";
         });
     }
     updateUserTel(user) {
@@ -91,7 +113,7 @@ class UserDAO {
         return __awaiter(this, void 0, void 0, function* () {
             let userInDB = yield this.getUserByKorIme(user.kor_ime);
             if (userInDB != null) {
-                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { selectedAgency: user.selectedAgency } });
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { slike: user.slike } });
             }
             return "Korisnik ne psotoji";
         });

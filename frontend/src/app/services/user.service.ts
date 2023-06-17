@@ -21,6 +21,9 @@ export class UserService {
   insertUser(user: User) {
     return firstValueFrom(this.http.post(`${this.back}/users/insert`, user));
   }
+  checkNameAndEmail(user: User) {
+    return firstValueFrom(this.http.post(`${this.back}/users/check`, user));
+  }
   getUserByKorIme(kor_ime: string) {
     return firstValueFrom(
       this.http.get(`${this.back}/users/fetchUser/${kor_ime}`)
@@ -65,5 +68,4 @@ export class UserService {
       this.http.put(`${this.back}/users/updateSlike`, user)
     );
   }
-
 }

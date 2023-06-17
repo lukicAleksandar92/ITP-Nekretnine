@@ -12,13 +12,14 @@ export class UserController extends Controller {
   @Post("insert")
   async insertUser(@Body() user: User) {
     let result = await userDAO.insertUser(user);
-    if (result == "Korisnik vec postoji") {
-      this.setStatus(409);
-    }
 
     return result;
   }
-
+  @Post("check")
+  async checkNameAndEmail(@Body() user: User) {
+    let result = await userDAO.checkKorImeAndEmail(user.kor_ime, user.email);
+    return result;
+  }
   @Put("updateEmail")
   async updateUserEmail(@Body() user: User) {
     let result = await userDAO.updateUserEmail(user);
@@ -49,7 +50,7 @@ export class UserController extends Controller {
   }
   @Put("updateSlike")
   async updateUserSlike(@Body() user: User) {
-    let result = await userDAO.updateUserPassword(user);
+    let result = await userDAO.updateUserSlike(user);
     if (result == "Korisnik ne postoji") this.setStatus(404);
 
     return result;
