@@ -22,23 +22,27 @@ exports.UserController = void 0;
 const tsoa_1 = require("tsoa");
 const UserDAO_1 = require("../../../mongo/models/users/UserDAO");
 let UserController = class UserController extends tsoa_1.Controller {
+    //POST zahtev za login korisnika
     login(user) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield UserDAO_1.userDAO.login(user.kor_ime, user.lozinka);
         });
     }
+    //POST zahtev unos korisnika
     insertUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.insertUser(user);
             return result;
         });
     }
+    //POST zahtev za proveru jedinstvenog kor.imena i emaila
     checkNameAndEmail(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.checkKorImeAndEmail(user.kor_ime, user.email);
             return result;
         });
     }
+    //PUT zahtev za azuiranje mail-a
     updateUserEmail(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.updateUserEmail(user);
@@ -47,6 +51,7 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    //PUT zahtev za azuiranje telefona
     updateUserTel(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.updateUserTel(user);
@@ -55,6 +60,7 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    //PUT zahtev za azuiranje agencije
     updateUserAgency(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.updateUserAgency(user);
@@ -63,6 +69,7 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    //PUT zahtev za azuiranje lozinke
     updateUserPassword(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.updateUserPassword(user);
@@ -71,6 +78,7 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    //PUT zahtev za azuiranje slike
     updateUserSlike(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.updateUserSlike(user);
@@ -79,6 +87,7 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    //GET ruta za pretragu korisnika po korisničkom imenu 
     getUserByKorIme(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.getUserByKorIme(kor_ime);
@@ -87,6 +96,7 @@ let UserController = class UserController extends tsoa_1.Controller {
             return result;
         });
     }
+    //PUT zahtev za azuiranje omiljenih nekretnina
     updateListing(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield UserDAO_1.userDAO.updateFavoriteListing(user);

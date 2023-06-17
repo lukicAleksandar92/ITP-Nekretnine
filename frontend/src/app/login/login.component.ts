@@ -3,7 +3,6 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoggedUser, User } from '../models/User';
 import { UserService } from '../services/user.service';
-import { SharedCurrUserService } from '../services/shared-curr-user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private sharedCurrUserService: SharedCurrUserService
   ) {}
 
   ngOnInit(): void {}

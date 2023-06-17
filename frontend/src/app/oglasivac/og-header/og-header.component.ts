@@ -7,7 +7,6 @@ import {
   faArrowRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/User';
-import { SharedCurrUserService } from 'src/app/services/shared-curr-user.service';
 @Component({
   selector: 'app-og-header',
   templateUrl: './og-header.component.html',
@@ -15,22 +14,22 @@ import { SharedCurrUserService } from 'src/app/services/shared-curr-user.service
 })
 export class OgHeaderComponent implements OnInit{
 
-
+  //upravljanje ikonicama
   userIcon = faCircleUser;
   houseIcon = faHouse;
   plusIcon = faPlus;
   arrowRighIcon = faArrowRight;
 
+  // Kreiranje nove instance klase User i dodeljivanje vrednosti promenljivoj user
   user = new User();
   
-  constructor(private router: Router,
-    private sharedCurrUserService: SharedCurrUserService){}
+  constructor(private router: Router){}
 
   ngOnInit(): void {
     
   }
 
-  
+  // Odjava korisnika
   logout() {
     localStorage.clear();
     this.user == null;

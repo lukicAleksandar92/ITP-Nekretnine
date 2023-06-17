@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User, Slika, LoggedUser } from '../models/User';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { SharedCurrUserService } from '../services/shared-curr-user.service';
 import { Agencije } from '../models/Agencije';
 import { AgencijeService } from '../services/agencije.service';
 
@@ -15,7 +14,6 @@ export class RegistracijaComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private sharedCurrUserService: SharedCurrUserService,
     private agencijeService: AgencijeService
   ) {}
 
@@ -41,7 +39,11 @@ export class RegistracijaComponent implements OnInit {
   selectedAgency!: string;
   licenca!: number;
   loggedUser!: LoggedUser;
+
+
   register() {
+
+    // Proverava da li se lozinke podudaraju
     if (this.lozinka != this.confirmPassword) {
       alert('Lozinke se ne podudaraju!');
       return;
@@ -78,6 +80,7 @@ export class RegistracijaComponent implements OnInit {
     user.licenca = this.licenca;
     user.slike = this.slikeString64;
 
+    // Proverava da li je korisnik jedinstven na nivou sistema i kreira ga
     this.userService.checkNameAndEmail(user).then((res) => {
       if (res == 'sve ok') {
         this.userService
@@ -89,8 +92,6 @@ export class RegistracijaComponent implements OnInit {
               tip: user.tip,
             };
             localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
-            this.sharedCurrUserService.emitUser(user);
-            //this.output.emit(user);
 
             if (user.tip == 'kupac') {
               //kupac
@@ -109,6 +110,8 @@ export class RegistracijaComponent implements OnInit {
       }
     });
   }
+
+  //pretvaranje slike u string preko base64, pa za prikaz, obrnuto iz stringa u sliku
   odabraneSlike: File[] = [];
   slikeString64: Slika[] = [];
 
@@ -127,6 +130,7 @@ export class RegistracijaComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+  // omogucava brisanje upload-ovane slike
   deselectFile(imeSlike: string) {
     this.odabraneSlike = this.odabraneSlike.filter((f) => f.name !== imeSlike);
     this.slikeString64 = this.slikeString64.filter(

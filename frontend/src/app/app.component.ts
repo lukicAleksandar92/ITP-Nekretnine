@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core'
 import { Router } from '@angular/router';
-import { SharedCurrUserService } from './services/shared-curr-user.service';
 import { User } from './models/User';
 
 
@@ -15,13 +14,9 @@ export class AppComponent implements OnInit{
 
 
   user = new User();
-  constructor(private router: Router,
-    private sharedCurrUserService: SharedCurrUserService){}
+  constructor(private router: Router){}
 
   ngOnInit(): void {
-
-    // this.user = JSON.parse(localStorage.getItem("loggedUser"));
-    this.sharedCurrUserService.changeEmetted$.subscribe(user => this.user = user);
     
   }
 

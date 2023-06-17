@@ -414,7 +414,7 @@ export class PostaviOglasComponent implements OnInit {
       this.listingService
         .insertListing(listing)
         .then((res) => {
-          alert('Uspeno unet oglas');
+          alert('Uspesno unet oglas');
           this.router.navigate(['/moji-oglasi']);
         })
         .catch((res) => {});
