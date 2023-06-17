@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/User';
+import { User, Slika } from '../models/User';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { SharedCurrUserService } from '../services/shared-curr-user.service';
@@ -42,6 +42,12 @@ export class RegistracijaComponent implements OnInit {
   licenca!: number;
 
   register() {
+
+    if (this.lozinka != this.confirmPassword) {
+      alert('Lozinke se ne podudaraju!');
+      return;
+    }
+
     // Proverava da li su sva polja popunjena
     if (!this.ime || !this.prezime || !this.datumRodjenja || !this.grad || !this.telefon || !this.email || !this.kor_ime || !this.lozinka || !this.tip ) {
       alert('Morate popuniti sva polja');
@@ -61,6 +67,7 @@ export class RegistracijaComponent implements OnInit {
     user.tip = this.tip;
     user.selectedAgency = this.selectedAgency;
     user.licenca = this.licenca;
+    user.slike = this.slikeString64;
 
     this.userService
       .insertUser(user)
@@ -82,8 +89,31 @@ export class RegistracijaComponent implements OnInit {
       //oglasivac
       this.router.navigate(['/moji-oglasi']);
     }
-
-
   }
+  odabraneSlike: File[] = [];
+  slikeString64: Slika[] = [];
+
+  handleFileInput(event: any) {
+    const files: FileList = event.target.files;
+
+    for (let i = 0; i < files.length; i++) {
+      const file: File = files[i];
+      const reader: FileReader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String: string = reader.result as string;
+        this.slikeString64.push({ name: file.name, source: base64String });
+      };
+      this.odabraneSlike.push(file);
+      reader.readAsDataURL(file);
+    }
+  }
+  deselectFile(imeSlike: string) {
+    this.odabraneSlike = this.odabraneSlike.filter((f) => f.name !== imeSlike);
+    this.slikeString64 = this.slikeString64.filter(
+      (img) => img.name !== imeSlike
+    );
+  }
+
 
 }

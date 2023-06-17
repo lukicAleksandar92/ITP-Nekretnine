@@ -6,3 +6,40 @@ section {
   color: red;
   font-size: 1.2rem;
 }
+
+.input {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.8rem;
+  color: var(--black);
+  border: var(--border);
+  padding: 1.4rem;
+}
+
+
+.preview {
+  display: flex;
+}
+.imgs {
+  display: flex;
+  flex-direction: column;
+}
+.imgs img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  padding: 5px 0;
+}
+.names div {
+  height: 50px;
+  padding: 5px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.names button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}

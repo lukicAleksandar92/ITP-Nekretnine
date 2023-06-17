@@ -11,6 +11,12 @@ export interface User {
   selectedAgency: string | undefined;
   licenca: number | undefined;
   omiljeniOglasi: string[];
+  slike: Slika[];
+}
+
+export interface Slika {
+  name: string;
+  source: string;
 }
 export interface UserFavoriteListing {
   kor_ime: string;

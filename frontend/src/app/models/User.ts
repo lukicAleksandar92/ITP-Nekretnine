@@ -11,6 +11,12 @@ export class User {
   selectedAgency: string = '';
   licenca: number = 0;
   omiljeniOglasi: string[] = [];
+  slike: Slika[] = [];
+}
+
+export interface Slika {
+  name: string;
+  source: string;
 }
 
 export interface LoggedUser {

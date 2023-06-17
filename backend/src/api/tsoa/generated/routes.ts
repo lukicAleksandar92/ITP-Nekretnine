@@ -151,6 +151,7 @@ const models: TsoaRoute.Models = {
             "selectedAgency": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"undefined"}],"required":true},
             "licenca": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"undefined"}],"required":true},
             "omiljeniOglasi": {"dataType":"array","array":{"dataType":"string"},"required":true},
+            "slike": {"dataType":"array","array":{"dataType":"refObject","ref":"Slika"},"required":true},
         },
         "additionalProperties": false,
     },

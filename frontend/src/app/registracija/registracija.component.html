@@ -88,10 +88,10 @@
       #lozinkaInput="ngModel"
       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@?]).{8,}$"
     />
-    <span class="greska" *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched">Morate uneti polje ispod</span>
+    <span class="greska" *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched">Morate uneti ponovo lozinku</span>
     <input
       type="password"
-      name="confirm_password"
+      name="c_pass"
       placeholder="Ponovite lozinku"
       class="box"
       [(ngModel)]="confirmPassword"
@@ -99,7 +99,7 @@
       #confirmPasswordInput="ngModel"
     />
 
-    <label style="font-size: 1.8rem">Izaberite tip korisnika</label>
+    
     <select name="tip" id="tip" class="box" [(ngModel)]="tip" required>
       <option value="undefined" disabled>Izaberite tip korisnika</option>
       <option value="kupac">kupac</option>
@@ -109,18 +109,20 @@
 
         <!-- stavljamo da se vidi izbor agencije samo ako je tip korisnika agent-->
     <div *ngIf="tip == 'agent'">
-      <label for="agencija" id="agencijaLabel" style="font-size: 1.8rem">Izaberite agenciju</label>
+      <span class="greska" *ngIf="selectedAgencyInput.invalid && selectedAgencyInput.touched">Morate odabrati agenciju</span>
       <select
         name="agencija"
         class="input box"
         required
         [(ngModel)]="selectedAgency"
+        #selectedAgencyInput="ngModel"
       >
         <option value="undefined" disabled>Izaberite agenciju</option>
         <option *ngFor="let a of agencije" value="{{ a.naziv }}">
           {{ a.naziv }}
         </option>
       </select>
+      <span class="greska" *ngIf="licencaInput.invalid && licencaInput.touched">Morate ispravno upisati licencu sa 6 cifara</span>
       <input
         type="number"
         name="licenca"
@@ -128,17 +130,40 @@
         placeholder="Broj licence"
         class="box"
         [(ngModel)]="licenca"
+        #licencaInput="ngModel"
+        pattern="^\d{6}$"
       />
     </div>
 
     <label for="profile-picture" style="font-size: 1.8rem">Dodaj profilnu sliku:</label>
-    <input
-      type="file"
-      class="box"
-      id="profile-picture"
-      name="profile-picture"
-      accept="image/jpg, image/png"
-    />
+    <div class="input tall">
+      <input
+        type="file"
+        class="box"
+        id="profile-picture"
+        name="profile-picture"
+        accept="image/jpg, image/png"
+        #fileInput
+        (change)="handleFileInput($event)"
+        style="color: transparent; border: none"
+        multiple
+      />
+      <div class="preview">
+        <div class="imgs">
+          <img
+            [src]="slika.source"
+            alt=""
+            *ngFor="let slika of slikeString64"
+          />
+        </div>
+        <div class="names">
+          <div *ngFor="let slika of slikeString64">
+            {{ slika.name }}
+            <button (click)="deselectFile(slika.name)">X</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <p align="left">
       <i class="fas fa-circle-exclamation"></i>

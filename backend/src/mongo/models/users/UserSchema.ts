@@ -14,4 +14,5 @@ export const userSchema = new mongoose.Schema<User>({
   selectedAgency: {type: String},
   licenca: {type: Number},
   omiljeniOglasi: [{ type: String }],
+  slike: [{ name: { type: String }, source: { type: String } }],
 });
