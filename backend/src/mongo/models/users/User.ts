@@ -22,3 +22,8 @@ export interface UserFavoriteListing {
   kor_ime: string;
   omiljeniOglasi: string[];
 }
+
+export interface UserName {
+  kor_ime: string;
+}
+

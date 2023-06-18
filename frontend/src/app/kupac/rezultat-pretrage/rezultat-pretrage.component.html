@@ -68,33 +68,44 @@
           <i class="fas fa-building"></i>Sprat:
           <span> {{ spratToString(listing.sprat) }} </span>
         </p>
-        <!-- prosecna cena !!! treba da se poveze !!! -->
+        <!-- prosecna cena -->
         <p class="location">
           <i class="fas fa-circle-question"></i>Prosečna cena po m²:
-          {{
-            avgValuesToNumber(
-              avgValues,
-              listing.lokacija,
-              listing.tipNekretnine
-            )
-          }}
-          <span> </span>
+          <span>
+            {{ avgValuesToNumber(listing.lokacija, listing.tipNekretnine) }} €
+          </span>
         </p>
-
+        <!-- cena -->
         <p class="location">
           <i class="fas fa-euro-sign"></i
           ><b
-            >Cena: <span> {{ listing.cena }} </span></b
-          >
+            >Cena:<span
+              [ngClass]="{
+                veca:
+                  izracunavanjeCenePoKvadratu(
+                    listing.cena,
+                    listing.kvadratura
+                  ) > avgValuesToNumber(listing.lokacija, listing.tipNekretnine)
+              }"
+              [ngClass]="{
+                manja:
+                  izracunavanjeCenePoKvadratu(
+                    listing.cena,
+                    listing.kvadratura
+                  ) <=
+                  avgValuesToNumber(listing.lokacija, listing.tipNekretnine)
+              }"
+            >
+              {{ listing.cena }} €
+            </span>
+          </b>
         </p>
       </div>
-
       <div class="opis">
         <p class="location">
           {{ listing.opis }}
         </p>
       </div>
-
       <a routerLink="/stranica-oglasa/{{ listing._id }}" class="btn"
         >Pogledaj oglas</a
       >

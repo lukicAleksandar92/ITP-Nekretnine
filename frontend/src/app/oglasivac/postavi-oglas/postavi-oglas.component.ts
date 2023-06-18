@@ -407,9 +407,9 @@ export class PostaviOglasComponent implements OnInit {
       listing.slike = this.slikeString64;
     }
     // datum izmene i prodaje
-    listing.datumIzmene = undefined;
-    listing.datumProdaje = undefined;
-
+    listing.datumIzmene = new Date();
+    listing.mesecProdaje = 0;
+  
     if (inputGreska == 0) {
       this.listingService
         .insertListing(listing)

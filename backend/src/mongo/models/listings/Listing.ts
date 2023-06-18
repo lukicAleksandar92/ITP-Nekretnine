@@ -18,7 +18,7 @@ export interface Listing {
   slike: Slika[];
 
   datumIzmene: Date | undefined;
-  datumProdaje: Date | undefined;
+  mesecProdaje: number | undefined;
 
   status: string;
   oglasivac: string;
@@ -43,6 +43,8 @@ export class SearchCriteria {
   mesecneRezijeOd: number | undefined = undefined;
   mesecneRezijeDo: number | undefined = undefined;
   status: string | undefined = undefined;
+  datumIzmene: Date | undefined = undefined;
+  mesecProdaje: number | undefined = undefined;
 }
 export interface Slika {
   name: string;
@@ -56,4 +58,10 @@ export interface AverageValue {
 export interface AverageValueId {
   lokacija: string;
   tip: string;
+}
+
+export interface NumberOfSold {
+  // _id predstavlja mesec u kome je izvrsena prodaja
+  _id: number;
+  prodato: number;
 }

@@ -3,6 +3,7 @@ import {
   AverageValue,
   Listing,
   SearchCriteria,
+  NumberOfSold,
 } from "../../../mongo/models/listings/Listing";
 import { listingDAO } from "../../../mongo/models/listings/ListingDAO";
 
@@ -21,9 +22,23 @@ export class ListingController extends Controller {
   async getListingById(@Path() id: string): Promise<Listing | null> {
     return listingDAO.getListingById(id);
   }
-  @Get("getListingsByOglasivac/:oglasivac")
-  async getListingsByOglasivac(@Path() oglasivac: string) {
-    return listingDAO.getListingsByOglasivac(oglasivac);
+  @Get("getListingByOglasivac/:kor_ime")
+  async getListingByOglasivac(
+    @Path() kor_ime: string
+  ): Promise<Listing | null> {
+    return listingDAO.getListingByOglasivac(kor_ime);
+  }
+  @Post("getAllSellByAgency")
+  async getAllSellByAgency(
+    @Body() agenti: string[]
+  ): Promise<NumberOfSold[] | null> {
+    return listingDAO.getAllSellByAgency(agenti);
+  }
+  @Get("getAllSellByLocation/:location")
+  async getAllSellByLocation(
+    @Path() location: string
+  ): Promise<NumberOfSold[] | null> {
+    return listingDAO.getAllSellByLocation(location);
   }
   @Get("getAverageValues")
   async getAverageValues(): Promise<AverageValue[] | null> {
@@ -31,7 +46,7 @@ export class ListingController extends Controller {
   }
   @Put("update/:id")
   async updateListing(@Body() listing: Listing, @Path() id: string) {
-    let result = await listingDAO.updateListing(listing, id);
+    let result = await listingDAO.updateLsisting(listing, id);
     if (result == null) this.setStatus(404);
     return result;
   }

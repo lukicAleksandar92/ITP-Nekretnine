@@ -1,10 +1,13 @@
 import { Body, Controller, Get, Path, Post, Put, Route } from "tsoa";
-import { User, UserFavoriteListing } from "../../../mongo/models/users/User";
+import {
+  User,
+  UserFavoriteListing,
+  UserName,
+} from "../../../mongo/models/users/User";
 import { userDAO } from "../../../mongo/models/users/UserDAO";
 
 @Route("users")
 export class UserController extends Controller {
-
   //POST zahtev za login korisnika
   @Post("login")
   async login(@Body() user: User) {
@@ -71,7 +74,15 @@ export class UserController extends Controller {
     return result;
   }
 
-  //GET ruta za pretragu korisnika po korisničkom imenu 
+  //GET ruta za pretragu korisnika po korisničkom imenu
+  @Get("getAllAgents/:nazivAgencije")
+  async getAllAgents(
+    @Path() nazivAgencije: string
+  ): Promise<UserName[] | null> {
+    let result = await userDAO.getAllAgents(nazivAgencije);
+    if (result == null) this.setStatus(404);
+    return result;
+  }
   @Get("fetchUser/:kor_ime")
   async getUserByKorIme(@Path() kor_ime: string) {
     let result = await userDAO.getUserByKorIme(kor_ime);

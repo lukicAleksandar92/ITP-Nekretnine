@@ -1,5 +1,6 @@
-import express, { json, urlencoded } from "express";
-import { RegisterRoutes as registerTsoaRoutes } from "./tsoa/generated/routes";
+import express, { json, urlencoded, Response as ExResponse, Request as ExRequest, NextFunction } from "express";
+import { ValidateError } from "tsoa";
+import { RegisterRoutes as registerTsoaRoutes,  } from "./tsoa/generated/routes";
 import cors from "cors";
 
 export function initApi() {
@@ -16,5 +17,27 @@ export function initApi() {
 
   app.listen(port, () => {
     console.log(`Aplikacija slusa na http://localhost:${port}`);
+  });
+
+  app.use(function errorHandler(
+    err: unknown,
+    req: ExRequest,
+    res: ExResponse,
+    next: NextFunction
+  ): ExResponse | void {
+    if (err instanceof ValidateError) {
+      console.warn(`Caught Validation Error for ${req.path}:`, err.fields);
+      return res.status(422).json({
+        message: "Validation Failed",
+        details: err?.fields,
+      });
+    }
+    if (err instanceof Error) {
+      return res.status(500).json({
+        message: "Internal Server Error",
+      });
+    }
+  
+    next();
   });
 }

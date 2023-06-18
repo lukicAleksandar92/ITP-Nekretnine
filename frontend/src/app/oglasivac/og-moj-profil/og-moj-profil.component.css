@@ -2,7 +2,7 @@ section {
   min-height: calc(100vh - 399px);
 }
 .content {
-  max-width: 50rem;
+ /* max-width: 50rem;*/
   margin: 0 auto;
   background-color: var(--white);
   box-shadow: var(--box-shodow);
@@ -19,7 +19,13 @@ section {
   display: flex;
   justify-content: space-between;
 }
-
+.flex1 {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.info {
+  padding: 2rem;
+}
 .box {
   border: var(--border);
   padding: 1.4rem;

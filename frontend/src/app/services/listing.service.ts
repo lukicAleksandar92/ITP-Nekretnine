@@ -16,10 +16,29 @@ export class ListingService {
     );
   }
   getAllListings() {
-    return firstValueFrom(this.http.post(`${this.back}/listings/getAll`, {}));
+    return firstValueFrom(
+      this.http.post(`${this.back}/listings/getAll`, {})
+    );
   }
   getListingById(id: string) {
-    return firstValueFrom(this.http.get(`${this.back}/listings/getOne/${id}`));
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getOne/${id}`)
+    );
+  }
+  getListingByOglasivac(kor_ime: string){
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getListingByOglasivac/${kor_ime}`)
+    );
+  }
+  getAllSellByAgency(agenti: string[]){
+    return firstValueFrom(
+      this.http.post(`${this.back}/listings/getAllSellByAgency`, agenti)
+    );
+  }
+  getAllSellByLocation(location: string){
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getAllSellByLocation/${location}`)
+    );
   }
   getListingsByOglasivac(oglasivac: string) {
     return firstValueFrom(
