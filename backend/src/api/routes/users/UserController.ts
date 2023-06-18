@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Path, Post, Put, Route } from "tsoa";
-import { User, UserFavoriteListing } from "../../../mongo/models/users/User";
+import { User, UserFavoriteListing, UserName } from "../../../mongo/models/users/User";
 import { userDAO } from "../../../mongo/models/users/UserDAO";
 
 @Route("users")
@@ -8,7 +8,6 @@ export class UserController extends Controller {
   async login(@Body() user: User) {
     return await userDAO.login(user.kor_ime, user.lozinka);
   }
-
   @Post("insert")
   async insertUser(@Body() user: User) {
     let result = await userDAO.insertUser(user);
@@ -40,12 +39,12 @@ export class UserController extends Controller {
 
     return result;
   }
-  
-  
-  
-  
-
-
+  @Get("getAllAgents/:nazivAgencije")
+  async getAllAgents(@Path() nazivAgencije: string): Promise<UserName[] | null> { 
+    let result = await userDAO.getAllAgents(nazivAgencije);
+    if (result == null) this.setStatus(404);
+    return result;
+  }
   @Get("fetchUser/:kor_ime")
   async getUserByKorIme(@Path() kor_ime: string) {
     let result = await userDAO.getUserByKorIme(kor_ime);

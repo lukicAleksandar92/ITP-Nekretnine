@@ -1,3 +1,4 @@
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle} from "ng-apexcharts";
 export class User {
   ime: string = '';
   prezime: string = '';
@@ -18,7 +19,19 @@ export interface LoggedUser {
   tip: string;
 }
 
+export interface UserName {
+  kor_ime: string;
+}
+
 export interface UserFavoriteListing {
   kor_ime: string;
   omiljeniOglasi: string[];
+}
+
+export interface ChartOptions {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  colors: any[];
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
 }

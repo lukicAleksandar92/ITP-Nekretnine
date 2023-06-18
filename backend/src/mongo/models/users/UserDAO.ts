@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { User, UserFavoriteListing } from "./User";
+import { User, UserFavoriteListing, UserName } from "./User";
 import { userSchema } from "./UserSchema";
 
 class UserDAO {
@@ -8,13 +8,12 @@ class UserDAO {
   async login(korisnicko_ime: string, lozinka: string): Promise<User | null> {
     let user = await this.userModel.findOne({
       kor_ime: korisnicko_ime,
-      lozinka: lozinka,
+      lozinka: lozinka
     });
 
     if (user != null) {
       this.logUserLogin(user.kor_ime);
     }
-
     return user;
   }
 
@@ -79,7 +78,9 @@ class UserDAO {
     return "Korisnik ne psotoji";
   }
 
-
+  async getAllAgents(selectedAgency: string): Promise<UserName[] | null>  {
+    return await this.userModel.find({selectedAgency: selectedAgency},{_id:0,kor_ime:1});
+  }
 
   async updateFavoriteListing(user: UserFavoriteListing) {
     let activeUser = await this.getUserByKorIme(user.kor_ime);

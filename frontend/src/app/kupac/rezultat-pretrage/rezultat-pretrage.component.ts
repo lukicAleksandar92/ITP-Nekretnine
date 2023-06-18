@@ -68,15 +68,12 @@ export class RezultatPretrageComponent implements OnInit {
       this.listingService.getAverageValues().then((res) => {
         // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
         this.avgValues = JSON.parse(JSON.stringify(res));
-        //  this.srednjaVrednost = this.avgValuesToNumber(this.avgValues, this.listing.lokacija, this.listing.tipNekretnine);
       });
     });
   }
 
   avgValues: AverageValue[] = [];
-  avgValue!: AverageValue;
-  srednjaVrednost!: number;
-
+  
   allListings: Listing[] = [];
   filter = new Filter();
 
@@ -104,14 +101,17 @@ export class RezultatPretrageComponent implements OnInit {
     if (sprat == 'Potkrovlje') return 32;
     else return parseInt(sprat);
   }
+  // racuna kolika je cena po kvadratu
+  izracunavanjeCenePoKvadratu(cena: number, kvadratura:number):number {
+    return Math.round(cena / kvadratura);
+  }
   // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine
   avgValuesToNumber(
-    avgValues: AverageValue[],
     lokacija: string,
     tipNekretnine: string
   ): number {
     let rezultat: number = 0;
-    for (let avgValue of avgValues) {
+    for (let avgValue of this.avgValues) {
       if (
         avgValue._id.lokacija == lokacija &&
         avgValue._id.tip == tipNekretnine

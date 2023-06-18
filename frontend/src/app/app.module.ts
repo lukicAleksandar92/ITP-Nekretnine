@@ -18,6 +18,8 @@ import { FontawesomeObject } from '@fortawesome/fontawesome-svg-core';
 import { OgHeaderComponent } from './oglasivac/og-header/og-header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { NgApexchartsModule} from "ng-apexcharts";
+
 import { PostaviOglasComponent } from './oglasivac/postavi-oglas/postavi-oglas.component';
 import { MojiOglasiComponent } from './oglasivac/moji-oglasi/moji-oglasi.component';
 import { OgMojProfilComponent } from './oglasivac/og-moj-profil/og-moj-profil.component';
@@ -57,6 +59,7 @@ import { IzmeniOglasComponent } from './oglasivac/izmeni-oglas/izmeni-oglas.comp
     HttpClientModule,
 
     FontAwesomeModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

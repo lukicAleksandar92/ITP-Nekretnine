@@ -1,9 +1,5 @@
 import { Body, Controller, Get, Path, Post, Put, Route } from "tsoa";
-import {
-  AverageValue,
-  Listing,
-  SearchCriteria,
-} from "../../../mongo/models/listings/Listing";
+import { AverageValue, Listing, SearchCriteria, NumberOfSold} from "../../../mongo/models/listings/Listing";
 import { listingDAO } from "../../../mongo/models/listings/ListingDAO";
 
 @Route("listings")
@@ -20,6 +16,18 @@ export class ListingController extends Controller {
   @Get("getOne/:id")
   async getListingById(@Path() id: string): Promise<Listing | null> {
     return listingDAO.getListingById(id);
+  }
+  @Get("getListingByOglasivac/:kor_ime")
+  async getListingByOglasivac(@Path() kor_ime: string): Promise<Listing | null> {
+    return listingDAO.getListingByOglasivac(kor_ime);
+  }
+  @Post("getAllSellByAgency")
+  async getAllSellByAgency(@Body() agenti: string[]): Promise<NumberOfSold[] | null> {
+    return listingDAO.getAllSellByAgency(agenti);
+  }
+  @Get("getAllSellByLocation/:location")
+  async getAllSellByLocation(@Path() location: string): Promise<NumberOfSold[] | null> {
+    return listingDAO.getAllSellByLocation(location);
   }
   @Get("getAverageValues")
   async getAverageValues(): Promise<AverageValue[] | null> {

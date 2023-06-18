@@ -12,6 +12,12 @@
 img {
   object-fit: cover;
 }
+.veca {
+  color: #FF0000;
+}
+.manja {
+  color: #00FF00;
+}
 section {
   min-height: calc(100vh - 399px);
 }

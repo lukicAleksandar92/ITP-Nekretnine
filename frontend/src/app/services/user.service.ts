@@ -15,8 +15,8 @@ export class UserService {
     let user = new User();
     user.kor_ime = kor_ime;
     user.lozinka = lozinka;
-
     return firstValueFrom(this.http.post(`${this.back}/users/login`, user));
+
   }
   insertUser(user: User) {
     return firstValueFrom(this.http.post(`${this.back}/users/insert`, user));
@@ -51,5 +51,8 @@ export class UserService {
     return firstValueFrom(this.http.put(`${this.back}/users/updateAgency`, user));
   }
 
+  getAllAgents(nazivAgencije: string){
+    return firstValueFrom(this.http.get(`${this.back}/users/getAllAgents/${nazivAgencije}`));
+  }
 
 }

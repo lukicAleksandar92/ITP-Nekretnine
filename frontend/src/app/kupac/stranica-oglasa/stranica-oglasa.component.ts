@@ -2,12 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
-import {
-  faCheck,
-  faX,
-  faCaretRight,
-  faCaretLeft,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faX, faCaretRight, faCaretLeft} from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from 'src/app/login/login.component';
 import { AverageValue, Listing } from 'src/app/models/Listing';
 import { User } from 'src/app/models/User';
@@ -36,13 +31,13 @@ export class StranicaOglasaComponent implements OnInit {
         this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
         this.sprat = this.spratToString(this.listing.sprat);
         this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
+        this.cenaPoKvadratu = this.izracunavanjeCenePoKvadratu(this.listing.cena, this.listing.kvadratura)
 
         // trazimo niz srednjih vrednosti grupisanih po lokaciji i tipu nekretnine
         this.listingService.getAverageValues().then((res) => {
           // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
           this.avgValues = JSON.parse(JSON.stringify(res));
           this.srednjaVrednost = this.avgValuesToNumber(
-            this.avgValues,
             this.listing.lokacija,
             this.listing.tipNekretnine
           );
@@ -54,12 +49,12 @@ export class StranicaOglasaComponent implements OnInit {
       });
     }
   }
-  user = new User();
+  user!: User;
   avgValues: AverageValue[] = [];
-  avgValue!: AverageValue;
   srednjaVrednost!: number;
 
   listing!: Listing;
+  cenaPoKvadratu!: number;
   // ikonice iz fontawesome
   left = faCaretLeft;
   right = faCaretRight;
@@ -126,6 +121,10 @@ export class StranicaOglasaComponent implements OnInit {
     if (sprat == 32) return 'Potkrovlje';
     else return sprat.toString();
   }
+  // racuna kolika je cena po kvadratu
+  izracunavanjeCenePoKvadratu(cena: number, kvadratura:number):number {
+    return Math.round(cena / kvadratura);
+  }
   // prati index trenutne slike koja se pokazuje
   currentIndex: number = 0;
   // pokazuje sledecu sliku
@@ -140,12 +139,11 @@ export class StranicaOglasaComponent implements OnInit {
   }
   // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine
   avgValuesToNumber(
-    avgValues: AverageValue[],
     lokacija: string,
     tipNekretnine: string
   ): number {
     let rezultat: number = 0;
-    for (let avgValue of avgValues) {
+    for (let avgValue of this.avgValues) {
       if (
         avgValue._id.lokacija == lokacija &&
         avgValue._id.tip == tipNekretnine

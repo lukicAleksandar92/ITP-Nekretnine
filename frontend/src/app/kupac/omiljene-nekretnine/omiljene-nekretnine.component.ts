@@ -4,7 +4,7 @@ import {
   faHeartCircleMinus,
   faMapMarkerAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { Listing } from 'src/app/models/Listing';
+import { Listing, AverageValue } from 'src/app/models/Listing';
 import { User } from 'src/app/models/User';
 import { ListingService } from 'src/app/services/listing.service';
 import { UserService } from 'src/app/services/user.service';
@@ -32,11 +32,21 @@ export class OmiljeneNekretnineComponent implements OnInit {
         .getFavoriteListings(this.user.omiljeniOglasi)
         .then((res) => {
           this.allListings = JSON.parse(JSON.stringify(res));
+          // trazimo niz srednjih vrednosti grupisanih po lokaciji i tipu nekretnine
+          this.listingService.getAverageValues().then((res) => {
+            // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
+            this.avgValues = JSON.parse(JSON.stringify(res));
+          });
         });
     });
   }
   allListings: Listing[] = [];
+  listing1!: Listing;
   user = new User();
+
+  avgValues: AverageValue[] = [];
+  srednjaVrednost!: number;
+  cenaPoKvadratu!: number;
 
   mapMarker = faMapMarkerAlt;
   euroMarker = faEuroSign;
@@ -50,5 +60,25 @@ export class OmiljeneNekretnineComponent implements OnInit {
     });
     alert('Uklonjeno!');
     this.ucitajKorisnikaIOglase();
+  }
+  // racuna kolika je cena po kvadratu
+  izracunavanjeCenePoKvadratu(cena: number, kvadratura:number):number {
+    return Math.round(cena / kvadratura);
+  }
+  // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine
+  avgValuesToNumber(
+    lokacija: string,
+    tipNekretnine: string
+  ): number {
+    let rezultat: number = 0;
+    for (let avgValue of this.avgValues) {
+      if (
+        avgValue._id.lokacija == lokacija &&
+        avgValue._id.tip == tipNekretnine
+      ) {
+        rezultat = Math.round(avgValue.srednjaVrednost);
+      }
+    }
+    return rezultat;
   }
 }

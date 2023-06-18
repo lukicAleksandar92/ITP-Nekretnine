@@ -64,6 +64,12 @@ img {
 .ima {
   font-weight: bold;
 }
+.veca{
+  color: #FF0000;
+}
+.manja {
+  color: #00FF00;
+}
 .btn {
   margin-top: 3rem;
 }

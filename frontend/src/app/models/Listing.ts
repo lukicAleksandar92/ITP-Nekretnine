@@ -19,7 +19,7 @@ export class Listing {
   slike: Slika[] = [];
 
   datumIzmene!: Date | undefined;
-  datumProdaje!: Date | undefined;
+  mesecProdaje!: number;
 
   status: string = 'nije prodato';
   oglasivac!: string;
@@ -58,4 +58,10 @@ export class AverageValue {
 export class AverageValueId {
   lokacija!: string;
   tip!: string;
+}
+
+export class NumberOfSold {
+  // _id predstavlja mesec u kome je izvrsena prodaja
+  _id!: number;
+  ukupno!: number;
 }

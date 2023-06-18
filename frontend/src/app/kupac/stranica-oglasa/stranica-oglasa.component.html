@@ -8,7 +8,13 @@
     <div class="flex">
       <!-- generalne informacije o nekretnini -->
       <div class="info">
-        <div class="box"><b>Cena:</b> {{ listing.cena }} €</div>
+        <div class="box"><b>Cena:</b>
+          <b [ngClass]="{ 'veca': cenaPoKvadratu > srednjaVrednost }"
+            [ngClass]="{ 'manja': cenaPoKvadratu <= srednjaVrednost }"
+          >
+          {{ listing.cena }} €
+          </b>
+        </div>
         <div class="box"><b>Tip:</b> {{ listing.tipNekretnine }}</div>
         <div class="box"><b>Kvadratura:</b> {{ listing.kvadratura }}m²</div>
         <div class="box"><b>Broj soba:</b> {{ brojSoba }}</div>
@@ -94,7 +100,8 @@
         </div>
         <!-- informacije o oglasivacu -->
         <div class="box">
-          <b> Prosečna cena na lokaciji:</b> {{ srednjaVrednost }}
+          <b> Prosečna cena na lokaciji:</b> 
+          {{ srednjaVrednost }} €
         </div>
         <div class="box oglasivac">
           <p><b>Oglašivač:</b> {{ listing.oglasivac }}</p>
