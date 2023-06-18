@@ -72,10 +72,19 @@ const models = {
             "opis": { "dataType": "string", "required": true },
             "slike": { "dataType": "array", "array": { "dataType": "refObject", "ref": "Slika" }, "required": true },
             "datumIzmene": { "dataType": "union", "subSchemas": [{ "dataType": "datetime" }, { "dataType": "undefined" }], "required": true },
-            "datumProdaje": { "dataType": "union", "subSchemas": [{ "dataType": "datetime" }, { "dataType": "undefined" }], "required": true },
+            "mesecProdaje": { "dataType": "union", "subSchemas": [{ "dataType": "double" }, { "dataType": "undefined" }], "required": true },
             "status": { "dataType": "string", "required": true },
             "oglasivac": { "dataType": "string", "required": true },
             "tipOglasivaca": { "dataType": "string", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NumberOfSold": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": { "dataType": "double", "required": true },
+            "prodato": { "dataType": "double", "required": true },
         },
         "additionalProperties": false,
     },
@@ -131,6 +140,8 @@ const models = {
             "mesecneRezijeOd": { "dataType": "union", "subSchemas": [{ "dataType": "double" }, { "dataType": "undefined" }] },
             "mesecneRezijeDo": { "dataType": "union", "subSchemas": [{ "dataType": "double" }, { "dataType": "undefined" }] },
             "status": { "dataType": "union", "subSchemas": [{ "dataType": "string" }, { "dataType": "undefined" }] },
+            "datumIzmene": { "dataType": "union", "subSchemas": [{ "dataType": "datetime" }, { "dataType": "undefined" }] },
+            "mesecProdaje": { "dataType": "union", "subSchemas": [{ "dataType": "double" }, { "dataType": "undefined" }] },
         },
         "additionalProperties": false,
     },
@@ -151,6 +162,14 @@ const models = {
             "licenca": { "dataType": "union", "subSchemas": [{ "dataType": "double" }, { "dataType": "undefined" }], "required": true },
             "omiljeniOglasi": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
             "slike": { "dataType": "array", "array": { "dataType": "refObject", "ref": "Slika" }, "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserName": {
+        "dataType": "refObject",
+        "properties": {
+            "kor_ime": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -268,9 +287,9 @@ function RegisterRoutes(app) {
         }
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/listings/getListingsByOglasivac/:oglasivac', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.getListingsByOglasivac)), function ListingController_getListingsByOglasivac(request, response, next) {
+    app.get('/listings/getListingsByOglasivac/:kor_ime', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.getListingsByOglasivac)), function ListingController_getListingsByOglasivac(request, response, next) {
         const args = {
-            oglasivac: { "in": "path", "name": "oglasivac", "required": true, "dataType": "string" },
+            kor_ime: { "in": "path", "name": "kor_ime", "required": true, "dataType": "string" },
         };
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         let validatedArgs = [];
@@ -278,6 +297,57 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new ListingController_1.ListingController();
             const promise = controller.getListingsByOglasivac.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/listings/getListingByOglasivac/:kor_ime', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.getListingByOglasivac)), function ListingController_getListingByOglasivac(request, response, next) {
+        const args = {
+            kor_ime: { "in": "path", "name": "kor_ime", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new ListingController_1.ListingController();
+            const promise = controller.getListingByOglasivac.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/listings/getAllSellByAgency', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.getAllSellByAgency)), function ListingController_getAllSellByAgency(request, response, next) {
+        const args = {
+            agenti: { "in": "body", "name": "agenti", "required": true, "dataType": "array", "array": { "dataType": "string" } },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new ListingController_1.ListingController();
+            const promise = controller.getAllSellByAgency.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/listings/getAllSellByLocation/:location', ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController)), ...((0, runtime_1.fetchMiddlewares)(ListingController_1.ListingController.prototype.getAllSellByLocation)), function ListingController_getAllSellByLocation(request, response, next) {
+        const args = {
+            location: { "in": "path", "name": "location", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new ListingController_1.ListingController();
+            const promise = controller.getAllSellByLocation.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {
@@ -498,6 +568,23 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new UserController_1.UserController();
             const promise = controller.updateUserSlike.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/users/getAllAgents/:nazivAgencije', ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController)), ...((0, runtime_1.fetchMiddlewares)(UserController_1.UserController.prototype.getAllAgents)), function UserController_getAllAgents(request, response, next) {
+        const args = {
+            nazivAgencije: { "in": "path", "name": "nazivAgencije", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new UserController_1.UserController();
+            const promise = controller.getAllAgents.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

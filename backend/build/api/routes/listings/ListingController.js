@@ -38,9 +38,24 @@ let ListingController = class ListingController extends tsoa_1.Controller {
             return ListingDAO_1.listingDAO.getListingById(id);
         });
     }
-    getListingsByOglasivac(oglasivac) {
+    getListingsByOglasivac(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
-            return ListingDAO_1.listingDAO.getListingsByOglasivac(oglasivac);
+            return ListingDAO_1.listingDAO.getListingsByOglasivac(kor_ime);
+        });
+    }
+    getListingByOglasivac(kor_ime) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return ListingDAO_1.listingDAO.getListingByOglasivac(kor_ime);
+        });
+    }
+    getAllSellByAgency(agenti) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return ListingDAO_1.listingDAO.getAllSellByAgency(agenti);
+        });
+    }
+    getAllSellByLocation(location) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return ListingDAO_1.listingDAO.getAllSellByLocation(location);
         });
     }
     getAverageValues() {
@@ -93,9 +108,21 @@ __decorate([
     __param(0, (0, tsoa_1.Path)())
 ], ListingController.prototype, "getListingById", null);
 __decorate([
-    (0, tsoa_1.Get)("getListingsByOglasivac/:oglasivac"),
+    (0, tsoa_1.Get)("getListingsByOglasivac/:kor_ime"),
     __param(0, (0, tsoa_1.Path)())
 ], ListingController.prototype, "getListingsByOglasivac", null);
+__decorate([
+    (0, tsoa_1.Get)("getListingByOglasivac/:kor_ime"),
+    __param(0, (0, tsoa_1.Path)())
+], ListingController.prototype, "getListingByOglasivac", null);
+__decorate([
+    (0, tsoa_1.Post)("getAllSellByAgency"),
+    __param(0, (0, tsoa_1.Body)())
+], ListingController.prototype, "getAllSellByAgency", null);
+__decorate([
+    (0, tsoa_1.Get)("getAllSellByLocation/:location"),
+    __param(0, (0, tsoa_1.Path)())
+], ListingController.prototype, "getAllSellByLocation", null);
 __decorate([
     (0, tsoa_1.Get)("getAverageValues")
 ], ListingController.prototype, "getAverageValues", null);

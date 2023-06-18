@@ -21,6 +21,8 @@ class SearchCriteria {
         this.mesecneRezijeOd = undefined;
         this.mesecneRezijeDo = undefined;
         this.status = undefined;
+        this.datumIzmene = undefined;
+        this.mesecProdaje = undefined;
     }
 }
 exports.SearchCriteria = SearchCriteria;

@@ -22,6 +22,11 @@ export class ListingController extends Controller {
   async getListingById(@Path() id: string): Promise<Listing | null> {
     return listingDAO.getListingById(id);
   }
+  @Get("getListingsByOglasivac/:kor_ime")
+  async getListingsByOglasivac(@Path() kor_ime: string) {
+    return listingDAO.getListingsByOglasivac(kor_ime);
+  }
+
   @Get("getListingByOglasivac/:kor_ime")
   async getListingByOglasivac(
     @Path() kor_ime: string
@@ -46,7 +51,7 @@ export class ListingController extends Controller {
   }
   @Put("update/:id")
   async updateListing(@Body() listing: Listing, @Path() id: string) {
-    let result = await listingDAO.updateLsisting(listing, id);
+    let result = await listingDAO.updateListing(listing, id);
     if (result == null) this.setStatus(404);
     return result;
   }

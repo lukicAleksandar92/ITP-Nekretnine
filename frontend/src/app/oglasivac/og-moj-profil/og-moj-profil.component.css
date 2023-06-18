@@ -2,7 +2,7 @@ section {
   min-height: calc(100vh - 399px);
 }
 .content {
- /* max-width: 50rem;*/
+  max-width: 50rem;
   margin: 0 auto;
   background-color: var(--white);
   box-shadow: var(--box-shodow);

@@ -118,6 +118,11 @@ class UserDAO {
             return "Korisnik ne psotoji";
         });
     }
+    getAllAgents(selectedAgency) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userModel.find({ selectedAgency: selectedAgency }, { _id: 0, kor_ime: 1 });
+        });
+    }
     updateFavoriteListing(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let activeUser = yield this.getUserByKorIme(user.kor_ime);

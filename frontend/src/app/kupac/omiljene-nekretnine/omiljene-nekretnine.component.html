@@ -20,17 +20,16 @@
       <h3 class="name">{{ listing.nazivOglasa }}</h3>
       <p class="location">
         <fa-icon [icon]="euroMarker"></fa-icon>Cena:
-        <span 
-              [ngClass]="{ 'veca': 
-                izracunavanjeCenePoKvadratu(listing.cena, listing.kvadratura) 
-                  > 
-                avgValuesToNumber(listing.lokacija, listing.tipNekretnine)  }"
-              [ngClass]="{ 'manja': 
-                izracunavanjeCenePoKvadratu(listing.cena, listing.kvadratura) 
-                  <=  
-                  avgValuesToNumber(listing.lokacija, listing.tipNekretnine)  }"
-            >
-        {{ listing.cena }} €
+        <span
+          [ngClass]="{
+            veca:
+              izracunavanjeCenePoKvadratu(listing.cena, listing.kvadratura) >
+              avgValuesToNumber(listing.lokacija, listing.tipNekretnine),
+            manja:
+              izracunavanjeCenePoKvadratu(listing.cena, listing.kvadratura) <=
+              avgValuesToNumber(listing.lokacija, listing.tipNekretnine)
+          }"
+          >{{ listing.cena }} €
         </span>
       </p>
       <p class="location">

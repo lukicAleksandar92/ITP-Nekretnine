@@ -85,9 +85,8 @@
                   izracunavanjeCenePoKvadratu(
                     listing.cena,
                     listing.kvadratura
-                  ) > avgValuesToNumber(listing.lokacija, listing.tipNekretnine)
-              }"
-              [ngClass]="{
+                  ) >
+                  avgValuesToNumber(listing.lokacija, listing.tipNekretnine),
                 manja:
                   izracunavanjeCenePoKvadratu(
                     listing.cena,
@@ -95,8 +94,7 @@
                   ) <=
                   avgValuesToNumber(listing.lokacija, listing.tipNekretnine)
               }"
-            >
-              {{ listing.cena }} €
+              >{{ listing.cena }} €
             </span>
           </b>
         </p>
