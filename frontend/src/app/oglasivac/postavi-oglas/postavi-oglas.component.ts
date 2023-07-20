@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Listing, Slika } from 'src/app/models/Listing';
+import { LoggedUser } from 'src/app/models/User';
 import { ListingService } from 'src/app/services/listing.service';
 
 @Component({
@@ -8,8 +9,14 @@ import { ListingService } from 'src/app/services/listing.service';
   templateUrl: './postavi-oglas.component.html',
   styleUrls: ['./postavi-oglas.component.css'],
 })
-export class PostaviOglasComponent {
+export class PostaviOglasComponent implements OnInit {
   constructor(private listingService: ListingService, private router: Router) {}
+  ngOnInit(): void {
+    const userJson = localStorage.getItem('loggedUser');
+    this.listingUser = JSON.parse(userJson + '');
+  }
+  listingUser!: LoggedUser;
+
   lokacija!: string;
   ulica!: string;
   nazivOglasa!: string;
@@ -243,8 +250,9 @@ export class PostaviOglasComponent {
     let inputGreska = 0;
     let listing = new Listing();
     // ovde ubaciti aktivnog korisnika, local storage ili sta god
-    listing.oglasivac = 'anailic';
-    listing.tipOglasivaca = 'samostalniProdavac';
+
+    listing.oglasivac = this.listingUser.kor_ime;
+    listing.tipOglasivaca = this.listingUser.tip;
     // lokacija
     if (
       this.lokacija == undefined ||
@@ -399,14 +407,14 @@ export class PostaviOglasComponent {
       listing.slike = this.slikeString64;
     }
     // datum izmene i prodaje
-    listing.datumIzmene = undefined;
-    listing.datumProdaje = undefined;
-
+    listing.datumIzmene = new Date();
+    listing.mesecProdaje = 0;
+  
     if (inputGreska == 0) {
       this.listingService
         .insertListing(listing)
         .then((res) => {
-          alert('Uspeno unet oglas');
+          alert('Uspesno unet oglas');
           this.router.navigate(['/moji-oglasi']);
         })
         .catch((res) => {});

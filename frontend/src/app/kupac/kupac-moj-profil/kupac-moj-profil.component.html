@@ -1,24 +1,23 @@
-
 <app-kupac-header></app-kupac-header>
 <section>
-  <h1 class="heading">Moj Profil</h1>
+  <h1 class="heading">Moj Profil - {{ user.tip }}</h1>
   <div class="content">
     <!-- Informacije koji se ne menjaju-->
     <div>
       <div class="flex">
-        <span> <b>Korisničko ime:</b> Kupac Zika </span>
+        <span> <b>Korisničko ime:</b> {{ user.kor_ime }} </span>
       </div>
       <div class="flex">
-        <span> <b>Ime i prezime:</b> Zika Zikic </span>
+        <span> <b>Ime i prezime:</b> {{ user.ime }} {{ user.prezime }}</span>
       </div>
       <div class="flex">
-        <span> <b>Grad:</b> Beograd </span>
+        <span> <b>Grad:</b> {{ user.grad }} </span>
       </div>
     </div>
     <!-- Email adresa i njena promena -->
 
     <div class="flex">
-      <span> <b>Email adresa:</b> email@adresa.com </span>
+      <span> <b>Email adresa:</b> {{ user.email }}</span>
       <fa-icon
         [icon]="arrowRight"
         *ngIf="!mailSeMenja"
@@ -32,13 +31,14 @@
         name="newMail"
         placeholder="nova e-mail adresa"
         class="box"
+        [(ngModel)]="newMail"
       />
-      <button class="btn">Potvrdi promenu</button>
+      <button class="btn" (click)="izmenaMail()">Potvrdi promenu</button>
     </div>
     <!-- Telefon i njegova promena -->
 
     <div class="flex">
-      <span> <b>Broj Telefona:</b> 069/ 99 88 9898 </span>
+      <span> <b>Broj Telefona:</b> 0{{ user.telefon }} </span>
       <fa-icon
         [icon]="arrowRight"
         *ngIf="!telefonSeMenja"
@@ -53,11 +53,12 @@
     <div *ngIf="telefonSeMenja">
       <input
         type="phone"
-        name="newPhone"
+        name="newTel"
         placeholder="novi broj telefona"
         class="box"
+        [(ngModel)]="newTel"
       />
-      <button class="btn">Potvrdi promenu</button>
+      <button class="btn" (click)="izmenaTel()">Potvrdi promenu</button>
     </div>
 
     <!-- Promena lozinke -->
@@ -81,37 +82,46 @@
         name="oldPassword"
         placeholder="važeća lozinka"
         class="box"
+        [(ngModel)]="oldPassword"
       />
+      <span class="greska" *ngIf="lozinkaInput.invalid && lozinkaInput.touched">Morate uneti polje lozinke prema uputstvima</span>
       <input
         type="password"
         name="newPassword"
         placeholder="nova lozinka"
         class="box"
+        [(ngModel)]="newPassword"
+        #lozinkaInput="ngModel"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@?]).{8,}$"
       />
       <input
         type="password"
         name="c_pass"
         placeholder="ponovite novu lozinku"
         class="box"
+        [(ngModel)]="repeatNewPassword"
       />
 
       <p align="left">
         <i class="fas fa-circle-exclamation"></i>
-        Lozinka mora da ima minimalno 8 karaktera, i to: <br />
-        -mora počinjati slovom <br />
-        -mora imati bar jedno veliko slovo <br />
-        -mora imati jedan broj <br />
-        -mora imati jedan specijalni karakter(npr. !, ?, @, i sl. ) <br />
+        Lozinka mora da ima minimum 8 karaktera i mora: <br />
+        -počinjati slovom <br />
+        -imati bar jedno veliko slovo <br />
+        -imati bar jedan broj <br />
+        -imati bar jedan specijalni karakter (npr. !, ?, @, sl.) <br />
       </p>
       <input
         type="submit"
         value="Potvrdi promenu lozinke"
         name="submit"
         class="btn"
+        (click)="izmenaLozinke()"
+        
       />
     </div>
     <div class="flex">
       <b>Promena profilne slike </b>
+      
       <fa-icon
         [icon]="arrowRight"
         *ngIf="!slikaSeMenja"
@@ -124,18 +134,40 @@
       ></fa-icon>
     </div>
     <div *ngIf="slikaSeMenja">
-      <input
-        type="file"
-        class="box"
-        id="profile-picture"
-        name="profile-picture"
-        accept="image/jpg, image/png"
-      />
+      <div class="input tall">
+        <input
+          type="file"
+          class="box"
+          id="profile-picture"
+          name="profile-picture"
+          accept="image/jpg, image/png"
+          #fileInput
+          (change)="handleFileInput($event)"
+          style="color: transparent; border: none"
+          multiple
+        />
+        <div class="preview">
+          <div class="imgs">
+            <img
+              [src]="slika.source"
+              alt=""
+              *ngFor="let slika of slikeString64"
+            />
+          </div>
+          <div class="names">
+            <div *ngFor="let slika of slikeString64">
+              {{ slika.name }}
+              <button (click)="deselectFile(slika.name)">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <input
         type="submit"
         value="Potvrdi promenu slike"
         name="submit"
         class="btn"
+        (click)="izmenaSlike()"
       />
     </div>
   </div>

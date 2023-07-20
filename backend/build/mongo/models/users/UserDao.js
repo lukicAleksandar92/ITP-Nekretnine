@@ -21,7 +21,10 @@ class UserDAO {
     }
     login(korisnicko_ime, lozinka) {
         return __awaiter(this, void 0, void 0, function* () {
-            let user = yield this.userModel.findOne({ kor_ime: korisnicko_ime, lozinka: lozinka });
+            let user = yield this.userModel.findOne({
+                kor_ime: korisnicko_ime,
+                lozinka: lozinka,
+            });
             if (user != null) {
                 this.logUserLogin(user.kor_ime);
             }
@@ -30,12 +33,30 @@ class UserDAO {
     }
     logUserLogin(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userModel.updateOne({ "kor_ime": kor_ime }, { $push: { "logins": new Date() } });
+            return yield this.userModel.updateOne({ kor_ime: kor_ime }, { $push: { logins: new Date() } });
         });
     }
     getUserByKorIme(kor_ime) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.userModel.findOne({ "kor_ime": kor_ime });
+            return this.userModel.findOne({ kor_ime: kor_ime });
+        });
+    }
+    getUserByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.userModel.findOne({ email: email });
+        });
+    }
+    checkKorImeAndEmail(kor_ime, email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let resultKorIme = yield this.userModel.findOne({ kor_ime: kor_ime });
+            if (resultKorIme != null) {
+                return "Korisnicko ime je zauzeto";
+            }
+            let resultEmail = yield this.userModel.findOne({ email: email });
+            if (resultEmail != null) {
+                return "Email je zauzet";
+            }
+            return "sve ok";
         });
     }
     insertUser(user) {
@@ -48,13 +69,70 @@ class UserDAO {
             return "Korisnik vec postoji";
         });
     }
-    updateUser(user) {
+    updateUserEmail(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let userInDB = yield this.getUserByKorIme(user.kor_ime);
+            let emailInDB = yield this.getUserByEmail(user.email);
+            if (emailInDB != null) {
+                return "Email je zauzet";
+            }
+            if (userInDB != null) {
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { email: user.email } });
+            }
+            return "Korisnik ne postoji";
+        });
+    }
+    updateUserTel(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let userInDB = yield this.getUserByKorIme(user.kor_ime);
             if (userInDB != null) {
-                return this.userModel.updateOne({ "kor_ime": user.kor_ime }, { $set: { "ime": user.ime, "prezime": user.prezime } });
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { telefon: user.telefon } });
             }
-            return 'Korisnik ne psotoji';
+            return "Korisnik ne psotoji";
+        });
+    }
+    updateUserPassword(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let userInDB = yield this.getUserByKorIme(user.kor_ime);
+            if (userInDB != null) {
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { lozinka: user.lozinka } });
+            }
+            return "Korisnik ne psotoji";
+        });
+    }
+    updateUserAgency(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let userInDB = yield this.getUserByKorIme(user.kor_ime);
+            if (userInDB != null) {
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { selectedAgency: user.selectedAgency } });
+            }
+            return "Korisnik ne psotoji";
+        });
+    }
+    updateUserSlike(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let userInDB = yield this.getUserByKorIme(user.kor_ime);
+            if (userInDB != null) {
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, { $set: { slike: user.slike } });
+            }
+            return "Korisnik ne psotoji";
+        });
+    }
+    getAllAgents(selectedAgency) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userModel.find({ selectedAgency: selectedAgency }, { _id: 0, kor_ime: 1 });
+        });
+    }
+    updateFavoriteListing(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let activeUser = yield this.getUserByKorIme(user.kor_ime);
+            if (activeUser != null) {
+                return this.userModel.updateOne({ kor_ime: user.kor_ime }, {
+                    $set: {
+                        omiljeniOglasi: user.omiljeniOglasi,
+                    },
+                });
+            }
         });
     }
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/User';
+import { User, Slika, LoggedUser } from '../models/User';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { SharedCurrUserService } from '../services/shared-curr-user.service';
 import { Agencije } from '../models/Agencije';
 import { AgencijeService } from '../services/agencije.service';
 
@@ -15,48 +14,15 @@ export class RegistracijaComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private sharedCurrUserService: SharedCurrUserService,
     private agencijeService: AgencijeService
   ) {}
 
   ngOnInit(): void {
-    /* this.getAgencije();
-    const tipSelect = document.getElementById('tip') as HTMLSelectElement;
-    const agencijaLabel = document.getElementById(
-      'agencijaLabel'
-    ) as HTMLLabelElement;
-    const agencijaSelect = document.getElementById(
-      'agencija'
-    ) as HTMLSelectElement;
-    const licencaInput = document.getElementById('licenca') as HTMLInputElement;
-
-    tipSelect.addEventListener('change', showHideFields);
-
-    function showHideFields() {
-      if (tipSelect.value === 'agent') {
-        agencijaLabel.style.display = 'inline-block';
-        agencijaSelect.style.display = 'inline-block';
-        licencaInput.style.display = 'inline-block';
-      } else {
-        agencijaLabel.style.display = 'none';
-        agencijaSelect.style.display = 'none';
-        licencaInput.style.display = 'none';
-      }
-    } */
-
     // hvatamo iz baze agencije i smestamo ih u niz agencije[]
     this.agencijeService.getAgencije().then((res) => {
       this.agencije = JSON.parse(JSON.stringify(res));
     });
   }
-
-  /*  async getAgencije() {
-    try {
-      this.agencije = await this.agencijeService.getAgencije().toPromise();
-    } catch (error) {
-      console.error('Error retrieving agencije', error);
-    }
-  } */
 
   ime!: string;
   prezime!: string;
@@ -66,13 +32,39 @@ export class RegistracijaComponent implements OnInit {
   email!: string;
   kor_ime!: string;
   lozinka!: string;
+  confirmPassword!: string;
   tip!: string;
-  agencija: string | null = null;
   naziv!: string;
   agencije!: Agencije[];
   selectedAgency!: string;
+  licenca!: number;
+  loggedUser!: LoggedUser;
+
 
   register() {
+
+    // Proverava da li se lozinke podudaraju
+    if (this.lozinka != this.confirmPassword) {
+      alert('Lozinke se ne podudaraju!');
+      return;
+    }
+
+    // Proverava da li su sva polja popunjena
+    if (
+      !this.ime ||
+      !this.prezime ||
+      !this.datumRodjenja ||
+      !this.grad ||
+      !this.telefon ||
+      !this.email ||
+      !this.kor_ime ||
+      !this.lozinka ||
+      !this.tip
+    ) {
+      alert('Morate popuniti sva polja');
+      return;
+    }
+
     let user = new User();
 
     user.ime = this.ime;
@@ -84,26 +76,65 @@ export class RegistracijaComponent implements OnInit {
     user.kor_ime = this.kor_ime;
     user.lozinka = this.lozinka;
     user.tip = this.tip;
+    user.selectedAgency = this.selectedAgency;
+    user.licenca = this.licenca;
+    user.slike = this.slikeString64;
 
-    this.userService
-      .insertUser(user)
-      .then((res) => {
-        alert('Uspesno kreiran korisnik');
-      })
-      .catch((res) => {
-        alert(res.error);
-      });
+    // Proverava da li je korisnik jedinstven na nivou sistema i kreira ga
+    this.userService.checkNameAndEmail(user).then((res) => {
+      if (res == 'sve ok') {
+        this.userService
+          .insertUser(user)
+          .then((res) => {
+            alert('Uspesno kreiran korisnik');
+            this.loggedUser = {
+              kor_ime: user.kor_ime,
+              tip: user.tip,
+            };
+            localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
 
-    localStorage.setItem('loggedUser', JSON.stringify(user));
-    this.sharedCurrUserService.emitUser(user);
-    //this.output.emit(user);
+            if (user.tip == 'kupac') {
+              //kupac
+              this.router.navigate(['/naslovna']);
+            } else {
+              //oglasivac
+              this.router.navigate(['/moji-oglasi']);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error.message);
+          });
+      } else {
+        alert(res);
+      }
+    });
+  }
 
-    if (user.tip == 'kupac') {
-      //kupac
-      this.router.navigate(['/naslovna']);
-    } else {
-      //oglasivac
-      this.router.navigate(['/moji-oglasi']);
+  //pretvaranje slike u string preko base64, pa za prikaz, obrnuto iz stringa u sliku
+  odabraneSlike: File[] = [];
+  slikeString64: Slika[] = [];
+
+  handleFileInput(event: any) {
+    const files: FileList = event.target.files;
+
+    for (let i = 0; i < files.length; i++) {
+      const file: File = files[i];
+      const reader: FileReader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String: string = reader.result as string;
+        this.slikeString64.push({ name: file.name, source: base64String });
+      };
+      this.odabraneSlike.push(file);
+      reader.readAsDataURL(file);
     }
+  }
+  // omogucava brisanje upload-ovane slike
+  deselectFile(imeSlike: string) {
+    this.odabraneSlike = this.odabraneSlike.filter((f) => f.name !== imeSlike);
+    this.slikeString64 = this.slikeString64.filter(
+      (img) => img.name !== imeSlike
+    );
   }
 }

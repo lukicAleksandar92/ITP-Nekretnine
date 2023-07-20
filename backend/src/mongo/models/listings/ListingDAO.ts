@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { listingSchema } from "./ListingSchema";
-import { Listing, SearchCriteria } from "./Listing";
+import { AverageValue, Listing, SearchCriteria, NumberOfSold } from "./Listing";
+import { query } from "express";
 
 class ListingDAO {
   private listingModel = mongoose.model("listing", listingSchema, "oglasi");
@@ -14,6 +15,65 @@ class ListingDAO {
   }
   async getListingById(id: string): Promise<Listing | null> {
     return this.listingModel.findById(id);
+  }
+  async getListingsByOglasivac(oglasivac: string): Promise<Listing[] | null> {
+    return this.listingModel.find({ oglasivac: oglasivac });
+  }
+  async getListingByOglasivac(kor_ime: string): Promise<Listing | null> {
+    return this.listingModel.findOne({ oglasivac: kor_ime });
+  }
+  async getAllSellByAgency(agents: string[]): Promise<NumberOfSold[] | null> {
+    const currentDate: Date = new Date();
+    const currentYear: number = currentDate.getFullYear();
+    const firstDateOfYear: Date = new Date(currentYear + "-01-01");
+    return this.listingModel.aggregate([
+      {
+        $match: {
+          oglasivac: { $in: agents },
+          status: "prodato",
+          datumIzmene: { $gte: firstDateOfYear },
+        },
+      },
+      {
+        $group: {
+          _id: "$mesecProdaje",
+          ukupno: { $count: {} },
+        },
+      },
+    ]);
+  }
+  async getAllSellByLocation(location: string): Promise<NumberOfSold[] | null> {
+    const currentDate: Date = new Date();
+    const currentYear: number = currentDate.getFullYear();
+    const firstDateOfYear: Date = new Date(currentYear + "-01-01");
+    return this.listingModel.aggregate([
+      {
+        $match: {
+          lokacija: location,
+          status: "prodato",
+          datumIzmene: { $gte: firstDateOfYear },
+        },
+      },
+      {
+        $group: {
+          _id: "$mesecProdaje",
+          ukupno: { $count: {} },
+        },
+      },
+    ]);
+  }
+  async getAverageValues(): Promise<AverageValue[] | null> {
+    return this.listingModel.aggregate([
+      {
+        $group: {
+          _id: {
+            lokacija: "$lokacija",
+            tip: "$tipNekretnine",
+          },
+          srednjaVrednost: { $avg: { $divide: ["$cena", "$kvadratura"] } },
+        },
+      },
+    ]);
   }
   async updateListing(listing: Listing, id: string) {
     let activeListing = this.getListingById(id);
@@ -52,12 +112,14 @@ class ListingDAO {
     let activeLisitng = this.getListingById(id);
     if (activeLisitng != null) {
       const currentDate = new Date();
+      let monthOfSell: number = currentDate.getMonth() + 1;
       return this.listingModel.updateOne(
         { _id: id },
         {
           $set: {
             status: "prodato",
-            datumProdaje: currentDate,
+            datumIzmene: currentDate,
+            mesecProdaje: monthOfSell,
           },
         }
       );
@@ -95,7 +157,6 @@ class ListingDAO {
     } else if (filter.kvadraturaDo !== undefined) {
       query.kvadratura = { $lte: filter.kvadraturaDo };
     }
-
     //broj soba
     if (filter.brojSobaOd !== undefined && filter.brojSobaDo !== undefined) {
       query.brojSoba = { $gte: filter.brojSobaOd, $lte: filter.brojSobaDo };
@@ -104,7 +165,6 @@ class ListingDAO {
     } else if (filter.brojSobaDo !== undefined) {
       query.brojSoba = { $lte: filter.brojSobaDo };
     }
-
     //godina izgradnje
     if (
       filter.godinaIzgradnjeOd !== undefined &&
@@ -119,7 +179,6 @@ class ListingDAO {
     } else if (filter.godinaIzgradnjeDo !== undefined) {
       query.godinaIzgradnje = { $lte: filter.godinaIzgradnjeDo };
     }
-
     //tip oglasivaca
     if (filter.tipOglasivaca.length > 0) {
       query.tipOglasivaca = { $in: filter.tipOglasivaca };
@@ -141,7 +200,6 @@ class ListingDAO {
     } else if (filter.spratDo !== undefined) {
       query.sprat = { $lte: filter.spratDo };
     }
-
     //mesecneRezije od
     if (
       filter.mesecneRezijeOd !== undefined &&
@@ -156,7 +214,18 @@ class ListingDAO {
     } else if (filter.mesecneRezijeDo !== undefined) {
       query.mesecneRezije = { $lte: filter.mesecneRezijeDo };
     }
+    //status
+    if (filter.status !== undefined) {
+      query.status = filter.status;
+    }
 
+    const filteredResults = this.listingModel.find(query);
+    return filteredResults;
+  }
+  async getFavoriteListings(listings: string[]) {
+    const query: any = {};
+
+    query._id = { $in: listings };
     const filteredResults = this.listingModel.find(query);
     return filteredResults;
   }

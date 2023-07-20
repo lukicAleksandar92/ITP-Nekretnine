@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import {
   faCheck,
   faX,
@@ -9,8 +7,12 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from 'src/app/login/login.component';
-import { Listing } from 'src/app/models/Listing';
+import { Agencije } from 'src/app/models/Agencije';
+import { AverageValue, Listing } from 'src/app/models/Listing';
+import { User } from 'src/app/models/User';
+import { AgencijeService } from 'src/app/services/agencije.service';
 import { ListingService } from 'src/app/services/listing.service';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-stranica-oglasa',
   templateUrl: './stranica-oglasa.component.html',
@@ -19,12 +21,14 @@ import { ListingService } from 'src/app/services/listing.service';
 export class StranicaOglasaComponent implements OnInit {
   constructor(
     private listingService: ListingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private agencijeService: AgencijeService
   ) {}
   ngOnInit(): void {
     // ucitavamo id oglasa koji prikazujemo
     const id = this.route.snapshot.paramMap.get('id');
-    if (id != null)
+    if (id != null) {
       // trazimo oglas u bazi na osnovu id-a
       this.listingService.getListingById(id).then((res) => {
         // kad ga nobijemo ucitavamo ga u lokalnu promenljivu listing
@@ -33,10 +37,48 @@ export class StranicaOglasaComponent implements OnInit {
         this.brojSoba = this.brojSobaToString(this.listing.brojSoba);
         this.sprat = this.spratToString(this.listing.sprat);
         this.ukupnaSpratnost = this.spratToString(this.listing.ukupnaSpratnost);
+        //ucitavamo oglasivaca
+        this.userService.getUserByKorIme(this.listing.oglasivac).then((res) => {
+          this.oglasivac = JSON.parse(JSON.stringify(res));
+
+          //racunamo prosecnu cenu
+          this.cenaPoKvadratu = this.izracunavanjeCenePoKvadratu(
+            this.listing.cena,
+            this.listing.kvadratura
+          );
+
+          if (this.oglasivac.selectedAgency) {
+            this.agencijeService
+              .getAgencijaByNaziv(this.oglasivac.selectedAgency)
+              .then((res) => {
+                this.agencija = JSON.parse(JSON.stringify(res));
+              });
+          }
+        });
+        // trazimo niz srednjih vrednosti grupisanih po lokaciji i tipu nekretnine
+        this.listingService.getAverageValues().then((res) => {
+          // kad ih dobijemo ucitavamo u lokalnu promenljivu avgValues
+          this.avgValues = JSON.parse(JSON.stringify(res));
+          this.srednjaVrednost = this.avgValuesToNumber(
+            this.listing.lokacija,
+            this.listing.tipNekretnine
+          );
+        });
       });
+      //ucitavamo podatke ulogovanog korisnika
+      this.userService.parseLoggedUser()?.then((res) => {
+        this.user = JSON.parse(JSON.stringify(res));
+      });
+    }
   }
+  user!: User;
+  avgValues: AverageValue[] = [];
+  srednjaVrednost!: number;
+  oglasivac = new User();
+  agencija = new Agencije();
 
   listing!: Listing;
+  cenaPoKvadratu!: number;
   // ikonice iz fontawesome
   left = faCaretLeft;
   right = faCaretRight;
@@ -103,6 +145,10 @@ export class StranicaOglasaComponent implements OnInit {
     if (sprat == 32) return 'Potkrovlje';
     else return sprat.toString();
   }
+  // racuna kolika je cena po kvadratu
+  izracunavanjeCenePoKvadratu(cena: number, kvadratura: number): number {
+    return Math.round(cena / kvadratura);
+  }
   // prati index trenutne slike koja se pokazuje
   currentIndex: number = 0;
   // pokazuje sledecu sliku
@@ -114,5 +160,35 @@ export class StranicaOglasaComponent implements OnInit {
     this.currentIndex =
       (this.currentIndex - 1 + this.listing.slike.length) %
       this.listing.slike.length;
+  }
+  // iz nisa srednjih vrednosti dohvata onu koja odgovara zadatoj lokaciji i tipu nekretnine
+  avgValuesToNumber(lokacija: string, tipNekretnine: string): number {
+    let rezultat: number = 0;
+    for (let avgValue of this.avgValues) {
+      if (
+        avgValue._id.lokacija == lokacija &&
+        avgValue._id.tip == tipNekretnine
+      ) {
+        rezultat = Math.round(avgValue.srednjaVrednost);
+      }
+    }
+    return rezultat;
+  }
+  dodajUOmiljeno(id: string) {
+    if (this.user.omiljeniOglasi.includes(id)) {
+      alert('Ovaj glas vam je već u omiljenim oglasima!');
+      return;
+    }
+    if (this.user.omiljeniOglasi.length > 5) {
+      alert('Ne možete imati više od 5 omiljenih oglasa');
+      return;
+    } else {
+      this.user.omiljeniOglasi.push(id);
+      this.userService.updateFavoriteListing({
+        kor_ime: this.user.kor_ime,
+        omiljeniOglasi: this.user.omiljeniOglasi,
+      });
+      alert('Dodato!');
+    }
   }
 }

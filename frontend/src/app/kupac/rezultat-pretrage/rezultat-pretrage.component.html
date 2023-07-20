@@ -1,9 +1,36 @@
 <app-kupac-header></app-kupac-header>
 <section class="listings2">
   <h1 class="heading">Rezultat pretrage</h1>
+
   <div class="box-container">
+    <!-- navbar za paginaciju -->
+    <div class="pagNav box" *ngIf="broj_stranica > 1">
+      <div class="pagNavButton">
+        <fa-icon
+          [icon]="levo"
+          (click)="minusOne()"
+          *ngIf="active > 0"
+        ></fa-icon>
+      </div>
+      <div class="numbers">
+        <div
+          *ngFor="let number of stranice"
+          (click)="change(number)"
+          [ngClass]="{ active: number == active, pagNavButton: true }"
+        >
+          {{ number + 1 }}
+        </div>
+      </div>
+      <div class="pagNavButton">
+        <fa-icon
+          [icon]="desno"
+          (click)="plusOne()"
+          *ngIf="active < aktivna_lista.length"
+        ></fa-icon>
+      </div>
+    </div>
     <!-- uspisujemo svaki oglas iz liste svih dovucenih ogalsa -->
-    <div *ngFor="let listing of allListings" class="box result">
+    <div *ngFor="let listing of aktivna_lista" class="box result">
       <div class="thumb">
         <!-- slika iz oglasa -->
         <img
@@ -41,26 +68,42 @@
           <i class="fas fa-building"></i>Sprat:
           <span> {{ spratToString(listing.sprat) }} </span>
         </p>
-        <!-- prosecna cena !!! treba da se poveze !!! -->
+        <!-- prosecna cena -->
         <p class="location">
-          <i class="fas fa-circle-question"></i>Prosečna cena po m²:<span
-          > </span>
+          <i class="fas fa-circle-question"></i>Prosečna cena po m²:
+          <span>
+            {{ avgValuesToNumber(listing.lokacija, listing.tipNekretnine) }} €
+          </span>
         </p>
-
+        <!-- cena -->
         <p class="location">
           <i class="fas fa-euro-sign"></i
           ><b
-            >Cena: <span> {{ listing.cena }} </span></b
-          >
+            >Cena:<span
+              [ngClass]="{
+                veca:
+                  izracunavanjeCenePoKvadratu(
+                    listing.cena,
+                    listing.kvadratura
+                  ) >
+                  avgValuesToNumber(listing.lokacija, listing.tipNekretnine),
+                manja:
+                  izracunavanjeCenePoKvadratu(
+                    listing.cena,
+                    listing.kvadratura
+                  ) <=
+                  avgValuesToNumber(listing.lokacija, listing.tipNekretnine)
+              }"
+              >{{ listing.cena }} €
+            </span>
+          </b>
         </p>
       </div>
-
       <div class="opis">
         <p class="location">
           {{ listing.opis }}
         </p>
       </div>
-
       <a routerLink="/stranica-oglasa/{{ listing._id }}" class="btn"
         >Pogledaj oglas</a
       >
@@ -68,5 +111,31 @@
     <p class="err" *ngIf="allListings.length == 0">
       Nema oglasa koji zadovoljavaju vaše kriterijume
     </p>
+    <!-- navbar za paginaciju -->
+    <div class="pagNav box" *ngIf="broj_stranica > 1">
+      <div class="pagNavButton">
+        <fa-icon
+          [icon]="levo"
+          (click)="minusOne()"
+          *ngIf="active > 0"
+        ></fa-icon>
+      </div>
+      <div class="numbers">
+        <div
+          *ngFor="let number of stranice"
+          (click)="change(number)"
+          [ngClass]="{ active: number == active, pagNavButton: true }"
+        >
+          {{ number + 1 }}
+        </div>
+      </div>
+      <div class="pagNavButton">
+        <fa-icon
+          [icon]="desno"
+          (click)="plusOne()"
+          *ngIf="active < aktivna_lista.length"
+        ></fa-icon>
+      </div>
+    </div>
   </div>
 </section>

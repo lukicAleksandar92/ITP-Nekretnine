@@ -11,6 +11,9 @@ class AgencijeDAO {
   async getAllListings(): Promise<Agencije[]> {
     return this.agencijegModel.find();
   }
+  async getAgencijaByNaziv(naziv: string) {
+    return this.agencijegModel.findOne({ naziv: naziv });
+  }
 }
 
 export const agencijeDAO = new AgencijeDAO();

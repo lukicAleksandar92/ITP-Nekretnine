@@ -2,20 +2,35 @@
 <section class="form-container">
   <form action="" method="post">
     <h3>Napravi nov nalog</h3>
+    <span class="greska" *ngIf="imeInput.invalid && imeInput.touched"
+      >Morate uneti Ime</span
+    >
     <input
       type="text"
       name="ime"
       placeholder="Ime"
       class="box"
       [(ngModel)]="ime"
+      required
+      #imeInput="ngModel"
     />
+    <span class="greska" *ngIf="prezimeInput.invalid && prezimeInput.touched"
+      >Morate uneti Prezime</span
+    >
     <input
       type="text"
       name="prezime"
       placeholder="Prezime"
       class="box"
       [(ngModel)]="prezime"
+      required
+      #prezimeInput="ngModel"
     />
+    <span
+      class="greska"
+      *ngIf="datumRodjenjaInput.invalid && datumRodjenjaInput.touched"
+      >Morate uneti datum rodjenja</span
+    >
     <input
       placeholder="Datum rođenja"
       name="datumRodjenja"
@@ -25,44 +40,87 @@
       onblur="(this.type='text')"
       id="date"
       [(ngModel)]="datumRodjenja"
+      required
+      #datumRodjenjaInput="ngModel"
     />
+    <span class="greska" *ngIf="gradInput.invalid && gradInput.touched"
+      >Morate uneti Grad</span
+    >
     <input
       type="text"
       name="grad"
       placeholder="Grad"
       class="box"
       [(ngModel)]="grad"
+      required
+      #gradInput="ngModel"
     />
+    <span class="greska" *ngIf="telefonInput.invalid && telefonInput.touched"
+      >Morate uneti broj telefona ispravno uz 06 i max 10 cifara</span
+    >
     <input
       type="tel"
       name="telefon"
       placeholder="Telefon"
       class="box"
       [(ngModel)]="telefon"
+      required
+      #telefonInput="ngModel"
+      pattern="^06\d{0,8}$"
     />
+    <span class="greska" *ngIf="emailInput.invalid && emailInput.touched"
+      >Morate uneti Email ispravno</span
+    >
     <input
       type="email"
       name="email"
       placeholder="Email adresa"
       class="box"
       [(ngModel)]="email"
+      required
+      #emailInput="ngModel"
+      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
     />
+    <span class="greska" *ngIf="kor_imeInput.invalid && kor_imeInput.touched"
+      >Morate uneti Korisnicko Ime</span
+    >
     <input
       type="text"
       name="kor_ime"
       placeholder="Korisničko ime"
       class="box"
       [(ngModel)]="kor_ime"
+      required
+      #kor_imeInput="ngModel"
     />
+    <span class="greska" *ngIf="lozinkaInput.invalid && lozinkaInput.touched"
+      >Morate uneti polje lozinke prema uputstvima</span
+    >
     <input
       type="password"
       name="lozinka"
       placeholder="Lozinka"
       class="box"
       [(ngModel)]="lozinka"
+      required
+      #lozinkaInput="ngModel"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@?]).{8,}$"
+    />
+    <span
+      class="greska"
+      *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched"
+      >Morate uneti ponovo lozinku</span
+    >
+    <input
+      type="password"
+      name="c_pass"
+      placeholder="Ponovite lozinku"
+      class="box"
+      [(ngModel)]="confirmPassword"
+      required
+      #confirmPasswordInput="ngModel"
     />
 
-    <label style="font-size: 1.8rem">Izaberite tip korisnika</label>
     <select name="tip" id="tip" class="box" [(ngModel)]="tip" required>
       <option value="undefined" disabled>Izaberite tip korisnika</option>
       <option value="kupac">kupac</option>
@@ -72,49 +130,76 @@
 
     <!-- stavljamo da se vidi izbor agencije samo ako je tip korisnika agent-->
     <div *ngIf="tip == 'agent'">
-      <label for="agencija" id="agencijaLabel" style="font-size: 1.8rem"
-        >Izaberite agenciju</label
+      <span
+        class="greska"
+        *ngIf="selectedAgencyInput.invalid && selectedAgencyInput.touched"
+        >Morate odabrati agenciju</span
       >
       <select
-        name="lokacija"
+        name="agencija"
         class="input box"
         required
         [(ngModel)]="selectedAgency"
+        #selectedAgencyInput="ngModel"
       >
         <option value="undefined" disabled>Izaberite agenciju</option>
         <option *ngFor="let a of agencije" value="{{ a.naziv }}">
           {{ a.naziv }}
         </option>
       </select>
+      <span class="greska" *ngIf="licencaInput.invalid && licencaInput.touched"
+        >Morate ispravno upisati licencu sa 6 cifara</span
+      >
+      <input
+        type="number"
+        name="licenca"
+        id="licenca"
+        placeholder="Broj licence"
+        class="box"
+        [(ngModel)]="licenca"
+        #licencaInput="ngModel"
+        pattern="^\d{6}$"
+      />
     </div>
-
-    <input
-      type="number"
-      name="licenca"
-      id="licenca"
-      placeholder="Broj licence"
-      class="box"
-      style="display: none"
-    />
 
     <label for="profile-picture" style="font-size: 1.8rem"
       >Dodaj profilnu sliku:</label
     >
-    <input
-      type="file"
-      class="box"
-      id="profile-picture"
-      name="profile-picture"
-      accept="image/jpg, image/png"
-    />
+    <div class="input tall">
+      <input
+        type="file"
+        class="box"
+        id="profile-picture"
+        name="profile-picture"
+        accept="image/jpg, image/png"
+        #fileInput
+        (change)="handleFileInput($event)"
+        style="color: transparent; border: none"
+      />
+      <div class="preview">
+        <div class="imgs">
+          <img
+            [src]="slika.source"
+            alt=""
+            *ngFor="let slika of slikeString64"
+          />
+        </div>
+        <div class="names">
+          <div *ngFor="let slika of slikeString64">
+            {{ slika.name }}
+            <button (click)="deselectFile(slika.name)">X</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <p align="left">
       <i class="fas fa-circle-exclamation"></i>
-      Lozinka mora da ima minimalno 8 karaktera, i to: <br />
-      -mora počinjati slovom <br />
-      -mora imati bar jedno veliko slovo <br />
-      -mora imati jedan broj <br />
-      -mora imati jedan specijalni karakter(npr. !, ?, @, i sl. ) <br />
+      Lozinka mora da ima minimum 8 karaktera i mora: <br />
+      -počinjati slovom <br />
+      -imati bar jedno veliko slovo <br />
+      -imati bar jedan broj <br />
+      -imati bar jedan specijalni karakter (npr. !, ?, @, sl.) <br />
     </p>
 
     <p>Već imaš nalog? <a routerLink="/login">Prijavi se</a></p>

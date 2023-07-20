@@ -38,6 +38,31 @@ let ListingController = class ListingController extends tsoa_1.Controller {
             return ListingDAO_1.listingDAO.getListingById(id);
         });
     }
+    getListingsByOglasivac(kor_ime) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return ListingDAO_1.listingDAO.getListingsByOglasivac(kor_ime);
+        });
+    }
+    getListingByOglasivac(kor_ime) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return ListingDAO_1.listingDAO.getListingByOglasivac(kor_ime);
+        });
+    }
+    getAllSellByAgency(agenti) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return ListingDAO_1.listingDAO.getAllSellByAgency(agenti);
+        });
+    }
+    getAllSellByLocation(location) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return ListingDAO_1.listingDAO.getAllSellByLocation(location);
+        });
+    }
+    getAverageValues() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield ListingDAO_1.listingDAO.getAverageValues();
+        });
+    }
     updateListing(listing, id) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield ListingDAO_1.listingDAO.updateListing(listing, id);
@@ -62,6 +87,14 @@ let ListingController = class ListingController extends tsoa_1.Controller {
             return result;
         });
     }
+    getFavoriteListing(listings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield ListingDAO_1.listingDAO.getFavoriteListings(listings);
+            if (result == null)
+                this.setStatus(404);
+            return result;
+        });
+    }
 };
 __decorate([
     (0, tsoa_1.Post)("insert"),
@@ -75,6 +108,25 @@ __decorate([
     __param(0, (0, tsoa_1.Path)())
 ], ListingController.prototype, "getListingById", null);
 __decorate([
+    (0, tsoa_1.Get)("getListingsByOglasivac/:kor_ime"),
+    __param(0, (0, tsoa_1.Path)())
+], ListingController.prototype, "getListingsByOglasivac", null);
+__decorate([
+    (0, tsoa_1.Get)("getListingByOglasivac/:kor_ime"),
+    __param(0, (0, tsoa_1.Path)())
+], ListingController.prototype, "getListingByOglasivac", null);
+__decorate([
+    (0, tsoa_1.Post)("getAllSellByAgency"),
+    __param(0, (0, tsoa_1.Body)())
+], ListingController.prototype, "getAllSellByAgency", null);
+__decorate([
+    (0, tsoa_1.Get)("getAllSellByLocation/:location"),
+    __param(0, (0, tsoa_1.Path)())
+], ListingController.prototype, "getAllSellByLocation", null);
+__decorate([
+    (0, tsoa_1.Get)("getAverageValues")
+], ListingController.prototype, "getAverageValues", null);
+__decorate([
     (0, tsoa_1.Put)("update/:id"),
     __param(0, (0, tsoa_1.Body)()),
     __param(1, (0, tsoa_1.Path)())
@@ -87,6 +139,10 @@ __decorate([
     (0, tsoa_1.Post)("search"),
     __param(0, (0, tsoa_1.Body)())
 ], ListingController.prototype, "searchListings", null);
+__decorate([
+    (0, tsoa_1.Post)("getFavoriteListings"),
+    __param(0, (0, tsoa_1.Body)())
+], ListingController.prototype, "getFavoriteListing", null);
 ListingController = __decorate([
     (0, tsoa_1.Route)("listings")
 ], ListingController);

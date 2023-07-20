@@ -35,6 +35,75 @@ class ListingDAO {
             return this.listingModel.findById(id);
         });
     }
+    getListingsByOglasivac(oglasivac) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.listingModel.find({ oglasivac: oglasivac });
+        });
+    }
+    getListingByOglasivac(kor_ime) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.listingModel.findOne({ oglasivac: kor_ime });
+        });
+    }
+    getAllSellByAgency(agents) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const firstDateOfYear = new Date(currentYear + "-01-01");
+            return this.listingModel.aggregate([
+                {
+                    $match: {
+                        oglasivac: { $in: agents },
+                        status: "prodato",
+                        datumIzmene: { $gte: firstDateOfYear },
+                    },
+                },
+                {
+                    $group: {
+                        _id: "$mesecProdaje",
+                        ukupno: { $count: {} },
+                    },
+                },
+            ]);
+        });
+    }
+    getAllSellByLocation(location) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const firstDateOfYear = new Date(currentYear + "-01-01");
+            return this.listingModel.aggregate([
+                {
+                    $match: {
+                        lokacija: location,
+                        status: "prodato",
+                        datumIzmene: { $gte: firstDateOfYear },
+                    },
+                },
+                {
+                    $group: {
+                        _id: "$mesecProdaje",
+                        ukupno: { $count: {} },
+                    },
+                },
+            ]);
+        });
+    }
+    getAverageValues() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.listingModel.aggregate([
+                {
+                    $group: {
+                        _id: {
+                            lokacija: "$lokacija",
+                            tip: "$tipNekretnine",
+                        },
+                        srednjaVrednost: { $avg: { $divide: ["$cena", "$kvadratura"] } },
+                    },
+                },
+            ]);
+        });
+    }
     updateListing(listing, id) {
         return __awaiter(this, void 0, void 0, function* () {
             let activeListing = this.getListingById(id);
@@ -71,10 +140,12 @@ class ListingDAO {
             let activeLisitng = this.getListingById(id);
             if (activeLisitng != null) {
                 const currentDate = new Date();
+                let monthOfSell = currentDate.getMonth() + 1;
                 return this.listingModel.updateOne({ _id: id }, {
                     $set: {
                         status: "prodato",
-                        datumProdaje: currentDate,
+                        datumIzmene: currentDate,
+                        mesecProdaje: monthOfSell,
                     },
                 });
             }
@@ -175,6 +246,18 @@ class ListingDAO {
             else if (filter.mesecneRezijeDo !== undefined) {
                 query.mesecneRezije = { $lte: filter.mesecneRezijeDo };
             }
+            //status
+            if (filter.status !== undefined) {
+                query.status = filter.status;
+            }
+            const filteredResults = this.listingModel.find(query);
+            return filteredResults;
+        });
+    }
+    getFavoriteListings(listings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = {};
+            query._id = { $in: listings };
             const filteredResults = this.listingModel.find(query);
             return filteredResults;
         });

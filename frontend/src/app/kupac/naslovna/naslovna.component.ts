@@ -11,10 +11,15 @@ import { ListingService } from 'src/app/services/listing.service';
 export class NaslovnaComponent implements OnInit {
   constructor(private listingService: ListingService, private router: Router) {}
   ngOnInit(): void {
-    this.listingService.getAllListings().then((res) => {
+    //ucitavamo samo neprodate oglase i to 6 najnovijih
+    this.iniFilter.status = 'nije prodato';
+    this.listingService.searchListings(this.iniFilter).then((res) => {
       this.allListings = JSON.parse(JSON.stringify(res));
+      this.allListings = this.allListings.reverse();
+      this.allListings = this.allListings.slice(0, 6);
     });
   }
+  iniFilter = new Filter();
   // promenljiva u koju ucitavamo oglas
   allListings: Listing[] = [];
   // lokacije od kojih biramo

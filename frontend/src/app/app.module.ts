@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NaslovnaComponent } from './kupac/naslovna/naslovna.component';
 import { LoginComponent } from './login/login.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
-import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RezultatPretrageComponent } from './kupac/rezultat-pretrage/rezultat-pretrage.component';
@@ -17,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontawesomeObject } from '@fortawesome/fontawesome-svg-core';
 import { OgHeaderComponent } from './oglasivac/og-header/og-header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { PostaviOglasComponent } from './oglasivac/postavi-oglas/postavi-oglas.component';
 import { MojiOglasiComponent } from './oglasivac/moji-oglasi/moji-oglasi.component';
@@ -33,7 +35,7 @@ import { IzmeniOglasComponent } from './oglasivac/izmeni-oglas/izmeni-oglas.comp
     NaslovnaComponent,
     LoginComponent,
     RegistracijaComponent,
-    PromenaLozinkeComponent,
+
     HeaderComponent,
     FooterComponent,
     RezultatPretrageComponent,
@@ -57,6 +59,7 @@ import { IzmeniOglasComponent } from './oglasivac/izmeni-oglas/izmeni-oglas.comp
     HttpClientModule,
 
     FontAwesomeModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

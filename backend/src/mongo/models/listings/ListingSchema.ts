@@ -21,7 +21,7 @@ export const listingSchema = new mongoose.Schema<Listing>({
   slike: [{ name: { type: String }, source: { type: String } }],
 
   datumIzmene: { type: Date, sparse: true },
-  datumProdaje: { type: Date, sparse: true },
+  mesecProdaje: { type:Number },
 
   status: { type: String },
   oglasivac: { type: String },

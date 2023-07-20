@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Listing } from '../models/Listing';
+import { Filter, Listing } from '../models/Listing';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -16,10 +16,39 @@ export class ListingService {
     );
   }
   getAllListings() {
-    return firstValueFrom(this.http.post(`${this.back}/listings/getAll`, {}));
+    return firstValueFrom(
+      this.http.post(`${this.back}/listings/getAll`, {})
+    );
   }
   getListingById(id: string) {
-    return firstValueFrom(this.http.get(`${this.back}/listings/getOne/${id}`));
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getOne/${id}`)
+    );
+  }
+  getListingByOglasivac(kor_ime: string){
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getListingByOglasivac/${kor_ime}`)
+    );
+  }
+  getAllSellByAgency(agenti: string[]){
+    return firstValueFrom(
+      this.http.post(`${this.back}/listings/getAllSellByAgency`, agenti)
+    );
+  }
+  getAllSellByLocation(location: string){
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getAllSellByLocation/${location}`)
+    );
+  }
+  getListingsByOglasivac(oglasivac: string) {
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getListingsByOglasivac/${oglasivac}`)
+    );
+  }
+  getAverageValues() {
+    return firstValueFrom(
+      this.http.get(`${this.back}/listings/getAverageValues`)
+    );
   }
   updateListing(listing: Listing, id: string) {
     return firstValueFrom(
@@ -31,9 +60,14 @@ export class ListingService {
       this.http.put(`${this.back}/listings/sell/${id}`, {})
     );
   }
-  searchListings(filter: any) {
+  searchListings(filter: Filter) {
     return firstValueFrom(
       this.http.post(`${this.back}/listings/search`, filter)
+    );
+  }
+  getFavoriteListings(listings: string[]) {
+    return firstValueFrom(
+      this.http.post(`${this.back}/listings/getFavoriteListings`, listings)
     );
   }
 }

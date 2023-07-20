@@ -5,13 +5,32 @@
   <!-- u ng if ide prikaz svih oglasa oglasivaca -->
   <div *ngFor="let listing of allListings" class="box">
     <div class="thumb">
-      <img src="./assets/house-img-2.webp" alt="" />
+      <img
+        [src]="listing.slike[0].source"
+        alt=""
+        *ngIf="listing.slike.length > 0"
+      />
+      <img
+        src="assets/images/house-img-2.jpg"
+        *ngIf="listing.slike.length == 0"
+        alt=""
+      />
     </div>
     <div class="info">
       <h3 class="name">{{ listing.nazivOglasa }}</h3>
       <p class="location">
         <fa-icon [icon]="euroMarker"></fa-icon>Cena:
-        <span> {{ listing.cena }} </span>
+        <span
+          [ngClass]="{
+            veca:
+              izracunavanjeCenePoKvadratu(listing.cena, listing.kvadratura) >
+              avgValuesToNumber(listing.lokacija, listing.tipNekretnine),
+            manja:
+              izracunavanjeCenePoKvadratu(listing.cena, listing.kvadratura) <=
+              avgValuesToNumber(listing.lokacija, listing.tipNekretnine)
+          }"
+          >{{ listing.cena }} €
+        </span>
       </p>
       <p class="location">
         <fa-icon [icon]="mapMarker"></fa-icon
@@ -19,11 +38,15 @@
       </p>
     </div>
     <div class="buttons">
-      <a routerLink="/stranica-oglasa/{{ listing._id }}" class="btn"
+      <a
+        routerLink="/stranica-oglasa/{{ listing._id }}"
+        class="btn"
+        *ngIf="listing.status == 'nije prodato'"
         >Vidi oglas</a
       >
-      <a class="btn"
-        >Ukloni iz omiljenih  <fa-icon [icon]="heartMinus"></fa-icon
+      <a class="btn prodato" *ngIf="listing.status == 'prodato'">PRODATO</a>
+      <a class="btn" (click)="ukloniIzOmiljenih(listing._id)"
+        >Ukloni iz omiljenih <fa-icon [icon]="heartMinus"></fa-icon
       ></a>
     </div>
   </div>
